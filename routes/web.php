@@ -1,0 +1,12 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return view('index');
+});
+
+
+Route::group(['prefix' => 'nboard'], function () {
+    Voyager::routes();
+});
