@@ -5,7 +5,7 @@
 ])
 <div {{ $attributes->merge(['class' => 'group']) }}>
 
-    <div class="group flex flex-col h-[300px] md:h-[335px] bg-white rounded-[8px] shadow-md overflow-hidden py-3">
+    <div class="group flex flex-col h-[300px] md:h-[372px] bg-white rounded-[8px] shadow-md overflow-hidden py-3">
         <!-- Image -->
         <a href="">
             <div class="group-hover:opacity-30 transition-opacity duration-200 p-[10px]">

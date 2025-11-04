@@ -74,7 +74,7 @@
             <div>
                 <h2 class="text-[17px] font-custom-bold-upper my-[20px]">კატეგორიის სახელი</h2>
                 <div>
-                    <x-carousel  :pagination="false" perPage="7" perPageMobile="2" perPageTablet="5">
+                    <x-carousel  :pagination="false" perPage="6" perPageMobile="2" perPageTablet="5">
                         @for($i = 0; $i < 24; $i++)
                             @php
                                 $options = [
@@ -94,7 +94,7 @@
             <div>
                 <h2 class="text-[17px] font-custom-bold-upper my-[20px]">კატეგორიის სახელი</h2>
                 <div>
-                    <x-carousel  :pagination="false" perPage="7" perPageMobile="2" perPageTablet="5">
+                    <x-carousel  :pagination="false" perPage="6" perPageMobile="2" perPageTablet="5">
                         @for($i = 0; $i < 24; $i++)
                             @php
                                 $options = [
@@ -131,7 +131,7 @@
             <div>
                 <h2 class="text-[17px] font-custom-bold-upper my-[20px]">კატეგორიის სახელი</h2>
                 <div>
-                    <x-carousel  :pagination="false" perPage="7" perPageMobile="2" perPageTablet="5">
+                    <x-carousel  :pagination="false" perPage="6" perPageMobile="2" perPageTablet="5">
                         @for($i = 0; $i < 24; $i++)
                             @php
                                 $options = [
@@ -166,7 +166,7 @@
             <div>
                 <h2 class="text-[17px] font-custom-bold-upper my-[20px]">კატეგორიის სახელი</h2>
                 <div>
-                    <x-carousel  :pagination="false" perPage="7" perPageMobile="2" perPageTablet="5">
+                    <x-carousel  :pagination="false" perPage="6" perPageMobile="2" perPageTablet="5">
                         @for($i = 0; $i < 24; $i++)
                             @php
                                 $options = [
@@ -202,7 +202,7 @@
             <div>
                 <h2 class="text-[17px] font-custom-bold-upper my-[20px]">კატეგორიის სახელი</h2>
                 <div>
-                    <x-carousel  :pagination="false" perPage="7" perPageMobile="2" perPageTablet="5">
+                    <x-carousel  :pagination="false" perPage="6" perPageMobile="2" perPageTablet="5">
                         @for($i = 0; $i < 24; $i++)
                             @php
                                 $options = [
@@ -240,7 +240,7 @@
             <div>
                 <h2 class="text-[17px] font-custom-bold-upper my-[10px]">კატეგორიის სახელი</h2>
                 <div>
-                    <x-carousel  :pagination="false" perPage="7" perPageMobile="2" perPageTablet="5">
+                    <x-carousel  :pagination="false" perPage="6" perPageMobile="2" perPageTablet="5">
                         @for($i = 0; $i < 24; $i++)
                             @php
                                 $options = [
