@@ -1,6 +1,6 @@
 <div class="w-full bg-[var(--color-footer)]">
     <div class="container mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-[120px] text-slate-500 text-[12px] font-custom-regular py-[20px]">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-[15px] md:gap-[120px] text-slate-500 text-[12px] font-custom-regular py-[20px]">
             <div>
                 <div class="py-[10px] border-b border-[var(--color-main)] font-custom-bold-upper">ნავიგაცია</div>
                 <div class="mt-[30px]">
