@@ -10,7 +10,7 @@
     'pagination' => true,
     'type' => 'loop',
     'gap' =>'1rem',
-    'id' =>'id_'.uniqid(),
+    'id' =>'id',
 ])
 <div
 
@@ -26,7 +26,7 @@
     class="splide selector-{{ $class  }} w-full {{ $containerClass }}" @if(isset($attributes['data-splide-options'])) data-splide-options="{{ $attributes['data-splide-options'] }}" @endif style="padding-bottom: 20px; {{ $containerInlineClass }}">
     <div class="splide__arrows"></div>
     <div class="splide__track" style="padding-bottom: 20px; {{ $splideTrackClass }}">
-    <ul class="splide__list" style="padding-bottom: 20px">
+    <ul class="splide__list">
         {{-- render slot raw; JS will wrap each direct child into <li class="splide__slide"> --}}
         {!! trim($slot) !!}
     </ul>
@@ -71,6 +71,7 @@
                         pauseOnHover: false,
                         pagination: root.dataset.pagination ,
                         arrows: root.dataset.showArrows,
+                        autoHeight: true,
                         classes: {
                             prev: "splide__arrow--prev splide-custom-class-prev",
                             next: "splide__arrow--next splide-custom-class-next",

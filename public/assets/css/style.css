@@ -1,35 +1,35 @@
 
 /*Start - Splide carousel*/
-.splide {
-    position: relative !important;
-}
+/*.splide {*/
+/*    position: relative !important;*/
+/*}*/
 
-/* Move arrows container on top and center */
-.splide .splide__arrows {
-    top: -30px;
-    right: 47px;
-    position: absolute;
-}
-
-
-.splide .splide__arrow {
-    background: transparent !important;
-    border-radius: 4px;
-}
-
-.splide .splide__arrow:hover {
-    background: #0069A8 !important;
-    color: white !important;
-}
+/*!* Move arrows container on top and center *!*/
+/*.splide .splide__arrows {*/
+/*    top: -30px;*/
+/*    right: 47px;*/
+/*    position: absolute;*/
+/*}*/
 
 
-.splide-custom-class-prev {
-    left: -19px !important;
-}
+/*.splide .splide__arrow {*/
+/*    background: transparent !important;*/
+/*    border-radius: 4px;*/
+/*}*/
 
-.splide-custom-class-next {
+/*.splide .splide__arrow:hover {*/
+/*    background: #0069A8 !important;*/
+/*    color: white !important;*/
+/*}*/
 
-    right: -48px!important;
-}
+
+/*.splide-custom-class-prev {*/
+/*    left: -19px !important;*/
+/*}*/
+
+/*.splide-custom-class-next {*/
+
+/*    right: -48px!important;*/
+/*}*/
 
 /*End - Splide carousel*/

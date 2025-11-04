@@ -8,7 +8,6 @@ $(function() {
 
     $(window).on('scroll', function () {
         const scrollTop = $(this).scrollTop();
-        console.log(scrollTop);
         if (scrollTop > hideAfter) {
             // scrolling down
             $main.addClass('header-hidden');
