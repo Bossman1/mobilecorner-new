@@ -5,11 +5,12 @@
 /*}*/
 
 /*!* Move arrows container on top and center *!*/
-/*.splide .splide__arrows {*/
-/*    top: -30px;*/
-/*    right: 47px;*/
-/*    position: absolute;*/
-/*}*/
+.splide .splide__arrow {
+    background: #ffffff !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
 
 
 /*.splide .splide__arrow {*/

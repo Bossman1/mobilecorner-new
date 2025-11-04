@@ -8,7 +8,7 @@
 <div class="{{ $wrapperClass }}">
     @if(count($options))
         @foreach($options as $k => $option)
-            <p {{ $attributes->merge(['class' => '']) }}>
+            <div {{ $attributes->merge(['class' => '']) }}>
                 <a href="{{ $option['url'] }}"
                 @if(count($hrefOptions))
                     @foreach($hrefOptions as $k =>  $hrefOption)
@@ -28,7 +28,7 @@
                 />
                 </a>
 
-            </p>
+            </div>
         @endforeach
     @endif
 </div>

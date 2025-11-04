@@ -3,9 +3,9 @@
 
 @import "preline/variants.css";
 
-body {
-    @apply bg-slate-50 ;
-}
+/*body {*/
+/*    !*@apply bg-slate-50 ;*!*/
+/*}*/
 .hide-scrollbar::-webkit-scrollbar {
     display: none;
 }
