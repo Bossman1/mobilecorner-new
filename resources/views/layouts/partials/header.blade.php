@@ -33,11 +33,12 @@
                 </div>
 
                 <!-- Navigation Button -->
-                <div class="flex items-center h-full mr-4">
-                    <x-button size="md" icon="phosphor-dots-nine" iconPosition="left" variant="primary" class="text-[18px]"
-                              href="/">ნავიგაცია
-                    </x-button>
-                </div>
+                @include('includes.secondary-header-menu')
+{{--                <div class="flex items-center h-full mr-4">--}}
+{{--                    <x-button size="md" icon="phosphor-dots-nine" iconPosition="left" variant="primary" class="text-[18px]"--}}
+{{--                              href="/">ნავიგაცია--}}
+{{--                    </x-button>--}}
+{{--                </div>--}}
 
                 <!-- Search Input (takes remaining space) -->
                 <div class="flex items-center h-full flex-1 mr-4">

@@ -70,8 +70,8 @@
                             // console.log(root.dataset.pagination);
                             // console.log(root.dataset.showArrows);
                             // console.log(root.dataset);
-                            console.log(root.dataset.autoplay);
-                            console.log(root.dataset.pauseOnHover);
+                            // console.log(root.dataset.autoplay);
+                            // console.log(root.dataset.pauseOnHover);
                             const defaultOptions = {
                                 type: root.dataset.type || "loop",
                                 perPage: parseInt(root.dataset.perPage) || 4,
