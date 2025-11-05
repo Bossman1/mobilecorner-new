@@ -4,16 +4,17 @@
    'id' => 'id',
    'options' => [],
    'class' =>'',
-   'hasSearch' => false
+   'hasSearch' => false,
+   'selected' => null,
 ])
 
 
 <!-- Select -->
 <select
 
- name="{{ $name }}"
- id="{{ $id }}"
- data-hs-select='{
+    name="{{ $name }}"
+    id="{{ $id }}"
+    data-hs-select='{
  @if($hasSearch)  "hasSearch": true, @endif
   "placeholder": "{{ $placeholder }}",
   "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
@@ -28,7 +29,7 @@
     <option value="">{{ $placeholder }}</option>
     @if(is_array($options) && count($options) > 0)
         @foreach($options as $k => $option)
-            <option value="{{ $k }}">{{ $option }}</option>
+            <option value="{{ $k }}" @selected($selected == $k)>{{ $option }}</option>
         @endforeach
     @endif
 </select>
