@@ -20,11 +20,11 @@
         </label>
     @endif
 
-    <div class="flex @if($labelPosition === 'under' || $labelPosition === 'top') flex-col items-center @else items-center  @endif">
+    <div class="flex @if($labelPosition === 'under' || $labelPosition === 'top') flex-col items-center @else items-center  w-full @endif">
 
         {{-- Label before --}}
         @if($label && $labelPosition === 'before')
-            <label for="{{ $id }}" class="mr-[4px] text-slate-600 text-[16px] select-none {{ $labelClass }}">
+            <label for="{{ $id }}" class="mr-[4px] text-slate-600 text-[16px] flex-1 select-none cursor-pointer {{ $labelClass }}">
                 {{ $label }}
             </label>
         @endif
@@ -38,13 +38,13 @@
             @if($checked) checked @endif
             @if($disabled) disabled @endif
             {{ $attributes->merge([
-                'class' => 'w-5 h-5 text-blue-600 bg-white border border-slate-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed'
+                'class' => 'w-5 h-5 text-blue-600 bg-white border border-slate-300 rounded-xs focus:ring-2 focus:ring-blue-500 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed'
             ]) }}
         />
 
         {{-- Label after --}}
         @if($label && $labelPosition === 'after')
-            <label for="{{ $id }}" class="ml-2 text-slate-600 text-[16px] select-none {{ $labelClass }}">
+            <label for="{{ $id }}" class="ml-2 text-slate-600 text-[16px] flex-1 select-none cursor-pointer {{ $labelClass }}">
                 {{ $label }}
             </label>
         @endif

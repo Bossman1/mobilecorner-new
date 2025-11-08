@@ -29,7 +29,7 @@
             <div class="flex items-center h-[70px]">
                 <!-- Logo -->
                 <div class="flex items-center h-full mr-6">
-                    <a href=""><img src="{{ asset('assets/images/logo.png') }}" alt=""></a>
+                    <a href="{{ route('home') }}"><img src="{{ asset('assets/images/logo.png') }}" alt=""></a>
                 </div>
 
                 <!-- Navigation Button -->

@@ -13,9 +13,10 @@
 :root {
     --color-main: #92549f;
     --color-main-hover: #a259b3;
+    --color-main-light: #e17bfc;
     --color-second-header: rgba(237, 235, 235, 0.74);
     --color-footer: #f8f1f9;
-
+    --color-favorite: #e79929;
 }
 
 .hide-scrollbar {
@@ -95,9 +96,9 @@ input[type=number] {
 
 /* Active state */
 .splide__pagination__page.is-active {
-    @apply !bg-sky-500  w-[24px] h-[6px] rounded-[32px] m-[5px];
+    @apply !bg-[var(--color-main)]  w-[24px] h-[6px] rounded-[32px] m-[5px];
 }
 
 .splide__pagination__page {
-    @apply !bg-slate-300  w-[6px] h-[6px] rounded-[32px];
+    @apply !bg-[var(--color-main-hover)]  w-[6px] h-[6px] rounded-[32px];
 }

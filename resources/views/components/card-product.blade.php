@@ -1,31 +1,57 @@
 @props([
      'id' =>'',
      'options' =>[],
+     'condition' => 'new', // new | owned
+     'favorite' => '', // new | owned
+     'wrapperClass' =>''
 
 ])
+@php
+    $conditionColor  ='';
+    $conditionText  ='';
+    if($condition === 'new'){
+        $conditionColor = 'bg-green-500 border-green-600';
+        $conditionText = 'ახალი';
+    }elseif ($condition === 'owned'){
+        $conditionColor = 'bg-blue-500 border-blue-600';
+        $conditionText = 'ნახმარი';
+    }
+@endphp
 <div {{ $attributes->merge(['class' => 'group']) }}>
 
-    <div class="group flex flex-col h-[300px] md:h-[372px] bg-white rounded-[8px] shadow-md overflow-hidden py-3">
-        <!-- Image -->
-        <a href="">
-            <div class="group-hover:opacity-30 transition-opacity duration-200 p-[10px]">
-                <img src="{{ $options['image'] }}" class="w-[256px]  object-cover" alt="">
+    <div class="group flex flex-col h-auto  bg-white rounded-[8px] shadow-lg overflow-hidden py-3 relative {{ $wrapperClass }}">
+
+        <div class="group-hover:opacity-30 transition-opacity">
+            <div class="absolute top-2 right-1">
+                <span class="border rounded-[10px] text-xs text-white px-[5px] py-[3px] italic shadow-lg {{ $conditionColor }}">{{ $conditionText }}</span>
             </div>
-        </a>
+            <!-- Image -->
+            <a href="">
+                <div class="flex items-center justify-center p-[10px]">
+                    <img src="http://mobilecorner.lc/assets/images/temp/img1.webp" class="w-[256px] object-cover" alt="">
+                </div>
+            </a>
+        </div>
+
 
         <!-- Text + Button -->
         <div class="flex flex-col flex-1 px-[15px]  md:justify-between ">
             <!-- Text -->
-            <a href="" class="space-y-[5px]">
-                <div class="text-[16px] font-custom-bold-upper text-[var(--color-main)] line-clamp-2">{{ $options['price'] }} ₾</div>
-                <div class="text-[12px] text-slate-800 line-clamp-2">{{ $options['title'] }}</div>
-            </a>
+            <div class="group-hover:opacity-30 transition-opacity">
+                <a href="" class="space-y-[5px]">
+                    <div class="text-[16px] font-custom-bold-upper text-[var(--color-main)] line-clamp-2">{{ $options['price'] }} ₾</div>
+                    <div class="text-[12px] text-slate-800 line-clamp-2">{{ $options['title'] }}</div>
+                </a>
+            </div>
+
 
             <!-- Button -->
             <div class="text-center mt-[5px]">
-                <x-button size="sm" icon="phosphor-shopping-cart" iconPosition="left" variant="primary">
-                    დამატება
-                </x-button>
+                <div class="flex justify-between items-center gap-[10px]">
+                    <x-button size="sm" icon="phosphor-shopping-cart" class="w-full flex-1" iconPosition="left" variant="primary">დამატება</x-button>
+                    <x-button size="sm" icon="phosphor-heart" class="{{ $favorite }} hidden md:block" variant="primary"  />
+                </div>
+
             </div>
         </div>
     </div>

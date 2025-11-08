@@ -124,18 +124,18 @@
     }
 
     .noUi-connect {
-        background: #3b82f6;
+        background: var(--color-main);
     }
 
     .noUi-handle.noUi-handle-lower, .noUi-handle.noUi-handle-upper {
-        background: #00BCFF !important;
+        background: var(--color-main) !important;
         border: 1px solid #F8FAFC !important;
         width: 20px !important;
         height: 20px !important;
     }
 
     .noUi-connect {
-        background: #0084D1 !important;
+        background: var(--color-main-light) !important;
     }
 
     .noUi-handle {
