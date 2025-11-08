@@ -28,7 +28,7 @@
             <!-- Image -->
             <a href="">
                 <div class="flex items-center justify-center p-[10px]">
-                    <img src="http://mobilecorner.lc/assets/images/temp/img1.webp" class="w-[256px] object-cover" alt="">
+                    <img src="{{ $options['image'] }}" class="w-[256px] object-cover" alt="">
                 </div>
             </a>
         </div>
