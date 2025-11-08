@@ -57,7 +57,19 @@
 
             {{--product blocks start--}}
             <div>
-                <h2 class="text-[17px] font-custom-bold-upper my-[20px]">კატეგორიის სახელი</h2>
+                <div class="flex justify-between items-center">
+                    <h2 class="text-[17px] font-custom-bold-upper my-[20px]">
+                        <a href="#">კატეგორიის სახელი</a>
+                    </h2>
+                    <a href="#">
+                        <div class="flex justify-between items-center gap-1 group hover:text-[var(--color-main)] font-custom-regular">
+                            <span class="text-sm">ყველას ნახვა</span>
+                            <x-dynamic-component :component="'phosphor-arrow-square-out'" class="h-5 w-5 group-hover:text-[var(--color-main)]"/>
+                        </div>
+                    </a>
+                </div>
+
+
                 <div>
                     <x-carousel  :pagination="false" perPage="6" perPageMobile="2" perPageTablet="5">
                         @for($i = 0; $i < 24; $i++)
@@ -77,7 +89,17 @@
 
             {{--product blocks start--}}
             <div>
-                <h2 class="text-[17px] font-custom-bold-upper my-[20px]">კატეგორიის სახელი</h2>
+                <div class="flex justify-between items-center">
+                    <h2 class="text-[17px] font-custom-bold-upper my-[20px]">
+                        <a href="#">კატეგორიის სახელი</a>
+                    </h2>
+                    <a href="#">
+                        <div class="flex justify-between items-center gap-1 group hover:text-[var(--color-main)] font-custom-regular">
+                            <span class="text-sm">ყველას ნახვა</span>
+                            <x-dynamic-component :component="'phosphor-arrow-square-out'" class="h-5 w-5 group-hover:text-[var(--color-main)]"/>
+                        </div>
+                    </a>
+                </div>
                 <div>
                     <x-carousel  :pagination="false" perPage="6" perPageMobile="2" perPageTablet="5">
                         @for($i = 0; $i < 24; $i++)
@@ -114,7 +136,17 @@
 
             {{--product blocks start--}}
             <div>
-                <h2 class="text-[17px] font-custom-bold-upper my-[20px]">კატეგორიის სახელი</h2>
+                <div class="flex justify-between items-center">
+                    <h2 class="text-[17px] font-custom-bold-upper my-[20px]">
+                        <a href="#">კატეგორიის სახელი</a>
+                    </h2>
+                    <a href="#">
+                        <div class="flex justify-between items-center gap-1 group hover:text-[var(--color-main)] font-custom-regular">
+                            <span class="text-sm">ყველას ნახვა</span>
+                            <x-dynamic-component :component="'phosphor-arrow-square-out'" class="h-5 w-5 group-hover:text-[var(--color-main)]"/>
+                        </div>
+                    </a>
+                </div>
                 <div>
                     <x-carousel  :pagination="false" perPage="6" perPageMobile="2" perPageTablet="5">
                         @for($i = 0; $i < 24; $i++)
@@ -149,7 +181,17 @@
 
             {{--product blocks start--}}
             <div>
-                <h2 class="text-[17px] font-custom-bold-upper my-[20px]">კატეგორიის სახელი</h2>
+                <div class="flex justify-between items-center">
+                    <h2 class="text-[17px] font-custom-bold-upper my-[20px]">
+                        <a href="#">კატეგორიის სახელი</a>
+                    </h2>
+                    <a href="#">
+                        <div class="flex justify-between items-center gap-1 group hover:text-[var(--color-main)] font-custom-regular">
+                            <span class="text-sm">ყველას ნახვა</span>
+                            <x-dynamic-component :component="'phosphor-arrow-square-out'" class="h-5 w-5 group-hover:text-[var(--color-main)]"/>
+                        </div>
+                    </a>
+                </div>
                 <div>
                     <x-carousel  :pagination="false" perPage="6" perPageMobile="2" perPageTablet="5">
                         @for($i = 0; $i < 24; $i++)
@@ -185,7 +227,17 @@
 
             {{--product blocks start--}}
             <div>
-                <h2 class="text-[17px] font-custom-bold-upper my-[20px]">კატეგორიის სახელი</h2>
+                <div class="flex justify-between items-center">
+                    <h2 class="text-[17px] font-custom-bold-upper my-[20px]">
+                        <a href="#">კატეგორიის სახელი</a>
+                    </h2>
+                    <a href="#">
+                        <div class="flex justify-between items-center gap-1 group hover:text-[var(--color-main)] font-custom-regular">
+                            <span class="text-sm">ყველას ნახვა</span>
+                            <x-dynamic-component :component="'phosphor-arrow-square-out'" class="h-5 w-5 group-hover:text-[var(--color-main)]"/>
+                        </div>
+                    </a>
+                </div>
                 <div>
                     <x-carousel  :pagination="false" perPage="6" perPageMobile="2" perPageTablet="5">
                         @for($i = 0; $i < 24; $i++)
@@ -223,7 +275,17 @@
 
             {{--product blocks start--}}
             <div>
-                <h2 class="text-[17px] font-custom-bold-upper my-[10px]">კატეგორიის სახელი</h2>
+                <div class="flex justify-between items-center">
+                    <h2 class="text-[17px] font-custom-bold-upper my-[20px]">
+                        <a href="#">კატეგორიის სახელი</a>
+                    </h2>
+                    <a href="#">
+                        <div class="flex justify-between items-center gap-1 group hover:text-[var(--color-main)] font-custom-regular">
+                            <span class="text-sm">ყველას ნახვა</span>
+                            <x-dynamic-component :component="'phosphor-arrow-square-out'" class="h-5 w-5 group-hover:text-[var(--color-main)]"/>
+                        </div>
+                    </a>
+                </div>
                 <div>
                     <x-carousel  :pagination="false" perPage="6" perPageMobile="2" perPageTablet="5">
                         @for($i = 0; $i < 24; $i++)
