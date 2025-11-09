@@ -47,6 +47,9 @@
 @include('layouts.partials.header')
 <!-- End of Header -->
 
+<div class="container mx-auto mt-[20px]">
+    <x-breadcrumbs />
+</div>
 
 
 @yield('content')

@@ -33,8 +33,23 @@ window.flatpickrLocales = {
 window.monthSelectPlugin = monthSelectPlugin;
 window.Splide = Splide;
 
-// import Alpine from 'alpinejs';
-//
-// window.Alpine = Alpine;
-//
-// Alpine.start();
+import lightGallery from 'lightgallery';
+
+// Plugins (optional)
+import lgZoom from 'lightgallery/plugins/zoom';
+import lgThumbnail from 'lightgallery/plugins/thumbnail';
+import lgFullscreen from 'lightgallery/plugins/fullscreen';
+
+// Styles
+import 'lightgallery/css/lightgallery.css';
+import 'lightgallery/css/lg-zoom.css';
+import 'lightgallery/css/lg-thumbnail.css';
+import 'lightgallery/css/lg-fullscreen.css';
+
+// Expose globally if needed
+window.lightGallery = lightGallery;
+window.lgZoom = lgZoom;
+window.lgThumbnail = lgThumbnail;
+window.lgFullscreen = lgFullscreen;
+
+

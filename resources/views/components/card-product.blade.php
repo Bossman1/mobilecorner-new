@@ -20,29 +20,30 @@
 <div {{ $attributes->merge(['class' => 'group']) }}>
 
     <div class="group flex flex-col h-auto  bg-white rounded-[8px] shadow-lg overflow-hidden py-3 relative {{ $wrapperClass }}">
-
-        <div class="group-hover:opacity-30 transition-opacity">
-            <div class="absolute top-2 right-1">
-                <span class="border rounded-[10px] text-xs text-white px-[5px] py-[3px] italic shadow-lg {{ $conditionColor }}">{{ $conditionText }}</span>
-            </div>
-            <!-- Image -->
-            <a href="">
+        <a href="{{ route('pages.full-page') }}">
+            <div class="group-hover:opacity-30 transition-opacity">
+                <div class="absolute top-2 right-1">
+                    <span class="border rounded-[10px] text-xs text-white px-[5px] py-[3px] italic shadow-lg {{ $conditionColor }}">{{ $conditionText }}</span>
+                </div>
+                <!-- Image -->
                 <div class="flex items-center justify-center p-[10px]">
                     <img src="{{ $options['image'] }}" class="w-[256px] object-cover" alt="">
                 </div>
-            </a>
-        </div>
+            </div>
+        </a>
 
 
         <!-- Text + Button -->
         <div class="flex flex-col flex-1 px-[15px]  md:justify-between ">
             <!-- Text -->
-            <div class="group-hover:opacity-30 transition-opacity">
-                <a href="" class="space-y-[5px]">
-                    <div class="text-[16px] font-custom-bold-upper text-[var(--color-main)] line-clamp-2">{{ $options['price'] }} ₾</div>
-                    <div class="text-[12px] text-slate-800 line-clamp-2">{{ $options['title'] }}</div>
-                </a>
-            </div>
+            <a href="{{ route('pages.full-page') }}">
+                <div class="group-hover:opacity-30 transition-opacity">
+                    <div class="space-y-[5px]">
+                        <div class="text-[16px] font-custom-bold-upper text-[var(--color-main)] line-clamp-2">{{ $options['price'] }} ₾</div>
+                        <div class="text-[12px] text-slate-800 line-clamp-2">{{ $options['title'] }}</div>
+                    </div>
+                </div>
+            </a>
 
 
             <!-- Button -->
@@ -53,7 +54,9 @@
                 </div>
 
             </div>
+
         </div>
+
     </div>
 
 </div>
