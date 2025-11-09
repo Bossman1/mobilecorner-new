@@ -135,7 +135,7 @@
 
             </x-slot:sidebar>
             <x-slot:content>
-
+                <x-breadcrumbs />
                 <div class="flex justify-between items-center my-[16px]">
                     <div class="flex flex-col">
                         <div class="font-custom-bold-upper text-xl">Apple</div>

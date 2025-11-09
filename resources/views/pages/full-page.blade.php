@@ -14,6 +14,7 @@
 
         <x-page-component  position="right" class="my-[20px]"  sidebar-class="bg-[var(--color-footer)] rounded-md w-[400px]">
             <x-slot:content>
+
                 @php
                     $galleries = [
                             ['thumb' =>  asset('assets/images/temp/img1.webp'), 'src' =>  asset('assets/images/temp/img1.webp'), 'caption' => 'Dark Souls 1'],
@@ -42,6 +43,7 @@
 
                 <div class="grid grid-cols-12 md:grid-cols-12 gap-2">
                     <div class="col-span-12 md:col-span-8">
+                        <x-breadcrumbs />
                         <x-gallery
                             :isThumbnail="true"
                             :images="$galleries"
