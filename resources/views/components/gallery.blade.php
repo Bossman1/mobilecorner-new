@@ -5,10 +5,27 @@
     'isThumbnail' => false
 ])
 
+@php
+if(isset($options['condition'])){
+    $conditionColor  ='';
+    $conditionText  ='';
+    if($options['condition'] === 'new'){
+        $conditionColor = 'bg-green-500 border-green-600';
+        $conditionText = 'ახალი';
+    }elseif ($options['condition'] === 'owned'){
+        $conditionColor = 'bg-blue-500 border-blue-600';
+        $conditionText = 'მეორადი';
+    }
+}
+@endphp
 <div id="{{ $id }}"
      class="relative overflow-hidden mx-auto {{ $options['wrapperClasses'] ?? '' }}"
      style="max-width: {{ $options['width'] ?? '800px' }}; height: {{ $options['height'] ?? '500px' }};">
+    <div class="absolute top-2 right-1 z-1">
+        <span class="border rounded-[10px] text-xs text-white px-[5px] py-[3px] italic shadow-lg {{ $conditionColor }}">{{ $conditionText }}</span>
+    </div>
     <x-carousel :arrows :onHoverArrows="false" :pagination="false" perPage="1" perPageMobile="1" perPageTablet="1">
+
         @foreach($images as $img)
             <a href="{{ $img['src'] ?? '' }}"
                data-sub-html="{{ $img['caption'] ?? '' }}"

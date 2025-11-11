@@ -242,7 +242,7 @@
             padding: 1px;
         }
         .selector-{{ $class }}-thumbs .splide__track--nav>.splide__list>.splide__slide.is-active {
-            border: 3px solid var(--color-main);
+            border: 2px solid var(--color-main);
             border-radius: 5px;
         }
         .splide-custom-class-thumb-prev{
