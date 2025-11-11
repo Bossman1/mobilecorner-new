@@ -177,7 +177,12 @@
                     <div class="mt-[16px]">
                         <div class="flex justify-start items-center">
                             <h2 class="text-sm font-custom-bold-upper">ონლაინ განვადება</h2>
-                            <span><x-tooltip icon="phosphor-warning-circle" text="aq rame"/></span>
+                            <span>
+                            <x-tooltip icon="phosphor-warning-circle" iconClass="!w-[19.5px] !h-[19.5px]"
+                                       text="აქ რამე ტექსტი დაიწერება"
+                                       labelClass="!text-slate-500 !text-[11px] !px-0"
+                                       contentClass="!bg-slate-700 !text-[11px] text-white whitespace-nowrap "/>
+                            </span>
                         </div>
                         <div class="flex flex-col justify-between items-center  space-y-2 mt-[5px]">
                             <div
