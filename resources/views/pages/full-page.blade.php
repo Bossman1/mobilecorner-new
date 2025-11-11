@@ -2,9 +2,9 @@
 @section('content')
     @php
         $options = [
-           '1' => 'A',
-           '2' => 'B',
-           '3' => 'C',
+           '1' => 'A ახალივით მდგომარეობაში 9.5/10',
+           '2' => 'B მცირედი მოხმარების კვალით 8/10',
+           '3' => 'C შესამჩნევი მოხმარების კვალი 6/10',
            ];
 
     $brands = ['Apple', 'Samsung', 'Xiaomi', 'Huawei', 'Oppo', 'Vivo', 'Nokia', 'Realme', 'OnePlus', 'Sony', 'Asus', 'Google', 'Honor'];
@@ -13,7 +13,7 @@
     <div class="container mx-auto font-custom-regular">
 
         <x-page-component position="right" class="my-[20px] !gap-[20px]"
-                          sidebar-class="bg-[var(--color-second-header)] rounded-md md:!w-[350px] sidebar-content-class transition-all duration-300">
+                          sidebar-class="bg-[var(--color-second-header)] rounded-md md:!w-[414px] sidebar-content-class transition-all duration-300">
             <x-slot:content>
 
                 @php
