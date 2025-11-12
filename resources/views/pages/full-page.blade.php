@@ -100,7 +100,7 @@
                 </div>
 
 
-<x-line class="!mt-[10px]" />
+                    <x-line class="!mt-[10px]" />
 
                     <section class="my-[30px]">
                         <h2 class="text-sm font-custom-bold-upper my-[10px]">აირჩიეთ მობილურის კატეგორია</h2>
@@ -161,24 +161,26 @@
 
 
                     <div>
-                        <h2 class="text-sm font-custom-bold-upper">აირჩიეთ მობილურის კატეგორია</h2>
-                        <div class="flex justify-between items-center gap-5 mt-[5px]">
-                            <div class="flex-1">
-                                <x-select class="w-full flex-1 !h-[50px] !pt-[14px] !text-sm" placeholder="ფასები"
-                                          :options="$options"/>
-                            </div>
-                            <div>
-                                <span class="text-xl text-[var(--color-main)] font-custom-bold-upper">12 ₾</span>
-                            </div>
+                        <h2 class="text-sm font-custom-bold-upper my-[5px]">აირჩიეთ მობილურის კატეგორია</h2>
+                        <div class="flex flex-col justify-between items-center gap-[7px] w-full">
+                                 @php
+                                     $radios = [
+                                       ['label'=>'A)  ახალივით მდგომარეობაში 9.5/10','icon' => 'phosphor-radio-button','checked' => true,'value' => 1],
+                                       ['label'=>'B)  მცირედი მოხმარების კვალით 8/10','icon' => 'phosphor-radio-button','value' => 2],
+                                       ['label'=>'C)  შესამჩნევი მოხმარების კვალი 6/10','icon' => 'phosphor-radio-button','value' => 3]
+                                     ]
+                                 @endphp
+                                 <x-radio-card label-class="!text-[12px]" text-position="right" iconClass="!w-[20px] !h-[20px]" name="payment_options" iconPosition="right" :options="$radios" />
+
                         </div>
 
                     </div>
 
                     <div class="mt-[16px]">
-                        <div class="flex justify-start items-center">
+                        <div class="flex justify-start items-center gap-2">
                             <h2 class="text-sm font-custom-bold-upper">ონლაინ განვადება</h2>
                             <span>
-                            <x-tooltip icon="phosphor-warning-circle" iconClass="!w-[19.5px] !h-[19.5px]"
+                              <x-tooltip icon="phosphor-warning-circle" iconClass="!w-[19.5px] !h-[19.5px]"
                                        text="აქ რამე ტექსტი დაიწერება"
                                        labelClass="!text-slate-500 !text-[11px] !px-0"
                                        contentClass="!bg-slate-700 !text-[11px] text-white whitespace-nowrap "/>
@@ -220,7 +222,6 @@
         $(function() {
             const $sidebar = $('.sidebar-content-class');
             const offsetTop = 100; // how far to scroll before sticking
-
             $(window).on('scroll', function() {
                 if ($(window).scrollTop() > offsetTop) {
                     $sidebar.addClass('sticky top-[80px] shadow-lg');
