@@ -9,6 +9,7 @@
 
     $brands = ['Apple', 'Samsung', 'Xiaomi', 'Huawei', 'Oppo', 'Vivo', 'Nokia', 'Realme', 'OnePlus', 'Sony', 'Asus', 'Google', 'Honor'];
     shuffle($brands);
+    $favoriteFullPage = rand(0, 1) ? '!text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)] !bg-[var(--color-second-header)]' : '!bg-[var(--color-favorite)]';
     @endphp
     <div class="container mx-auto font-custom-regular">
 
@@ -161,7 +162,10 @@
                                                  class="h-[15px] w-[15px] !text-black/80 group-hover:!text-white"/>
                             <span class="text-[12px] text-green-900 font-custom-bold-upper ">მარაგშია</span>
                             <span class="text-[12px] text-red-900 font-custom-bold-upper hidden">არ არის მარაგში</span>
+
+                            <x-button size="sm" icon="phosphor-heart" class="{{ $favoriteFullPage }}" variant="primary"  />
                         </div>
+
                     </div>
                     <x-line class="!border-t-[#dfd5d5] !my-[13px]"/>
 
