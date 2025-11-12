@@ -232,10 +232,12 @@
         $(function() {
             const $sidebar = $('.sidebar-content-class');
             const offsetTop = 100; // how far to scroll before sticking
+            const hideAfter = 58;
             $(window).on('scroll', function() {
-                if ($(window).scrollTop() > offsetTop) {
+                const scrollTop = $(this).scrollTop();
+                if (scrollTop > offsetTop) {
                     $sidebar.addClass('sticky top-[80px] shadow-lg');
-                } else {
+                } else if(scrollTop < hideAfter) {
                     $sidebar.removeClass('sticky top-0 shadow-lg');
                 }
             });
