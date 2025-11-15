@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,6 +23,11 @@ Route::group(['prefix' => 'pages'], function () {
     })->name('pages.full-page');
 
 });
+
+Route::group(['prefix' => 'cart'], function () {
+    Route::post('add-to-cart', [CartController::class, 'addItem'])->name('cart.add-to-cart');
+});
+
 
 
 Route::group(['prefix' => 'nboard'], function () {

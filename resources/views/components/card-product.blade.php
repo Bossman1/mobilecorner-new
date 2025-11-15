@@ -49,7 +49,17 @@
             <!-- Button -->
             <div class="text-center mt-[5px]">
                 <div class="flex justify-between items-center gap-[10px]">
-                    <x-button size="sm" icon="phosphor-shopping-cart" class="w-full flex-1" iconPosition="left" variant="primary">დამატება</x-button>
+
+                    @php
+                        $cardOptions = [
+                            'data-product-id' => uniqid(),
+                            'data-image' => $options['image'],
+                            'data-title' => $options['title'],
+                            'data-product-price' => $options['price']
+                        ];
+                     @endphp
+
+                    <x-button size="sm" icon="phosphor-shopping-cart" class="w-full flex-1 add-to-cart-btn" iconPosition="left" variant="primary" :options="$cardOptions">დამატება</x-button>
                     <x-button size="sm" icon="phosphor-heart" class="{{ $favorite }} hidden md:block" variant="primary"  />
                 </div>
 

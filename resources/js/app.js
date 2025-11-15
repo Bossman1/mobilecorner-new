@@ -7,7 +7,7 @@ import 'preline/dist/preline.js';
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import './scripts/header.js'
-// import './global.js'
+import './global.js'
 Fancybox.bind("[data-fancybox]", {
     // Custom options
 });

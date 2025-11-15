@@ -125,15 +125,17 @@
     disabled
 @endif
 
-@if($options && count($options))
+@if(!empty($options))
     @foreach($options as $key => $value)
-        @if(is_int($key) || (is_numeric($key) && $key === $value))
-            {{ $value }}
+        @if(is_int($key))
+            {{ $key }}
         @else
-            {{ $key }}="{{ $value }}"
+            {{ $key }}="{{ e($value) }}"
         @endif
     @endforeach
 @endif
+
+
 
 
 {{ $attributes->except('class')->merge(['class' => $finalClasses]) }}
