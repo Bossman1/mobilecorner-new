@@ -125,12 +125,12 @@
     disabled
 @endif
 
-@if(!empty($options))
+@if($options && count($options))
     @foreach($options as $key => $value)
-        @if(is_int($key))
-            {{ $key }}
+        @if(is_int($key) || (is_numeric($key) && $key === $value))
+            {{ $value }}
         @else
-            {{ $key }}="{{ e($value) }}"
+            {{ $key }}="{{ $value }}"
         @endif
     @endforeach
 @endif
