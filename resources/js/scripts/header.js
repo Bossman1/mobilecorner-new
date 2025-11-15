@@ -6,7 +6,7 @@ $(function() {
     let lastScrollTop = 0;
 
 
-    $(window).on('scroll', function () {
+    $(window).on('scroll load', function () {
         const scrollTop = $(this).scrollTop();
         if (scrollTop > hideAfter) {
             // scrolling down

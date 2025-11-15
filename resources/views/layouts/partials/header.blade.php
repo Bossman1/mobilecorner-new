@@ -57,44 +57,54 @@
                     </div>
                 </div>
 
-                <!-- Cart Button -->
-                <div class="flex items-center h-full relative font-custom-regular" id="cart-container">
-                    <!-- Cart Button -->
-                    <x-button id="cart-btn" size="md" icon="phosphor-shopping-cart" iconPosition="left" variant="outline"
-                              class="text-[18px] relative">
-                        კალათა
-                        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white w-5 h-5 text-[11px] font-bold rounded-full flex items-center justify-center invisible opacity-0 transition">0</span>
+                <div class="gap-[15px] flex items-center relative">
+
+                    <x-button id="fav-btn" size="sm" icon="phosphor-heart"  variant="outline"
+                              class="text-[18px] !rounded-full relative !pr-[8px]" iconCustomClass="!mr-0">
+                        <span id="fav-count" class="absolute -top-2 -right-2 bg-orange-500 text-white w-5 h-5 text-[11px] font-bold rounded-full flex items-center justify-center invisible opacity-0 transition">0</span>
                     </x-button>
 
-                    <!-- Mini Cart -->
-                    <div id="mini-cart"
-                         class="absolute top-full right-0 w-[320px] bg-white text-black shadow-lg rounded-[10px] p-4 opacity-0 invisible transition-opacity duration-300 border border-[var(--color-main)]">
-                        <!-- Arrow -->
-                        <span class="w-[15px] h-[15px] right-[52px] bg-white top-[-8px] rotate-45 border-t border-l border-[var(--color-main)] absolute"></span>
+                    <!-- Cart Button -->
+                    <div class="flex items-center h-full relative font-custom-regular" id="cart-container">
+                        <!-- Cart Button -->
+                        <x-button id="cart-btn" size="md" icon="phosphor-shopping-cart" iconPosition="left" variant="outline"
+                                  class="text-[18px] relative">
+                            კალათა
+                            <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white w-5 h-5 text-[11px] font-bold rounded-full flex items-center justify-center invisible opacity-0 transition">0</span>
+                        </x-button>
 
-                        <!-- Title -->
-                        <div class="flex justify-between items-center px-[10px] text-xs">
-                            <div>კალათა</div>
-                            <div><span class="product-count">0</span> პროდუქტი</div>
-                        </div>
+                        <!-- Mini Cart -->
+                        <div id="mini-cart"
+                             class="absolute top-[62px] right-0 w-[320px] bg-white text-black shadow-lg rounded-[10px] p-4 opacity-0 invisible transition-opacity duration-300 border border-[var(--color-main)]">
+                            <!-- Arrow -->
+                            <span class="w-[15px] h-[15px] right-[52px] bg-white top-[-8px] rotate-45 border-t border-l border-[var(--color-main)] absolute"></span>
 
-                        <!-- Items container -->
-                        <div id="mini-cart-items" class="space-y-2 h-[250px] overflow-y-auto pt-[10px]">
-                            <!-- Placeholder if empty -->
-                            <div id="cart-placeholder" class="flex flex-col items-center justify-center py-10 text-center text-slate-500">
-                                <img src="{{ asset('assets/images/cart-basket.png') }}" alt="Empty cart" class="w-24 h-24 mb-4 opacity-50">
-                                <span>თქვენი კალათა ცარიელია</span>
+                            <!-- Title -->
+                            <div class="flex justify-between items-center px-[10px] text-xs">
+                                <div>კალათა</div>
+                                <div><span class="product-count">0</span> პროდუქტი</div>
+                            </div>
+
+                            <!-- Items container -->
+                            <div id="mini-cart-items" class="space-y-2 h-[250px] overflow-y-auto pt-[10px]">
+                                <!-- Placeholder if empty -->
+                                <div id="cart-placeholder" class="flex flex-col items-center justify-center py-10 text-center text-slate-500">
+                                    <img src="{{ asset('assets/images/cart-basket.png') }}" alt="Empty cart" class="w-24 h-24 mb-4 opacity-50">
+                                    <span>თქვენი კალათა ცარიელია</span>
+                                </div>
+                            </div>
+
+                            <!-- View Cart Button -->
+                            <div class="mt-4">
+                                <x-button size="sm" icon="phosphor-shopping-cart" iconPosition="left" variant="primary" class="w-full" id="view-cart-btn" href="{{ route('home') }}">
+                                    კალათის ნახვა
+                                </x-button>
                             </div>
                         </div>
-
-                        <!-- View Cart Button -->
-                        <div class="mt-4">
-                            <x-button size="sm" icon="phosphor-shopping-cart" iconPosition="left" variant="primary" class="w-full" id="view-cart-btn">
-                                კალათის ნახვა
-                            </x-button>
-                        </div>
                     </div>
+
                 </div>
+
 
 
             </div>

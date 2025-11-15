@@ -171,6 +171,7 @@
 
 
                 $secondaryMenuBtn.on('mouseenter', function() {
+
                     $menuContent .removeClass('hidden');
                     console.log('mouse enter');
                 });

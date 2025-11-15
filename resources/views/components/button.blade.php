@@ -3,6 +3,7 @@
     'href' => null,
     'icon' => null,
     'iconPosition' => 'left',
+    'iconCustomClass' => '',
     'size' => 'md',
     'variant' => 'outline',
     'disabled' => false,
@@ -142,7 +143,7 @@
 >
 {{-- Left icon --}}
 @if($hasIcon && $iconPosition === 'left' && !$isIconOnly)
-    <x-dynamic-component :component="$icon" class="{{ $iconClass }}"/>
+    <x-dynamic-component :component="$icon" class="{{ $iconClass }} {{ $iconCustomClass }}"/>
 @endif
 
 {{-- Text --}}
@@ -152,11 +153,11 @@
 
 {{-- Right icon --}}
 @if($hasIcon && $iconPosition === 'right' && !$isIconOnly)
-    <x-dynamic-component :component="$icon" class="{{ $iconClass }}"/>
+    <x-dynamic-component :component="$icon" class="{{ $iconClass }} {{ $iconCustomClass }}"/>
 @endif
 
 {{-- Icon-only --}}
 @if($isIconOnly)
-    <x-dynamic-component :component="$icon" class="{{ $iconClass }}"/>
+    <x-dynamic-component :component="$icon" class="{{ $iconClass }} {{ $iconCustomClass }}"/>
 @endif
 </{{ $tag }}>

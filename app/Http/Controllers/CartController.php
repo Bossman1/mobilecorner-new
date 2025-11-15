@@ -20,7 +20,8 @@ class CartController extends Controller
         return response()->json([
             'success' => true,
             'html' => $html,
-            'id' => $id
+            'id' => $id,
+            'price'=>(int)$price,
         ]);
     }
 }

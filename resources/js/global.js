@@ -1,5 +1,5 @@
 $(function () {
-
+    let $totalCartPrice = 0;
 
     // show /hide mini cart - start
     let $miniCart = $('#mini-cart');
@@ -17,6 +17,28 @@ $(function () {
     );
     // show /hide mini cart - end
 
+    function changePriceInCartBtn(price){
+        let $cartBrnSpan =  $("#cart-btn span");
+        if (price > 0){
+            $cartBrnSpan
+                .contents()
+                .filter(function () {
+                    return this.nodeType === 3; // select only text
+                })
+                .first()
+                .replaceWith(price + ' ₾');
+        }else{
+            $cartBrnSpan
+                .contents()
+                .filter(function () {
+                    return this.nodeType === 3; // select only text
+                })
+                .first()
+                .replaceWith('კალათა');
+        }
+        $totalCartPrice = price;
+    }
+
 
 
     // Add to cart - star
@@ -25,6 +47,7 @@ $(function () {
         let imgUrl = $btn.data("image");
         let title = $btn.data("title");
         let price = $btn.data("product-price");
+
 
         // Add item via AJAX first
         $.ajax({
@@ -38,6 +61,12 @@ $(function () {
             },
             success: function (response) {
                 if (response.success) {
+                    $totalCartPrice += parseFloat(response.price);
+                    // console.log(totalCartPrice);
+
+                    // update cart btn text with price
+                    changePriceInCartBtn($totalCartPrice);
+
                     // Hide placeholder if any
                     $("#cart-placeholder").hide();
 
@@ -51,6 +80,7 @@ $(function () {
 
                     // Attach remove button event
                     $("#cart-item-" + response.id + " .remove-cart-item").on("click", function () {
+
                         $(this).closest("div[id^='cart-item-']").remove();
                         let newCount = $("#mini-cart-items .cart-item").length;
                         if (newCount === 0) {
@@ -60,6 +90,20 @@ $(function () {
                         } else {
                             $("#cart-count, .product-count").text(newCount);
                         }
+
+                        let newTotalPrice = 0;
+                        $('.cart-item').each(function () {
+                            let removedPrice = $(this)
+                                .find('.flex-1 > div:nth-child(2)')
+                                .text()
+                                .replace(/[^\d\.]/g, '');
+                            newTotalPrice += parseFloat(removedPrice);
+                            $totalCartPrice -= removedPrice;
+                        });
+
+                        // update cart btn text with price
+                        changePriceInCartBtn(newTotalPrice);
+
                     });
 
                     // === Start flying image animation AFTER AJAX success ===
@@ -83,7 +127,7 @@ $(function () {
 
                     imgToDrag.animate({
                         top: cartOffset.top,
-                        left: cartOffset.left,
+                        left: cartOffset.left + 100,
                         width: 0,
                         height: 0,
                         opacity: 0.1
