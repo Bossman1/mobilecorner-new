@@ -9,10 +9,11 @@ class CartController extends Controller
 {
     public function addItem(Request $request)
     {
-        $id = Str::uuid(); // unique ID for the item
+
         $image = $request->input('image');
         $title = $request->input('title');
         $price = $request->input('price');
+        $id = $request->input('id');
 
         // Render Blade partial and return HTML
         $html = view('components.mini-cart-item', compact('id', 'image', 'title', 'price'))->render();
@@ -21,6 +22,8 @@ class CartController extends Controller
             'success' => true,
             'html' => $html,
             'id' => $id,
+            'image' => $image,
+            'title' => $title,
             'price'=>(int)$price,
         ]);
     }

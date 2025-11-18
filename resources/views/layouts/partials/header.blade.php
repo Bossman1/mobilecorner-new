@@ -75,7 +75,7 @@
 
                         <!-- Mini Cart -->
                         <div id="mini-cart"
-                             class="absolute top-[62px] right-0 w-[320px] bg-white text-black shadow-lg rounded-[10px] p-4 opacity-0 invisible transition-opacity duration-300 border border-[var(--color-main)]">
+                             class="absolute top-[62px] right-0 w-[360px] bg-white text-black shadow-lg rounded-[10px] p-4 opacity-0 invisible transition-opacity duration-300 border border-[var(--color-main)]">
                             <!-- Arrow -->
                             <span class="w-[15px] h-[15px] right-[52px] bg-white top-[-8px] rotate-45 border-t border-l border-[var(--color-main)] absolute"></span>
 
@@ -95,7 +95,10 @@
                             </div>
 
                             <!-- View Cart Button -->
-                            <div class="mt-4">
+                            <div class="mt-[10px]">
+                                <div class="flex justify-end  items-end font-custom-regular text-sm mb-[10px]">
+                                    <div><span>ჯამური ფასი:</span> <span class="font-custom-bold-upper basket-price-sum">0₾</span></div>
+                                </div>
                                 <x-button size="sm" icon="phosphor-shopping-cart" iconPosition="left" variant="primary" class="w-full" id="view-cart-btn" href="{{ route('home') }}">
                                     კალათის ნახვა
                                 </x-button>

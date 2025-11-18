@@ -7,6 +7,7 @@ import 'preline/dist/preline.js';
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import './scripts/header.js'
+import './scripts/cart.js'
 import './global.js'
 Fancybox.bind("[data-fancybox]", {
     // Custom options
@@ -52,4 +53,7 @@ window.lgZoom = lgZoom;
 window.lgThumbnail = lgThumbnail;
 window.lgFullscreen = lgFullscreen;
 
+import { showModal } from './scripts/alert';
+
+window.showModal = showModal;
 

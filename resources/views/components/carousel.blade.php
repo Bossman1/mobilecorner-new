@@ -3,10 +3,10 @@
     'containerClass'=> '',
     'containerInlineClass'=> '',
     'splideTrackClass'=> '',
-    'perPage' => 1,            // main slider perPage
+    'perPage' => 1,
     'perPageMobile' => 1,
     'perPageTablet' => 1,
-    'thumbPerPage' => 4,       // thumbnails per page (desktop)
+    'thumbPerPage' => 4,
     'thumbPerPageMobile' => 2,
     'thumbPerPageTablet' => 3,
     'showArrows' => true,
@@ -15,7 +15,7 @@
     'pauseOnHover' => false,
     'type' => 'loop',
     'gap' =>'1rem',
-    'id' =>'id',
+    'id' =>'splide_'.uniqid(),
 ])
 
 {{-- MAIN SLIDER --}}
@@ -64,9 +64,9 @@
             if (!window.initSplideOnce) {
                 window.initSplideOnce = true;
 
-                const parseBool = (v) => (v === 'true' || v === true);
+                const parseBool = v => (v === 'true' || v === true);
 
-                const ensureListStructure = (root) => {
+                const ensureListStructure = root => {
                     let track = root.querySelector('.splide__track');
                     if (!track) {
                         track = document.createElement('div');
@@ -74,6 +74,7 @@
                         while (root.firstChild) track.appendChild(root.firstChild);
                         root.appendChild(track);
                     }
+
                     let list = track.querySelector('.splide__list');
                     if (!list) {
                         list = document.createElement('ul');
@@ -81,6 +82,7 @@
                         while (track.firstChild) list.appendChild(track.firstChild);
                         track.appendChild(list);
                     }
+
                     Array.from(list.children).forEach(child => {
                         if (child.tagName.toLowerCase() !== 'li' || !child.classList.contains('splide__slide')) {
                             const li = document.createElement('li');
@@ -91,6 +93,7 @@
                             child.classList.add('splide__slide');
                         }
                     });
+
                     return { track, list };
                 };
 
@@ -127,11 +130,11 @@
                             }
                         };
 
-                        let isThumbs = root.id && root.id.startsWith('thumbnails_') || root.classList.contains('thumbnails-root');
+                        const isThumbs = root.id.startsWith('thumbnails_') || root.classList.contains('thumbnails-root');
 
                         if (!isThumbs) {
                             // Main slider
-                            const thumbRoot = document.getElementById(`thumbnails_${root.id}`);
+                            const thumbRoot = root.parentNode.querySelector(`#thumbnails_${root.id}`);
                             let thumbSplide = null;
 
                             if (thumbRoot) {
@@ -164,7 +167,6 @@
 
                                 thumbSplide = new Splide(thumbRoot, thumbOpts);
 
-                                // Hide arrows dynamically on resize / updated
                                 thumbSplide.on('updated', () => {
                                     const slides = thumbRoot.querySelectorAll('.splide__slide').length;
                                     const currentPerPage = thumbSplide.options.perPage;
@@ -176,19 +178,14 @@
                                 thumbRoot.dataset.splideInitialized = 'true';
                             }
 
-                            // Main slider init
                             const mainSplide = new Splide(root, { ...defaultOptions, ...optsFromData });
+
                             mainSplide.on('mounted', () => {
                                 root.querySelectorAll('.splide-custom-class-prev').forEach(el => {
-                                    el.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
-                                <rect width="256" height="256" fill="none"/>
-                                <polyline points="96 48 176 128 96 208" fill="none"
-                                    stroke="currentColor" stroke-linecap="round"
-                                    stroke-linejoin="round" stroke-width="16"/>
-                            </svg>`;
+                                    el.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
                                 });
                                 root.querySelectorAll('.splide-custom-class-next').forEach(el => {
-                                    el.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+                                    el.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
                                 });
                             });
 
@@ -218,6 +215,7 @@
                         });
                     }
                 });
+
                 observer.observe(document.body, { childList: true, subtree: true });
             }
         })();
@@ -245,18 +243,9 @@
             border: 2px solid var(--color-main);
             border-radius: 5px;
         }
-        .splide-custom-class-thumb-prev{
+        .splide-custom-class-thumb-prev, .splide-custom-class-thumb-next{
             border-radius: 3px !important;
             height: 70px !important;
-            left: 0 !important;
-            top: 51px !important;
-            box-shadow: none !important;
-            border: 1px solid #fcecff !important;
-        }
-        .splide-custom-class-thumb-next, .splide-custom-class-thumb-prev{
-            border-radius: 3px !important;
-            height: 70px !important;
-            right: 0 !important;
             top: 51px !important;
             box-shadow: none !important;
             border: 1px solid #fcecff !important;
@@ -266,6 +255,5 @@
             outline-offset: 0 !important;
         }
         .selector-{{ $class }}:hover .splide__arrow { opacity: 1; }
-
     </style>
 @endpush

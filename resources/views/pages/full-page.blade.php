@@ -31,7 +31,7 @@
 
 
                 <div class="grid grid-cols-12 md:grid-cols-12 gap-5">
-                    <div class="col-span-12 md:col-span-8">
+                    <div class="col-span-12 md:col-span-8 mt-[20px]">
                         <div class="flex justify-between items-center">
                             <x-breadcrumbs/>
                             <div class="text-sm text-slate-700">ID: 2342434</div>
