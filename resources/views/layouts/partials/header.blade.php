@@ -99,7 +99,7 @@
                                 <div class="flex justify-end  items-end font-custom-regular text-sm mb-[10px]">
                                     <div><span>ჯამური ფასი:</span> <span class="font-custom-bold-upper basket-price-sum">0₾</span></div>
                                 </div>
-                                <x-button size="sm" icon="phosphor-shopping-cart" iconPosition="left" variant="primary" class="w-full" id="view-cart-btn" href="{{ route('home') }}">
+                                <x-button size="sm" icon="phosphor-shopping-cart" iconPosition="left" variant="primary" class="w-full" id="view-cart-btn" href="{{ route('pages.cart') }}">
                                     კალათის ნახვა
                                 </x-button>
                             </div>

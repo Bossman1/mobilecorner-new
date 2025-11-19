@@ -7,6 +7,12 @@ use Illuminate\Support\Str;
 
 class CartController extends Controller
 {
+
+    public function index()
+    {
+        return view('pages.cart');
+    }
+
     public function addItem(Request $request)
     {
 
