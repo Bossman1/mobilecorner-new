@@ -345,7 +345,7 @@ $(function () {
     }
 
     window.restoreCart();
-
+    window.updateCartItemCount();
 });
 
 
@@ -370,7 +370,7 @@ window.renderCart = function() {
         grandTotal += subtotal;
 
         container.append(`
-              <div class="flex items-center bg-white p-4 rounded shadow cart-item">
+              <div class="flex items-center bg-white p-4 shadow cart-item border-b border-b-slate-100">
                     <!-- ID -->
                     <div class="w-20  font-medium text-gray-700 overflow-hidden">#${item.id}</div>
 
@@ -380,7 +380,7 @@ window.renderCart = function() {
                     </div>
 
                     <!-- Title -->
-                    <div class="flex-1 text-gray-800 font-medium">${item.title}</div>
+                    <div class="flex-1 text-gray-800 font-medium"><a href="">${item.title}</a></div>
 
                     <!-- Price -->
                     <div class="w-24  text-gray-700">${item.price} ₾</div>

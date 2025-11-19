@@ -28,7 +28,11 @@
                         {{--cart items - start--}}
 
                             <!-- Page Heading -->
-                            <h1 class="text-2xl font-bold mb-6 font-custom-bold-upper">თქვენი კალათა</h1>
+                        <div class="flex justify-between items-center  my-5">
+                            <h1 class="text-xl font-custom-bold-upper">თქვენი კალათა</h1>
+                            <div class="text-sm text-shadow-slate-800 font-custom-regular">პროდუქტის რაოდენობა: <span class="product-count">0</span></div>
+                        </div>
+
 
                             <!-- Cart Table Headings -->
                             <div class="hidden md:flex justify-between items-start bg-gray-100 p-3 font-semibold text-gray-700 rounded-t">
@@ -42,9 +46,9 @@
                             </div>
 
                             <!-- Cart Items List -->
-                            <div id="cart-items" class="space-y-4"></div>
+                            <div id="cart-items"></div>
                             <div class="w-full  my-[20px] text-right">
-                                <div><span>ჯამი:</span> <span  id="grand-total" class="font-custom-bold-upper">0</span></div>
+                                <div><span class="font-custom-regular">ჯამი:</span> <span  id="grand-total" class="font-custom-bold-upper">0</span></div>
                             </div>
 
 
