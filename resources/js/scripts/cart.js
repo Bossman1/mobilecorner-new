@@ -44,7 +44,8 @@ $(function () {
 
 
     // Add to cart - star
-    $(document).on("click",".add-to-cart-btn", function () {
+    $(document).on("click",".add-to-cart-btn", function (e) {
+        e.preventDefault();
         let $btn = $(this);
         let imgUrl = $btn.data("image");
         let title = $btn.data("title");
@@ -77,8 +78,7 @@ $(function () {
                     $totalCartPrice += parseFloat(response.price);
                     // console.log(totalCartPrice);
 
-                    // update cart btn text with price
-                    changePriceInCartBtn($totalCartPrice);
+
                     // saveCartQuantity(response.id, 1);
                     saveCartItem(response.id, response.title, response.price, response.image, 1);
 
@@ -92,6 +92,8 @@ $(function () {
                     let count = $("#mini-cart-items  .cart-item").length;
                     updateCartItemCount();
                     window.renderCart();
+                    // update cart btn text with price
+                    changePriceInCartBtn(calculateCartTotals());
 
                     // === Start flying image animation AFTER AJAX success ===
                     let imgToDrag = $('<img />', {
@@ -138,6 +140,7 @@ $(function () {
 
         // Remove from localStorage
         removeCartItem($id);
+        window.renderCart();
 
         // Recalculate cart count
         let newCount = $("#mini-cart-items .cart-item").length;
@@ -158,8 +161,8 @@ $(function () {
             let price = parseFloat($(this).find('.flex-1 > div:nth-child(2)').text().replace(/[^\d\.]/g, ''));
             newTotalPrice += price * qty;
         });
-
-        changePriceInCartBtn(newTotalPrice);
+        console.log(newTotalPrice);
+        changePriceInCartBtn(calculateCartTotals());
         updateCartItemCount();
     });
 
@@ -201,10 +204,11 @@ $(function () {
 
             newCartTotal += itemSubtotal;
         });
-
+        console.log(    calculateCartTotals());
         // Update cart UI price
-        changePriceInCartBtn(newCartTotal);
-
+        changePriceInCartBtn(calculateCartTotals());
+        updateCartItemCount();
+        window.renderCart();
     });
 
 
@@ -232,8 +236,24 @@ $(function () {
         }
     }
 
+    function calculateCartTotals() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
-    function updateCartItemCount() {
+        let items = Object.values(cart);
+        let grandTotal = 0;
+
+        // Add subtotal to each item
+        items = items.map(item => {
+            item.subtotal = item.price * item.qty;
+            grandTotal += item.subtotal;
+            return item;
+        });
+
+        return grandTotal;
+    }
+
+
+    window.updateCartItemCount = function updateCartItemCount() {
         let cart = JSON.parse(localStorage.getItem("cart")) || {};
         let countItems = Object.keys(cart).length;
         console.log(countItems);
@@ -262,7 +282,7 @@ $(function () {
 
 
 
-    function restoreCart() {
+    window.restoreCart = function restoreCart() {
         let cart = JSON.parse(localStorage.getItem("cart")) || {};
         let $miniCartItems = $("#mini-cart-items");
 
@@ -324,7 +344,7 @@ $(function () {
         changePriceInCartBtn(totalPrice);
     }
 
-    restoreCart();
+    window.restoreCart();
 
 });
 
