@@ -44,7 +44,7 @@ $(function () {
 
 
     // Add to cart - star
-    $(".add-to-cart-btn").on("click", function () {
+    $(document).on("click",".add-to-cart-btn", function () {
         let $btn = $(this);
         let imgUrl = $btn.data("image");
         let title = $btn.data("title");
@@ -90,10 +90,7 @@ $(function () {
 
                     // Update counter
                     let count = $("#mini-cart-items  .cart-item").length;
-
-                    $("#cart-count, .product-count").text(count).removeClass("invisible opacity-0").addClass("opacity-100");
-
-
+                    updateCartItemCount();
 
                     // === Start flying image animation AFTER AJAX success ===
                     let imgToDrag = $('<img />', {
@@ -134,6 +131,7 @@ $(function () {
         let $wrapper = $(this).closest(".cart-item");
         let $id = $wrapper.find(".quantity").data("id");
 
+
         // Remove from DOM
         $wrapper.remove();
 
@@ -161,6 +159,7 @@ $(function () {
         });
 
         changePriceInCartBtn(newTotalPrice);
+        updateCartItemCount();
     });
 
 
@@ -232,6 +231,20 @@ $(function () {
         }
     }
 
+
+    function updateCartItemCount() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || {};
+        let countItems = Object.keys(cart).length;
+        console.log(countItems);
+        if (countItems > 0){
+            $("#cart-count").text(countItems).removeClass("invisible opacity-0").addClass("opacity-100");
+        }else{
+            $("#cart-count").text(countItems).addClass("invisible opacity-0").removeClass("opacity-100");
+        }
+        $(".product-count").text(countItems);
+    }
+
+
     function saveCartItem(id, title, price, image, qty = 1) {
         let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
@@ -259,7 +272,6 @@ $(function () {
 
         if (Object.keys(cart).length === 0) {
             $("#cart-placeholder").show();
-            $("#cart-count, .product-count, #mini-cart .product-count").text(0).addClass("invisible opacity-0");
             $(".basket-price-sum").text('0₾');
             changePriceInCartBtn(0); // also update button text
             return;
