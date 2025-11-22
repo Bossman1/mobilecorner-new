@@ -42,7 +42,7 @@
                     <div class="my-[16px] font-custom-regular">
 
                             <section class="my-[20px]">
-                                <x-line class="!border-white" />
+
                                 <div class="font-custom-bold-upper my-[10px] text-sm">მდგომარეობა</div>
 
                                 <div class="space-y-[10px] w-full">
