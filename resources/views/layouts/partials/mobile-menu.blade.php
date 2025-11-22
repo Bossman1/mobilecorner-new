@@ -1,7 +1,7 @@
 <!-- ========================= -->
 <!--        MOBILE HEADER      -->
 <!-- ========================= -->
-<div class="xl:hidden w-full bg-[var(--color-main)] text-white h-[58px] shadow-md relative z-[60] font-custom-regular">
+<div class="xl:hidden w-full bg-[var(--color-main)] text-white h-[58px] shadow-md relative z-[60] font-custom-regular sticky top-0">
 
     <div class="container mx-auto flex items-center justify-between h-full gap-5">
 

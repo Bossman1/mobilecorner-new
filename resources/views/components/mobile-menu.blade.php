@@ -1,8 +1,8 @@
 @props(['items'])
 
 <nav id="mMenu"
-     class="fixed left-0 top-0 h-full w-[82%] max-w-[320px] bg-white shadow-2xl text-black
-            -translate-x-full transition-transform duration-300 overflow-y-auto z-[60] font-custom-regular">
+     class="fixed left-0 top-[59] h-full w-[82%] max-w-[320px] bg-white shadow-2xl text-black
+            -translate-x-full transition-transform duration-300 overflow-y-auto z-[60] font-custom-regular pb-[47px]">
     <div class="p-4">
         <ul class="space-y-2">
             @foreach($items as $item)
