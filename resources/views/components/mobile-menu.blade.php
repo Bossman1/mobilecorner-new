@@ -6,14 +6,13 @@
     <div class="p-4">
         <ul class="space-y-2">
             @foreach($items as $item)
-                @include('components.mobile-menu-item', ['item' => $item])
+                <x-mobile-menu-item :item="$item" />
             @endforeach
         </ul>
     </div>
 </nav>
 
-<div id="mOverlay"
-     class="fixed inset-0 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 z-[59]"></div>
+<div id="mOverlay"  class="fixed inset-0 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 z-[59]"></div>
 
 @once
     <script>

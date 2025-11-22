@@ -38,13 +38,6 @@
 
 
 <!-- ========================= -->
-<!--     MOBILE MENU OVERLAY   -->
-<!-- ========================= -->
-<div id="mOverlay"
-     class="fixed inset-0 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 z-[59]"></div>
-
-
-<!-- ========================= -->
 <!--     MOBILE SLIDE-IN MENU  -->
 <!-- ========================= -->
 @php
