@@ -10,11 +10,11 @@
             </div>
             <div class="items-end">
                 <ul class="flex justify-between items-center gap-[20px]">
-                    <li class="menu-item"><a href="">მენიუ</a></li>
-                    <li class="menu-item"><a href="">მენიუ</a></li>
-                    <li class="menu-item"><a href="">მენიუ</a></li>
-                    <li class="menu-item"><a href="">მენიუ</a></li>
-                    <li class="menu-item"><a href="">მენიუ</a></li>
+                    <li class="menu-item"><a href="{{ route('pages.page') }}">მენიუ</a></li>
+                    <li class="menu-item"><a href="{{ route('pages.page') }}">მენიუ</a></li>
+                    <li class="menu-item"><a href="{{ route('pages.page') }}">მენიუ</a></li>
+                    <li class="menu-item"><a href="{{ route('pages.page') }}">მენიუ</a></li>
+                    <li class="menu-item"><a href="{{ route('pages.contact') }}">კონტაქტი</a></li>
                 </ul>
             </div>
 

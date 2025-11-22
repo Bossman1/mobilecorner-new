@@ -34,12 +34,12 @@
 
                     <div class="flex justify-end items-center mt-[15px]">
                         <div class="flex justify-end items-center gap-2">
-                            <div class="text-[20px]  font-custom-bold-upper ml-auto">მთლიანი ჯამი: <span class="basket-price-sum text-[var(--color-main)]"></span></div>
+                            <div class="text-[20px]  font-custom-bold-upper ml-auto">მთლიანი ჯამი: <span
+                                    class="basket-price-sum text-[var(--color-main)]"></span></div>
                         </div>
 
                     </div>
                     <x-line class="!border-t-[#dfd5d5] !my-[13px]"/>
-
 
 
                     <div class="mt-[16px]">
@@ -61,11 +61,16 @@
                                       ['label'=>'საქართცელოს ბანკი','image' => asset('assets/images/boglogo.png'),'value' => 3]
                                     ]
                                 @endphp
-                                <x-radio-card image-class="object-cover w-[100px] bg-white rounded-[5px] overflow-hidden p-2" label-class="!text-[14px]" text-position="right" iconClass="!w-[20px] !h-[20px]" name="payment_options" iconPosition="right" :options="$radios" />
+                                <x-radio-card
+                                    image-class="object-cover w-[100px] bg-white rounded-[5px] overflow-hidden p-2"
+                                    label-class="!text-[14px]" text-position="right" iconClass="!w-[20px] !h-[20px]"
+                                    name="payment_options" iconPosition="right" :options="$radios"/>
                             </div>
 
-                            <div  class="flex flex-col justify-between items-center mt-[16px] gap-[7px] w-full">
-                                <x-button size="sm" icon="phosphor-shopping-bag" iconPosition="left" class="w-full" variant="primary" href="{{ route('pages.checkout') }}" >ყიდვა</x-button>
+                            <div class="flex flex-col justify-between items-center mt-[16px] gap-[7px] w-full">
+                                <x-button size="sm" icon="phosphor-shopping-bag" iconPosition="left" class="w-full"
+                                          variant="primary" href="{{ route('pages.checkout') }}">ყიდვა
+                                </x-button>
                             </div>
                         </div>
 
@@ -88,7 +93,6 @@
                             <x-line class="!border-t-[#EDEDED] !my-[13px]"/>
 
 
-
                             <!-- Page Heading -->
                             <div class="flex justify-between items-center  my-5">
                                 <h1 class="text-xl font-custom-bold-upper">ყიდვა</h1>
@@ -98,42 +102,61 @@
                             <div class="grid grid-cols-1  md:!grid-cols-2 gap-5">
                                 <div class="w-full">
                                     <label for="">სახელი <span class="text-red-800 text-sm font-bold">*</span></label>
-                                    <x-input class="w-full mt-[5px]" placeholder="სახელი" />
+                                    <x-input class="w-full mt-[5px]" placeholder="სახელი"/>
                                 </div>
 
                                 <div class="w-full">
                                     <label for="">გვარი <span class="text-red-800 text-sm font-bold">*</span></label>
-                                    <x-input class="w-full mt-[5px]" placeholder="გვარი" />
+                                    <x-input class="w-full mt-[5px]" placeholder="გვარი"/>
                                 </div>
 
                                 <div class="w-full">
                                     <label for="">ტელეფონი <span class="text-red-800 text-sm font-bold">*</span></label>
-                                    <x-input class="w-full mt-[5px]" placeholder="ტელეფონი" />
+                                    <x-input class="w-full mt-[5px]" placeholder="ტელეფონი"/>
                                 </div>
 
                                 <div class="w-full">
                                     <label for="">ქალაქი <span class="text-red-800 text-sm font-bold">*</span></label>
-                                    <x-select class="w-full flex-1 !h-[55px] !pt-[15px]  mt-[5px]" placeholder="ქალაქი" :options="$optionsCities"/>
+                                    <x-select class="w-full flex-1 !h-[55px] !pt-[15px]  mt-[5px]" placeholder="ქალაქი"
+                                              :options="$optionsCities"/>
                                 </div>
 
                                 <div class="w-full">
-                                    <label for="">პირადი ნომერი <span class="text-red-800 text-sm font-bold">*</span></label>
-                                    <x-input class="w-full mt-[5px]" placeholder="პირადი ნომერი" />
+                                    <label for="">პირადი ნომერი <span
+                                            class="text-red-800 text-sm font-bold">*</span></label>
+                                    <x-input class="w-full mt-[5px]" placeholder="პირადი ნომერი"/>
                                 </div>
 
                                 <div class="w-full">
                                     <label for="">ზუსტი მისამართი <span class="text-red-800 text-sm font-bold">*</span></label>
-                                    <x-input class="w-full mt-[5px]" placeholder="ზუსტი მისამართი" />
+                                    <x-input class="w-full mt-[5px]" placeholder="ზუსტი მისამართი"/>
                                 </div>
                                 <div class="md:!col-span-2">
                                     <label for="">კომენტარი</label>
-                                    <x-textarea class="w-full !h-[200px]  mt-[5px]" placeholder="კომენტარი" />
+                                    <x-textarea class="w-full !h-[200px]  mt-[5px]" placeholder="კომენტარი"/>
                                 </div>
                             </div>
 
 
                         </div>
                     </section>
+
+                    <x-line class="!border-t-[#EDEDED] !my-[13px]"/>
+
+                    <div>
+                        <p>ყურადღება!!!</p>
+
+                        <p> "ონლაინ განვადების შევსებამდე დაუკავშირდით მაღაზიას და გადაამოწმეთ მარაგი!"</p>
+
+                        <p> 597 04 04 45</p>
+
+                        <p> ნივთის ონლაინ შეძენის შემთხვევაში, აჭერთ ღილაკს "ყიდვა" შერჩეული ნივთი დაემატება თქვენს
+                            კალათაში, შეკვეთის დასასრულებლად საჭიროა გადახვიდეთ კალათაში და მიყვეთ არსებულ
+                            ინსტრუქციას!</p>
+                        <p> განვადებით შეძენის შემთხვევაში ირჩევთ სასურველი ბანკის ღილაკს და მიყვებით ინსტრუქციას
+                        </p>
+                        <p>აქ ადმინკიდან დაწერ რაც გინდა იმას!!!!!</p>
+                    </div>
                 </div>
 
 
@@ -174,7 +197,7 @@
         $(function () {
 
             // Remove item
-            window.removeFromCart = function(id) {
+            window.removeFromCart = function (id) {
                 let cart = JSON.parse(localStorage.getItem('cart')) || {};
                 delete cart[id];
                 localStorage.setItem('cart', JSON.stringify(cart));

@@ -18,6 +18,10 @@ Route::group(['prefix' => 'categories'], function () {
 
 Route::group(['prefix' => 'pages'], function () {
 
+    Route::get('/', function () {
+        return view('pages.page');
+    })->name('pages.page');
+
     Route::get('/full-page', function () {
         return view('pages.full-page');
     })->name('pages.full-page');
@@ -31,6 +35,11 @@ Route::group(['prefix' => 'pages'], function () {
     Route::get('/favorites', function () {
         return view('pages.favorites');
     })->name('pages.favorites');
+
+    Route::get('/contact', function () {
+        return view('pages.contact');
+    })->name('pages.contact');
+
 
 });
 

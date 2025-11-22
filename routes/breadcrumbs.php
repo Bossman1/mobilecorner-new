@@ -34,4 +34,9 @@ Breadcrumbs::for('pages.favorites', function (Trail $trail) {
     $trail->push( __("Favorites"), route('pages.favorites'));
 });
 
+Breadcrumbs::for('pages.contact', function (Trail $trail) {
+    $trail->parent('home');
+    $trail->push( __("Contact"), route('pages.contact'));
+});
+
 
