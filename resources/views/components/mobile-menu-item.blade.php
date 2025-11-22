@@ -7,7 +7,7 @@
         <!-- Parent Button -->
         <button class="w-full flex justify-between items-center px-3 py-2 rounded hover:bg-gray-100">
             <span>{{ $item['title'] }}</span>
-            <span data-arrow class="transition-transform">
+            <span data-arrow class="transition-transform Arrow">
                 <x-dynamic-component :component="'phosphor-caret-down'" class="h-[24px] w-[24px]" />
             </span>
         </button>
