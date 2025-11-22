@@ -14,7 +14,7 @@
         $conditionText = 'ახალი';
     }elseif ($condition === 'owned'){
         $conditionColor = 'bg-blue-500 border-blue-600';
-        $conditionText = 'ნახმარი';
+        $conditionText = 'მეორადი';
     }
 @endphp
 <div {{ $attributes->merge(['class' => 'group']) }}>
