@@ -29,7 +29,7 @@
 
 <!-- SECONDARY DESKTOP HEADER -->
 <div id="secondary-header"
-     class="w-full h-[70px] bg-[var(--color-second-header)] absolute top-[58px] left-0 z-50 shadow-md hidden xl:block">
+     class="w-full h-[70px] bg-[var(--color-second-header)] absolute top-[58px] left-0 transition-all duration-300 transform translate-y-0 z-50 secondary-header   shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-2px_rgba(0,0,0,0.1)] hidden xl:block">
     <div class="container mx-auto h-full flex items-center gap-[15px] font-custom-regular">
 
         <!-- Logo -->
@@ -37,7 +37,7 @@
             <a href="{{ route('home') }}"><img src="{{ asset('assets/images/logo.png') }}" alt=""></a>
         </div>
 
-
+        @include('includes.secondary-header-menu')
 
         <!-- Search -->
         <div class="flex items-center h-full flex-1 mr-4">
@@ -61,11 +61,43 @@
             </x-button>
 
             <div class="flex items-center relative" id="cart-container">
-                <x-button id="cart-btn" size="md" icon="phosphor-shopping-cart" iconPosition="left" variant="outline"
+                <x-button id="cart-btn" size="md" icon="phosphor-shopping-cart" iconPosition="left" variant="outline" href="{{ route('pages.cart') }}"
                           class="text-[18px] relative">
                     კალათა
                     <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white w-5 h-5 text-[11px] rounded-full flex items-center justify-center">0</span>
                 </x-button>
+
+
+                <div id="mini-cart"
+                class="absolute top-[62px] right-0 w-[360px] bg-white text-black shadow-lg rounded-[10px] p-4 opacity-0 invisible transition-opacity duration-300 border border-[var(--color-main)]">
+                <!-- Arrow -->
+                <span class="w-[15px] h-[15px] right-[52px] bg-white top-[-8px] rotate-45 border-t border-l border-[var(--color-main)] absolute"></span>
+
+                <!-- Title -->
+                <div class="flex justify-between items-center px-[10px] text-xs">
+                    <div>კალათა</div>
+                    <div><span class="product-count">0</span> პროდუქტი</div>
+                </div>
+
+                <!-- Items container -->
+                <div id="mini-cart-items" class="space-y-2 h-[250px] overflow-y-auto pt-[10px]">
+                    <!-- Placeholder if empty -->
+                    <div id="cart-placeholder" class="flex flex-col items-center justify-center py-10 text-center text-slate-500">
+                        <img src="{{ asset('assets/images/cart-basket.png') }}" alt="Empty cart" class="w-24 h-24 mb-4 opacity-50">
+                        <span>თქვენი კალათა ცარიელია</span>
+                    </div>
+                </div>
+
+                <!-- View Cart Button -->
+                <div class="mt-[10px]">
+                    <div class="flex justify-end  items-end font-custom-regular text-sm mb-[10px]">
+                        <div><span>ჯამური ფასი:</span> <span class="font-custom-bold-upper basket-price-sum">0₾</span></div>
+                    </div>
+                    <x-button size="sm" icon="phosphor-shopping-cart" iconPosition="left" variant="primary" class="w-full" id="view-cart-btn" href="{{ route('pages.cart') }}">
+                        კალათის ნახვა
+                    </x-button>
+                </div>
+            </div>
             </div>
         </div>
     </div>

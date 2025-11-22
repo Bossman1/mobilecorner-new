@@ -3,7 +3,28 @@
 <!-- ========================= -->
 <div class="xl:hidden w-full bg-[var(--color-main)] text-white h-[58px] shadow-md relative z-[60] font-custom-regular">
 
-    <div class="container mx-auto flex items-center justify-between h-full">
+    <div class="container mx-auto flex items-center justify-between h-full gap-5">
+
+
+
+        <!-- Mobile Logo -->
+        <a href="{{ route('home') }}" class="block flex-1">
+            <img src="{{ asset('assets/images/logo.png') }}" class="min-w-[200px]" alt="Logo">
+        </a>
+
+
+
+        <a href="{{ route('pages.cart') }}" class="relative ml-auto w-auto">
+            <x-dynamic-component :component="'phosphor-heart'" class="h-7 w-7 text-white"/>
+            <span id="fav-count" class="absolute -top-2 -right-2 bg-orange-500 text-white w-5 h-5 text-[11px] font-bold rounded-full flex items-center justify-center">5</span>
+        </a>
+
+
+        <!-- Cart -->
+        <a href="{{ route('pages.cart') }}" class="relative ml-auto w-auto">
+            <x-dynamic-component :component="'phosphor-shopping-cart'" class="h-7 w-7 text-white"/>
+            <span id="m-cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white w-5 h-5 text-[11px] rounded-full flex items-center justify-center invisible">0</span>
+        </a>
 
         <!-- Burger Button -->
         <button id="mBurger" class="relative w-10 h-10 flex flex-col justify-center items-center group">
@@ -11,17 +32,6 @@
             <span class="block h-[3px] w-7 bg-white rounded mt-1 transition-all duration-300 group-[.open]:opacity-0"></span>
             <span class="block h-[3px] w-7 bg-white rounded mt-1 transition-all duration-300 group-[.open]:-rotate-45 group-[.open]:-translate-y-2"></span>
         </button>
-
-        <!-- Mobile Logo -->
-        <a href="{{ route('home') }}" class="block">
-            <img src="{{ asset('assets/images/logo.png') }}" class="h-[40px]" alt="Logo">
-        </a>
-
-        <!-- Cart -->
-        <a href="{{ route('pages.cart') }}" class="relative">
-            <x-dynamic-component :component="'phosphor-shopping-cart'" class="h-7 w-7 text-white"/>
-            <span id="m-cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white w-5 h-5 text-[11px] rounded-full flex items-center justify-center hidden">0</span>
-        </a>
 
     </div>
 </div>
@@ -37,56 +47,137 @@
 <!-- ========================= -->
 <!--     MOBILE SLIDE-IN MENU  -->
 <!-- ========================= -->
-<nav id="mMenu"
-     class="fixed left-0 top-0 h-full w-[82%] max-w-[320px] bg-white shadow-2xl text-black
-            -translate-x-full transition-transform duration-300 overflow-y-auto z-[60] font-custom-regular">
+@php
+    $menu = [
+        [
+            'title' => 'მთავარი',
+            'url'   => route('home'),
+        ],
+        [
+            'title' => 'მობილურები',
+            'children' => [
+                [
+                    'title' => 'მობილურები',
+                    'children' => [
+                        [
+                            'title' => 'iPhone',
+                            'url'   => '#'
+                        ],
+                        [
+                            'title' => 'Samsung',
+                            'url'   => '#'
+                        ],
+                        [
+                            'title' => 'Xiaomi',
+                            'url'   => '#'
 
-    <div class="p-4">
+                        ]
+                    ]
+                ],
+                  [
+                    'title' => 'აქსესუარები',
+                    'children' => [
+                        [
+                            'title' => 'ყურსასმენები',
+                            'url'   => '#'
+                        ],
+                        [
+                            'title' => 'ქეისები',
+                            'url'   => '#'
+                        ],
+                        [
+                            'title' => 'დამტენები',
+                            'url'   => '#'
 
-        <!-- Search Bar -->
-        <div class="flex mb-6">
-            <span class="flex items-center justify-center h-[48px] w-[48px] border border-[var(--color-main)] border-r-0 rounded-l-[12px] bg-white">
-                <x-dynamic-component :component="'phosphor-magnifying-glass'" class="h-6 w-6 text-[var(--color-main)]"/>
-            </span>
-            <input type="text"
-                   class="flex-1 h-[48px] rounded-r-[12px] border border-[var(--color-main)] focus:outline-none px-3"
-                   placeholder="ძიება">
-        </div>
+                        ]
+                    ]
+                ],
+                [
+                    'title' => 'სმარტ საათები',
+                    'children' => [
+                        [
+                            'title' => 'Apple Watch',
+                            'url'   => '#'
+                        ],
+                        [
+                            'title' => 'Samsung Watch',
+                            'url'   => '#'
+                        ],
+                        [
+                            'title' => 'Xiaomi mi bend',
+                            'url'   => '#'
 
-        <!-- Menu Items -->
-        <ul class="space-y-2">
+                        ]
+                    ]
+                ],
 
-            <li><a href="{{ route('home') }}" class="block px-3 py-2 rounded hover:bg-gray-100">მთავარი</a></li>
+            ]
+        ],
 
-            <li>
-                <button class="w-full flex justify-between items-center px-3 py-2 rounded hover:bg-gray-100 mParent">
-                    <span>პროდუქტები</span>
-                    <span class="mArrow transition-transform">⌄</span>
-                </button>
+          [
+            'title' => 'ლეპტოპები',
+            'children' => [
+                [
+                    'title' => 'მობილურები',
+                    'children' => [
+                        [
+                            'title' => 'iPhone',
+                            'url'   => '#'
+                        ],
+                        [
+                            'title' => 'Samsung',
+                            'url'   => '#'
+                        ],
+                        [
+                            'title' => 'Xiaomi',
+                            'url'   => '#'
 
-                <ul class="mChild max-h-0 overflow-hidden pl-6 transition-all duration-300 space-y-2">
+                        ]
+                    ]
+                ],
+                  [
+                    'title' => 'აქსესუარები',
+                    'children' => [
+                        [
+                            'title' => 'ყურსასმენები',
+                            'url'   => '#'
+                        ],
+                        [
+                            'title' => 'ქეისები',
+                            'url'   => '#'
+                        ],
+                        [
+                            'title' => 'დამტენები',
+                            'url'   => '#'
 
-                    <li>
-                        <button class="w-full flex justify-between items-center px-2 py-2 rounded hover:bg-gray-100 mSubParent">
-                            <span>ტელეფონები</span>
-                            <span class="mSubArrow transition-transform">⌄</span>
-                        </button>
+                        ]
+                    ]
+                ],
+                [
+                    'title' => 'სმარტ საათები',
+                    'children' => [
+                        [
+                            'title' => 'Apple Watch',
+                            'url'   => '#'
+                        ],
+                        [
+                            'title' => 'Samsung Watch',
+                            'url'   => '#'
+                        ],
+                        [
+                            'title' => 'Xiaomi mi bend',
+                            'url'   => '#'
 
-                        <ul class="mSubChild max-h-0 overflow-hidden pl-4 transition-all duration-300 space-y-2">
-                            <li><a href="#" class="block px-2 py-2 rounded hover:bg-gray-100">iPhone</a></li>
-                            <li><a href="#" class="block px-2 py-2 rounded hover:bg-gray-100">Samsung</a></li>
-                            <li><a href="#" class="block px-2 py-2 rounded hover:bg-gray-100">Xiaomi</a></li>
-                        </ul>
-                    </li>
+                        ]
+                    ]
+                ],
 
-                    <li><a href="#" class="block px-2 py-2 rounded hover:bg-gray-100">ლეპტოპები</a></li>
-                    <li><a href="#" class="block px-2 py-2 rounded hover:bg-gray-100">აქსესუარები</a></li>
-                </ul>
-            </li>
-
-            <li><a href="{{ route('pages.contact') }}" class="block px-3 py-2 rounded hover:bg-gray-100">კონტაქტი</a></li>
-
-        </ul>
-
-    </div>
-</nav>
+            ]
+        ],
+        [
+            'title' => 'კონტაქტი',
+            'url' => route('pages.contact'),
+        ],
+    ];
+    @endphp
+ <x-mobile-menu  :items="$menu" />

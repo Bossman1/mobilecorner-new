@@ -1,4 +1,4 @@
-<div class="w-full md:!w-[246px] relative hidden md:block">
+<div class="w-full xl:!w-[246px] relative hidden xl:block">
     <div class="bg-white rounded-2xl shadow-md py-4">
         <ul class="divide-y divide-slate-200 [--tw-divide-opacity:1] [--tw-divide-width:90%]">
 

@@ -12,7 +12,7 @@
                 <x-slot:content>
                     <h2 class="w-full text-center font-custom-bold-upper text-[16px]  md:text-[24px] text-slate-700 my-[16px] md:my-[32px]">
                         მოგვწერეთ</h2>
-                    <form action="" method="post" class="px-[16px] md:px-[64px] w-full">
+                    <form action="" method="post" class="w-full">
                         @csrf
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-[16px]">

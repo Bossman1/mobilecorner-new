@@ -145,7 +145,7 @@ $(function () {
         // Recalculate cart count
         let newCount = $("#mini-cart-items .cart-item").length;
         $(".product-count").text(newCount);
-        $("#cart-count").toggleClass("invisible opacity-0", newCount === 0);
+        $("#cart-count, #m-cart-count").toggleClass("invisible opacity-0", newCount === 0);
 
         // Show/hide placeholder
         if (newCount === 0) {
@@ -258,9 +258,9 @@ $(function () {
         let countItems = Object.keys(cart).length;
         console.log(countItems);
         if (countItems > 0){
-            $("#cart-count").text(countItems).removeClass("invisible opacity-0").addClass("opacity-100");
+            $("#cart-count, #m-cart-count").text(countItems).removeClass("invisible opacity-0").addClass("opacity-100");
         }else{
-            $("#cart-count").text(countItems).addClass("invisible opacity-0").removeClass("opacity-100");
+            $("#cart-count, #m-cart-count").text(countItems).addClass("invisible opacity-0").removeClass("opacity-100");
         }
         $(".product-count").text(countItems);
     }
@@ -337,7 +337,7 @@ $(function () {
         let count = Object.keys(cart).length;
 
         // Update button badge, mini-cart counter, and total price
-        $("#cart-count, #mini-cart .product-count").text(count).removeClass("invisible opacity-0").addClass("opacity-100");
+        $("#cart-count, #mini-cart .product-count, #m-cart-count").text(count).removeClass("invisible opacity-0").addClass("opacity-100");
         $(".basket-price-sum").text(totalPrice + ' ₾');
 
         // Update cart button text
@@ -370,9 +370,9 @@ window.renderCart = function() {
         grandTotal += subtotal;
 
         container.append(`
-              <div class="flex items-center bg-white p-4 shadow cart-item border-b border-b-slate-100">
+              <div class="flex flex-col  xl:!flex-row items-center bg-white p-4 shadow cart-item border-b border-b-slate-100 space-y-1.5 xl:!space-y-0">
                     <!-- ID -->
-                    <div class="w-20  font-medium text-gray-700 overflow-hidden">#${item.id}</div>
+                    <div class="wfull xl:!w-20  font-medium text-gray-700 overflow-hidden">#${item.id}</div>
 
                     <!-- Product Image -->
                     <div class="w-24 h-24 flex-shrink-0 mx-4">
@@ -380,13 +380,13 @@ window.renderCart = function() {
                     </div>
 
                     <!-- Title -->
-                    <div class="flex-1 text-gray-800 font-medium"><a href="">${item.title}</a></div>
+                    <div class="flex-1 text-gray-800 font-medium text-center xl:!text-left"><a href="">${item.title}</a></div>
 
                     <!-- Price -->
-                    <div class="w-24  text-gray-700">${item.price} ₾</div>
+                    <div class="w-full xl:!w-24  text-gray-700 text-center xl:!text-left ">${item.price} ₾</div>
 
                     <!-- Quantity -->
-                    <div class="flex w-32 mx-4">
+                    <div class="flex w-32  justify-center  xl:!justify-start">
                         <div class="flex justify-between items-center gap-0.5 bg-[var(--color-main)] text-white text-sm rounded-md p-[5px] w-[74px]">
                             <button class="h-[15px] w-[15px] cart-item-minus-list cursor-pointer">
                                 <svg class="h-[15px] w-[15px] cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128Z"></path></svg>
@@ -395,11 +395,11 @@ window.renderCart = function() {
                             <button class="h-[15px] w-[15px] cart-item-plus-list cursor-pointer">
                                 <svg class="h-[15px] w-[15px]  cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path></svg>
                             </button>
-                    </div>
+                        </div>
                     </div>
 
                     <!-- Total Price -->
-                    <div class="w-24 font-semibold text-gray-900 subtotal">${subtotal} ₾</div>
+                    <div class="w-full xl:!w-24 font-semibold text-gray-900 subtotal text-center xl:!text-left">${subtotal} ₾</div>
 
                     <!-- Delete Button -->
                     <div class="w-12 text-center">

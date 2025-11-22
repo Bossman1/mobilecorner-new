@@ -28,9 +28,9 @@
                         {{--cart items - start--}}
 
                             <!-- Page Heading -->
-                        <div class="flex justify-between items-center  my-5">
-                            <h1 class="text-xl font-custom-bold-upper">თქვენი კალათა</h1>
-                            <div class="text-sm text-shadow-slate-800 font-custom-regular">პროდუქტის რაოდენობა: <span class="product-count">0</span></div>
+                        <div class="flex flex-col xl:!flex-row justify-between items-center  xl:!my-10">
+                            <h1 class="text-xl font-custom-bold-upper text-nowrap">თქვენი კალათა</h1>
+                            <div class="text-xs xl:!text-sm text-shadow-slate-800 font-custom-regular">პროდუქტის რაოდენობა: <span class="product-count">0</span></div>
                         </div>
 
 
