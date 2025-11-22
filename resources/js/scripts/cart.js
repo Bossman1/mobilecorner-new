@@ -412,4 +412,58 @@ window.renderCart = function() {
     });
 
     $('#grand-total').text(grandTotal + ' ₾');
+    window.renderCartCheckout();
+};
+
+
+
+
+
+window.renderCartCheckout = function() {
+    const container = $('#checkout-product-list-wrapper');
+    let cart = JSON.parse(localStorage.getItem('cart')) || {};
+    let cartItems = Object.values(cart);
+
+    container.empty();
+
+    if (cartItems.length === 0) {
+        container.html('<p class="p-4 text-gray-500 text-center">თქვენი კალათა ცარიელია</p>');
+        $('#grand-total').text('0 ₾');
+        return;
+    }
+
+    let grandTotal = 0;
+
+    cartItems.forEach((item, index) => {
+        let subtotal = item.price * item.qty;
+        grandTotal += subtotal;
+
+        container.append(`
+              <div class="flex justify-start items-center gap-2 border-b border-[#dfd5d5] py-[10px] cart-item">
+                            <div class="w-[70px] h-[80px] overflow-hidden rounded-[5px] border border-[var(--color-main)] "><img src="${item.image}" class="w-[70px] h-[80px] overflow-hidden object-cover" alt=""></div>
+
+                            <div class="flex flex-col justify-start items-center gap-2">
+                                <div class="flex-1 text-sm font-custom-bold-upper">${item.title}</div>
+                                <div class="flex w-fit justify-start items-center gap-1  bg-[var(--color-main)] text-white text-sm rounded-md   px-[7px] py-[5px] mr-auto">
+                                    <button class="h-[15px] w-[15px] cart-item-minus-list cursor-pointer">
+                                        <svg class="h-[15px] w-[15px] cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128Z"></path></svg>
+                                    </button>
+                                    <div class="quantity" data-id="${item.id}">${item.qty}</div>
+                                    <button class="h-[15px] w-[15px] cart-item-plus-list cursor-pointer">
+                                        <svg class="h-[15px] w-[15px]  cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path></svg>
+                                    </button>
+                                </div>
+
+                            </div>
+                            <div class="flex flex-col justify-between items-center ml-auto h-[80px]">
+                                <button onclick="removeFromCart('${item.id}')" class="px-3 py-1.5   text-white rounded-lg  transition">
+                                    <svg class="h-[20px] w-[20px] remove-cart-item text-gray-500 hover:text-red-700 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path></svg>
+                                </button>
+                                <div class="font-custom-bold-upper text-[var(--color-main)] text-nowrap subtotal"> ${subtotal} ₾</div>
+                            </div>
+                        </div>
+        `);
+    });
+
+    $('#grand-total').text(grandTotal + ' ₾');
 };

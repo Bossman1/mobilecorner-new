@@ -7,6 +7,8 @@
     'labelDescriptionClass' => '',
     'labelClass' => '',
     'icon' => null,
+    'image' => null,
+    'imageClass' => '',
     'iconPosition' => 'right', // right | left
     'iconClass' => 'h-[48px] w-[48px]',
     'options' => [],
@@ -25,7 +27,7 @@
 
         <label
             for="{{ $id }}"
-            class="flex-1 items-start gap-3 p-3 border rounded-[12px] cursor-pointer transition w-full border-white group hover:bg-[var(--color-main)] hover:text-white
+            class="flex-1 items-start gap-3 p-3 border rounded-[12px] cursor-pointer   w-full border-white group hover:bg-[var(--color-main-hover-bank-cards)] hover:text-white transition-all duration-300 ease-in-out
                    {{ $isChecked ? 'bg-[var(--color-main)] text-white' : 'bg-white' }}"
             data-radio-label>
             <!-- Radio + Label stacked vertically -->
@@ -33,7 +35,12 @@
                 <div class="flex justify-start items-center gap-[8px]">
                     @if($iconPosition ==='left')
                         <div>
-                            <x-dynamic-component :component="$option['icon']" class="{{ $iconClass }}" />
+                            @if(isset($option['icon']) && trim($option['icon']) !='')
+                                <x-dynamic-component :component="$option['icon']" class="{{ $iconClass }}" />
+                            @endif
+                            @if(isset($option['image']) && trim($option['image']) !='')
+                                <img src="{{ $option['image'] }}" class="{{ $imageClass }}">
+                            @endif
                         </div>
                     @endif
                     <input
@@ -47,12 +54,17 @@
                     />
                     @if($iconPosition ==='right')
                         <div>
-                            <x-dynamic-component :component="$option['icon']" class="{{ $iconClass }}" />
+                            @if(isset($option['icon']) && trim($option['icon']) !='')
+                                <x-dynamic-component :component="$option['icon']" class="{{ $iconClass }}" />
+                            @endif
+                            @if(isset($option['image']) && trim($option['image']) !='')
+                                <img src="{{ $option['image'] }}" class="{{ $imageClass }}">
+                            @endif
                         </div>
                     @endif
                 </div>
 
-                <div class="@if($textPosition == 'bottom') mt-2 @endif select-none">
+                <div class="@if($textPosition == 'bottom') mt-2 @endif select-none @if(isset($option['image']) && trim($option['image']) !='') ml-auto @endif">
                     <div data-label-text  class="text-[16px] group-hover:text-white {{ $isChecked ? 'text-white' : 'text-slate-800' }}  font-custom-bold-upper {{ $labelClass }}">
                         {{ $option['label'] }}
                     </div>
@@ -80,8 +92,9 @@
                 const $label = $(this).closest('[data-radio-label]');
                 if ($label.length) {
                     $label.removeClass('bg-[var(--color-main)] bg-white text-white')
-                        .addClass('text-slate-800 bg-white');
+                        .addClass('text-slate-800 bg-white hover:bg-[var(--color-main-hover-bank-cards)]');
                 }
+
             });
 
             // Apply checked state to selected label
@@ -90,8 +103,8 @@
             const $selectedLabelText = $(this).closest('[data-radio-label]').find('[data-label-text]');
 
             if ($selectedLabel.length) {
-                $selectedLabel.removeClass('bg-white').addClass('bg-[var(--color-main)] text-white');
-
+                $selectedLabel.removeClass('bg-white hover:bg-[var(--color-main-hover-bank-cards)]').addClass('bg-[var(--color-main)] text-white');
+                console.log(2)
 
             }
             $('[data-label-text]').removeClass('text-white');

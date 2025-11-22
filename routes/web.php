@@ -24,6 +24,14 @@ Route::group(['prefix' => 'pages'], function () {
 
     Route::get('/cart',[CartController::class,'index'])->name('pages.cart');
 
+    Route::get('/checkout', function () {
+        return view('pages.checkout');
+    })->name('pages.checkout');
+
+    Route::get('/favorites', function () {
+        return view('pages.favorites');
+    })->name('pages.favorites');
+
 });
 
 Route::group(['prefix' => 'cart'], function () {

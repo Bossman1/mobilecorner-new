@@ -14,7 +14,7 @@
     <div class="container mx-auto font-custom-regular">
 
         <x-page-component position="right" class="!gap-[20px]"
-                          sidebar-class="bg-[var(--color-second-header)] rounded-md md:!w-[414px] sidebar-content-class transition-all duration-300">
+                          sidebar-class="bg-[var(--color-second-header)] rounded-md md:!w-[414px] sidebar-content-class transition-all duration-300 mt-[20px]">
             <x-slot:content>
 
 
@@ -107,19 +107,33 @@
                         <div class="flex flex-col justify-between items-center  space-y-2 mt-[5px]">
                             <div
                                 class="border border-gray-300 shadow-md w-full rounded-[4px] flex justify-center items-center bg-white">
-                                <img src="https://sanstore.ge/TBC.png" alt="" class="w-[135px]  object-cover">
+                                <a href="{{ route('pages.checkout') }}">
+                                    <img src="{{ asset('assets/images/TBC.png') }}" alt="" class="w-[135px] object-cover transition duration-500 hover:scale-105 ">
+                                </a>
+                            </div>
+
+                            <div
+                                class="border border-gray-300 shadow-md w-full rounded-[4px] flex justify-center items-center bg-white">
+                                <a href="{{ route('pages.checkout') }}">
+                                    <img src="{{ asset('assets/images/boglogo.png') }}" alt="" class="w-[135px] object-cover transition duration-500 hover:scale-105 ">
+                                </a>
                             </div>
                             <div
                                 class="border border-gray-300 shadow-md w-full rounded-[4px] flex justify-center items-center bg-white">
-                                <img src="https://sanstore.ge/boglogo.png" alt="" class="w-[135px] object-cover">
-                            </div>
-                            <div
-                                class="border border-gray-300 shadow-md w-full rounded-[4px] flex justify-center items-center bg-white">
-                                <img src="https://sanstore.ge/credo.png" alt="" class="w-[135px] object-cover">
+                                <a href="{{ route('pages.checkout') }}">
+                                    <img src="{{ asset('assets/images/credo.png') }}" alt="" class="w-[135px] object-cover transition duration-500 hover:scale-105 ">
+                                </a>
                             </div>
 
                         </div>
 
+                    </div>
+
+
+                    <x-line class="!border-t-[#dfd5d5] !my-[13px]"/>
+
+                    <div  class="flex flex-col justify-between items-center mt-[16px] gap-[7px]">
+                        <x-button size="sm" icon="phosphor-shopping-bag" iconPosition="left" class="w-full" variant="primary" href="{{ route('pages.checkout') }}" >ყიდვა</x-button>
                     </div>
 
 

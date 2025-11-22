@@ -60,8 +60,8 @@
                 <div class="gap-[15px] flex items-center relative">
 
                     <x-button id="fav-btn" size="sm" icon="phosphor-heart"  variant="outline"
-                              class="text-[18px] !rounded-full relative !pr-[8px]" iconCustomClass="!mr-0">
-                        <span id="fav-count" class="absolute -top-2 -right-2 bg-orange-500 text-white w-5 h-5 text-[11px] font-bold rounded-full flex items-center justify-center invisible opacity-0 transition">0</span>
+                              class="text-[18px] !rounded-full relative !pr-[8px]" iconCustomClass="!mr-0" href="{{ route('pages.favorites') }}">
+                        <span id="fav-count" class="absolute -top-2 -right-2 bg-orange-500 text-white w-5 h-5 text-[11px] font-bold rounded-full flex items-center justify-center invisiblee opacity-100 transition">5</span>
                     </x-button>
 
                     <!-- Cart Button -->
