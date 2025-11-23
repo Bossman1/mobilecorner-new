@@ -21,7 +21,7 @@
 
         <x-page-component position="right" class="!gap-[20px]"
                           content-class="my-[10px]"
-                          sidebar-class="bg-[var(--color-second-header)] rounded-md md:!w-[514px] sidebar-content-class transition-all duration-300 mt-[20px] order-2">
+                          sidebar-class="bg-[var(--color-second-header)] rounded-md xl:!w-[514px] sidebar-content-class transition-all duration-300 mt-[20px] order-2">
             <x-slot:sidebar>
 
                 <div class="p-[16px] sticky">
