@@ -110,20 +110,63 @@
 
                     <x-line class="!mt-[10px]" />
 
-                    <section class="my-[30px]">
-                        <h2 class="text-sm font-custom-bold-upper my-[10px]">აირჩიეთ მობილურის კატეგორია</h2>
-                        <div class="flex flex-wrap justify-start items-center gap-5">
-                            <div class="flex justify-start items-center gap-2"><img alt="👏" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t57/1.5/16/1f44f.png">
-                                ვიზუალური შეფასებით B კატეგორია</div>
-                            <div class="flex justify-start items-center gap-2"><img alt="⏳" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t3e/1.5/16/23f3.png">
-                                გარანტია 6 თვე</div>
-                            <div class="flex justify-start items-center gap-2"><img alt="🔌" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t99/1.5/16/1f50c.png">
-                                აქსესუარები: ორიგინალი USB კაბელი</div>
+                <section class="my-[30px]">
+                    <h2 class="text-sm font-custom-bold-upper my-[10px]">აირჩიეთ მობილურის კატეგორია</h2>
+                    <div class="flex flex-wrap justify-start items-center gap-5">
+                        <div class="flex justify-start items-center gap-2"><img alt="👏" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t57/1.5/16/1f44f.png">
+                            ვიზუალური შეფასებით B კატეგორია</div>
+                        <div class="flex justify-start items-center gap-2"><img alt="⏳" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t3e/1.5/16/23f3.png">
+                            გარანტია 6 თვე</div>
+                        <div class="flex justify-start items-center gap-2"><img alt="🔌" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t99/1.5/16/1f50c.png">
+                            აქსესუარები: ორიგინალი USB კაბელი</div>
+                    </div>
+                </section>
+
+
+                <section class="my-[30px]">
+                    <h2 class="text-sm font-custom-bold-upper my-[10px]">მიწოდების პირობები</h2>
+                    <div class="flex flex-col justify-between items-center gap-5">
+                        <div class="flex justify-between items-center w-full">
+                            <div class="leading-[16px] flex justify-start items-center gap-1.5">
+                                <div class=" rounded-full bg-white  p-1 text-[var(--color-main)]"><x-dynamic-component :component="'phosphor-map-pin-line'" class="h-[24px] w-[24px]"/></div>
+                                <div class="flex-1">ფილიალიდან გატანა</div>
+                            </div>
+                            <div class="flex-1 flex items-center mx-4">
+                                <div class="w-full border-b border-dashed border-gray-300"></div>
+                            </div>
+                            <div class="leading-[16px] font-custom-bold">უფასო</div>
                         </div>
-                    </section>
+
+                        <div class="flex justify-between items-center w-full">
+                            <div class="leading-[16px] flex justify-start items-center gap-1.5">
+                                <div class=" rounded-full bg-white  p-1 text-[var(--color-main)]"><x-dynamic-component :component="'phosphor-moped'" class="h-[24px] w-[24px]"/></div>
+                                <div class="flex-1">თბილისში მიწოდება</div>
+                            </div>
+                            <div class="flex-1 flex items-center mx-4">
+                                <div class="w-full border-b border-dashed border-gray-300"></div>
+                            </div>
+                            <div class="leading-[16px] font-custom-bold">15 ₾</div>
+                        </div>
+
+
+                        <div class="flex justify-between items-center w-full">
+                            <div class="leading-[16px] flex justify-start items-center gap-1.5">
+                                <div class=" rounded-full bg-white  p-1 text-[var(--color-main)]"><x-dynamic-component :component="'phosphor-truck'" class="h-[24px] w-[24px]"/></div>
+                                <div class="flex-1">რეგიონებში მიწოდება</div>
+                            </div>
+                            <div class="flex-1 flex items-center mx-4">
+                                <div class="w-full border-b border-dashed border-gray-300"></div>
+                            </div>
+                            <div class="leading-[16px] font-custom-bold">15 ₾</div>
+                        </div>
+
+
+                    </div>
+                </section>
 
 
                 <section class="[&>*+*]:border-t [&>*+*]:border-gray-300 [&>*+*]:border-dotted">
+                    <h2 class="text-sm font-custom-bold-upper my-[10px]">დამატებითი მონაცემები</h2>
                     @php
                         $details = [
                             ['name'=>'გრაფიკული პროცესორი','value'=>'Adreno 830'],
