@@ -14,7 +14,7 @@
 
 
 
-        <a href="{{ route('pages.cart') }}" class="relative ml-auto w-auto">
+        <a href="{{ route('pages.favorites') }}" class="relative ml-auto w-auto">
             <x-dynamic-component :component="'phosphor-heart'" class="h-7 w-7 text-white"/>
             <span id="fav-count" class="absolute -top-2 -right-2 bg-orange-500 text-white w-5 h-5 text-[11px] font-bold rounded-full flex items-center justify-center">5</span>
         </a>
