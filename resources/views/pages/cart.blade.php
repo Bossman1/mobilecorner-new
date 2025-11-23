@@ -14,7 +14,7 @@
     <div class="container mx-auto font-custom-regular">
 
         <x-page-component position="right" class="!gap-[20px]"
-                          sidebar-class="bg-[var(--color-second-header)] rounded-md md:!w-[414px] sidebar-content-class transition-all duration-300 mt-[20px]">
+                          sidebar-class="bg-[var(--color-second-header)] rounded-md xl:!w-[414px] sidebar-content-class transition-all duration-300 mt-[20px]">
             <x-slot:content>
 
 
