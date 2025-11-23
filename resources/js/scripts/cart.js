@@ -15,11 +15,12 @@ $(function () {
             }, 300);
         }
     );
+
     // show /hide mini cart - end
 
-    function changePriceInCartBtn(price){
-        let $cartBrnSpan =  $("#cart-btn span");
-        if (price > 0){
+    function changePriceInCartBtn(price) {
+        let $cartBrnSpan = $("#cart-btn span");
+        if (price > 0) {
             $cartBrnSpan
                 .contents()
                 .filter(function () {
@@ -28,7 +29,7 @@ $(function () {
                 .first()
                 .replaceWith(price + ' ₾');
             $(".basket-price-sum").text(price + ' ₾')
-        }else{
+        } else {
             $cartBrnSpan
                 .contents()
                 .filter(function () {
@@ -42,9 +43,8 @@ $(function () {
     }
 
 
-
     // Add to cart - star
-    $(document).on("click",".add-to-cart-btn", function (e) {
+    $(document).on("click", ".add-to-cart-btn", function (e) {
         e.preventDefault();
         let $btn = $(this);
         let imgUrl = $btn.data("image");
@@ -61,7 +61,8 @@ $(function () {
                 text: "პროდუქტი უკვე დამატებულია კალათაში!"
             });
             return false;
-        };
+        }
+        ;
         // Add item via AJAX first
         $.ajax({
             url: "/cart/add-to-cart",
@@ -71,7 +72,7 @@ $(function () {
                 image: imgUrl,
                 title: title,
                 price: price,
-                id:id
+                id: id
             },
             success: function (response) {
                 if (response.success) {
@@ -112,7 +113,7 @@ $(function () {
                     let btnOffset = $btn.offset();
                     let cartOffset = $("#cart-btn").offset();
 
-                    imgToDrag.css({ top: btnOffset.top, left: btnOffset.left });
+                    imgToDrag.css({top: btnOffset.top, left: btnOffset.left});
 
                     imgToDrag.animate({
                         top: cartOffset.top,
@@ -167,7 +168,6 @@ $(function () {
     });
 
 
-
     $(document).on("click", ".cart-item-plus, .cart-item-minus", function () {
 
         let wrapper = $(this).closest(".cart-item");
@@ -204,13 +204,12 @@ $(function () {
 
             newCartTotal += itemSubtotal;
         });
-        console.log(    calculateCartTotals());
+        console.log(calculateCartTotals());
         // Update cart UI price
         changePriceInCartBtn(calculateCartTotals());
         updateCartItemCount();
         window.renderCart();
     });
-
 
 
     function saveCartQuantity(id, qty) {
@@ -257,9 +256,9 @@ $(function () {
         let cart = JSON.parse(localStorage.getItem("cart")) || {};
         let countItems = Object.keys(cart).length;
         console.log(countItems);
-        if (countItems > 0){
+        if (countItems > 0) {
             $("#cart-count, #m-cart-count").text(countItems).removeClass("invisible opacity-0").addClass("opacity-100");
-        }else{
+        } else {
             $("#cart-count, #m-cart-count").text(countItems).addClass("invisible opacity-0").removeClass("opacity-100");
         }
         $(".product-count").text(countItems);
@@ -279,7 +278,6 @@ $(function () {
 
         localStorage.setItem("cart", JSON.stringify(cart));
     }
-
 
 
     window.restoreCart = function restoreCart() {
@@ -350,7 +348,7 @@ $(function () {
 
 
 // In your global JS file, e.g., app.js
-window.renderCart = function() {
+window.renderCart = function () {
     const container = $('#cart-items');
     let cart = JSON.parse(localStorage.getItem('cart')) || {};
     let cartItems = Object.values(cart);
@@ -371,41 +369,54 @@ window.renderCart = function() {
 
         container.append(`
               <div class="flex flex-col  xl:!flex-row items-center bg-white p-4 shadow cart-item border-b border-b-slate-100 space-y-1.5 xl:!space-y-0">
+
+
+                    <!-- Title -->
+                    <div class="flex-1 text-gray-800 font-medium text-start xl:!text-left xl:!hidden order-2"><a href="">${item.title}</a></div>
+
+                    <div class="w-full flex flex-row justify-between items-center order-1">
+
                     <!-- ID -->
-                    <div class="wfull xl:!w-20  font-medium text-gray-700 overflow-hidden">#${item.id}</div>
+                    <div class="hidden xl:!w-20  font-medium text-gray-700 overflow-hidden">#${item.id}</div>
 
                     <!-- Product Image -->
-                    <div class="w-24 h-24 flex-shrink-0 mx-4">
+                    <div class="w-fit h-24 flex-shrink-0 xl:!mx-4">
                         <img src="${item.image}" alt="Product" class="w-full h-full object-cover rounded">
                     </div>
 
-                    <!-- Title -->
-                    <div class="flex-1 text-gray-800 font-medium text-center xl:!text-left"><a href="">${item.title}</a></div>
+                     <!-- Title -->
+                    <div class="hidden xl:!block flex-1 text-gray-800 font-medium text-start xl:!text-left "><a href="">${item.title}</a></div>
 
-                    <!-- Price -->
-                    <div class="w-full xl:!w-24  text-gray-700 text-center xl:!text-left ">${item.price} ₾</div>
+                    <div class="flex flex-col xl:!flex-row items-center gap-1">
+                            <!-- Price -->
+                            <div class="w-fit xl:!w-24  text-gray-700 text-center ">${item.price} ₾</div>
 
-                    <!-- Quantity -->
-                    <div class="flex w-32  justify-center  xl:!justify-start">
-                        <div class="flex justify-between items-center gap-0.5 bg-[var(--color-main)] text-white text-sm rounded-md p-[5px] w-[74px]">
-                            <button class="h-[15px] w-[15px] cart-item-minus-list cursor-pointer">
-                                <svg class="h-[15px] w-[15px] cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128Z"></path></svg>
-                            </button>
-                            <div class="quantity text-white  px-1 rounded text-center " data-id="${item.id}">${item.qty}</div>
-                            <button class="h-[15px] w-[15px] cart-item-plus-list cursor-pointer">
-                                <svg class="h-[15px] w-[15px]  cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path></svg>
-                            </button>
-                        </div>
+                            <!-- Quantity -->
+                            <div class="flex w-fit  justify-center  xl:!justify-start">
+                                <div class="flex justify-between items-center gap-0.5 bg-[var(--color-main)] text-white text-sm rounded-md p-[5px] w-[74px]">
+                                    <button class="h-[15px] w-[15px] cart-item-minus-list cursor-pointer">
+                                        <svg class="h-[15px] w-[15px] cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128Z"></path></svg>
+                                    </button>
+                                    <div class="quantity text-white  px-1 rounded text-center " data-id="${item.id}">${item.qty}</div>
+                                    <button class="h-[15px] w-[15px] cart-item-plus-list cursor-pointer">
+                                        <svg class="h-[15px] w-[15px]  cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path></svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Total Price -->
+                            <div class="w-fit xl:!w-24 font-semibold text-gray-900 subtotal text-center ">${subtotal} ₾</div>
+
                     </div>
 
-                    <!-- Total Price -->
-                    <div class="w-full xl:!w-24 font-semibold text-gray-900 subtotal text-center xl:!text-left">${subtotal} ₾</div>
+                            <!-- Delete Button -->
+                            <div class="w-fit xl:!w-24 text-center">
+                                <button onclick="removeFromCart('${item.id}')" class="px-1 xl:!px-3 py-1.5   text-white rounded-lg  transition">
+                                    <svg class="h-[25px] w-[25px] remove-cart-item text-gray-500 hover:text-red-700 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path></svg>
+                                </button>
+                            </div>
 
-                    <!-- Delete Button -->
-                    <div class="w-full xl:!w-24 text-center">
-                        <button onclick="removeFromCart('${item.id}')" class="px-3 py-1.5   text-white rounded-lg  transition">
-                            <svg class="h-[25px] w-[25px] remove-cart-item text-gray-500 hover:text-red-700 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path></svg>
-                        </button>
+
                     </div>
               </div>
         `);
@@ -416,10 +427,7 @@ window.renderCart = function() {
 };
 
 
-
-
-
-window.renderCartCheckout = function() {
+window.renderCartCheckout = function () {
     const container = $('#checkout-product-list-wrapper');
     let cart = JSON.parse(localStorage.getItem('cart')) || {};
     let cartItems = Object.values(cart);
