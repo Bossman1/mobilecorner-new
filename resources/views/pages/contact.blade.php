@@ -7,7 +7,7 @@
             <x-breadcrumbs />
 
             <x-page-component position="right"
-                              sidebarClass="!w-full md:!w-[424px] shrink-0 !block md:!block"
+                              sidebarClass="!w-full xl:!w-[424px] shrink-0 !block xl:!block"
                               contentClass="flex-1 rounded-[16px] bg-white w-full">
                 <x-slot:content>
                     <h2 class="w-full text-center font-custom-bold-upper text-[16px]  md:text-[24px] text-slate-700 my-[16px] md:my-[32px]">
