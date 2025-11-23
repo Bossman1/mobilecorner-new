@@ -18,7 +18,7 @@
             <x-slot:content>
 
 
-                <section class="grid grid-cols-1 md:grid-cols-12 gap-5 font-custom-regular">
+                <section class="grid grid-cols-1 gap-5 font-custom-regular">
                     <div class="mt-[20px]">
                         <div class="flex justify-between items-center">
                             <x-breadcrumbs/>
@@ -130,7 +130,7 @@
         <section class="grid grid-cols-1">
             <h2 class="text-sm font-custom-bold-upper my-[10px]">მსგავსი პროდუქტები</h2>
             <x-carousel :autoplay="true" :pause-on-hover="true" :pagination="false" perPage="4"
-                        perPageMobile="1" perPageTablet="5">
+                        perPageMobile="1" perPageTablet="3">
                 @for($i = 0; $i < 15; $i++)
                     @php
                         $options = [

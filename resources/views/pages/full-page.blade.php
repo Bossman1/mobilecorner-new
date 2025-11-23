@@ -14,7 +14,7 @@
     <div class="container mx-auto font-custom-regular">
 
         <x-page-component position="right" class="my-[20px] !gap-[20px]"
-                          sidebar-class="bg-[var(--color-second-header)] rounded-md md:!w-[414px] sidebar-content-class transition-all duration-300 mt-[20px]">
+                          sidebar-class="bg-[var(--color-second-header)] rounded-md xl:!w-[414px] sidebar-content-class transition-all duration-300 mt-[20px]">
             <x-slot:content>
 
                 @php
@@ -148,23 +148,7 @@
 
                 <x-line class="!mt-[10px]" />
 
-                 <section class="grid grid-cols-1">
-                     <h2 class="text-sm font-custom-bold-upper my-[10px]">მსგავსი პროდუქტები</h2>
-                    <x-carousel :autoplay="true" :pause-on-hover="true"  :pagination="false" perPage="4" perPageMobile="1" perPageTablet="5">
-                        @for($i = 0; $i < 15; $i++)
-                            @php
-                                $options = [
-                                        'image' => asset('assets/images/temp/img1.webp'),
-                                        'price' => rand(123,12338),
-                                        'title' =>'Apple iPhone Air e-SIM | 256GB Sky Blue-'.rand(34,34565),
-                                  ];
-                            $condition = rand(0, 1) ? 'new' : 'owned';
-                            $favorite = rand(0, 1) ? '!bg-white !text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)]' : '!bg-[var(--color-favorite)]';
-                            @endphp
-                            <x-card-product :condition="$condition" :favorite="$favorite" :options="$options"/>
-                        @endfor
-                    </x-carousel>
-                 </section>
+
 
             </x-slot:content>
             <x-slot:sidebar>
@@ -255,6 +239,24 @@
             </x-slot:sidebar>
 
         </x-page-component>
+
+        <section class="grid grid-cols-1">
+            <h2 class="text-sm font-custom-bold-upper my-[10px]">მსგავსი პროდუქტები</h2>
+            <x-carousel :autoplay="true" :pause-on-hover="true"  :pagination="false" perPage="4" perPageMobile="1" perPageTablet="3">
+                @for($i = 0; $i < 15; $i++)
+                    @php
+                        $options = [
+                                'image' => asset('assets/images/temp/img1.webp'),
+                                'price' => rand(123,12338),
+                                'title' =>'Apple iPhone Air e-SIM | 256GB Sky Blue-'.rand(34,34565),
+                          ];
+                    $condition = rand(0, 1) ? 'new' : 'owned';
+                    $favorite = rand(0, 1) ? '!bg-white !text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)]' : '!bg-[var(--color-favorite)]';
+                    @endphp
+                    <x-card-product :condition="$condition" :favorite="$favorite" :options="$options"/>
+                @endfor
+            </x-carousel>
+        </section>
     </div>
 @endsection
 

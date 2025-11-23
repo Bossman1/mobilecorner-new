@@ -126,7 +126,8 @@
                             },
                             breakpoints: {
                                 1024: { perPage: parseInt(root.dataset.perPageTablet) || 1 },
-                                640: { perPage: parseInt(root.dataset.perPageMobile) || 1 }
+                                // 720: { perPage: parseInt(root.dataset.perPageTablet) || 1 },
+                                640: { perPage: parseInt(root.dataset.perPageMobile) || 1 },
                             }
                         };
 

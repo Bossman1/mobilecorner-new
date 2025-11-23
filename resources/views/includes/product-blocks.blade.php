@@ -14,7 +14,7 @@
 
 
     <div>
-        <x-carousel  :pagination="false" perPage="6" perPageMobile="2" perPageTablet="5">
+        <x-carousel  :pagination="false" perPage="6" perPageMobile="2" perPageTablet="3">
             @for($i = 0; $i < 24; $i++)
                 @php
                     $options = [

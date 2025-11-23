@@ -38,7 +38,7 @@
                 </div>
 
 
-                <div class="grid grid-cols-2 md:!grid-cols-4 gap-6">
+                <div class="grid grid-cols-2 md:!grid-cols-3 gap-6">
                     @for($i = 0; $i < 12; $i++)
                         @php
                             $options = [

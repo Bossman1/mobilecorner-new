@@ -4,9 +4,9 @@
     'contentClass' => ''
 ])
 
-<div {{ $attributes->merge(['class' => 'flex flex-col md:flex-row items-start gap-[24px]']) }}>
+<div {{ $attributes->merge(['class' => 'flex-1 xl:!flex flex-col md:flex-row items-start gap-[24px]']) }}>
     @if($position == 'left')
-        <aside class="w-full md:!w-[312px] shrink-0 {{ $sidebarClass }}">
+        <aside class="w-full xl:!w-[312px] shrink-0 {{ $sidebarClass }}">
             {{ $sidebar ?? '' }}
         </aside>
 
@@ -20,7 +20,7 @@
             {{ $content ?? '' }}
         </main>
 
-        <aside class="w-full md:!w-[312px] shrink-0 {{ $sidebarClass }}">
+        <aside class="w-full xl:!w-[312px] shrink-0 {{ $sidebarClass }}">
             {{ $sidebar ?? '' }}
         </aside>
     @endif
