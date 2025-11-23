@@ -74,15 +74,35 @@
                                     ['name'=>'ოპერატიული მეხსიერება','value'=>'12 GB'],
                                     ['name'=>'ელემენტი','value'=>'5000 mAh'],
                                 ];
+
+                                $colors = [
+                                    ['name' => 'წითელი', 'class' => 'bg-[#f00]'],
+                                    ['name' => 'ყვითელი', 'class' => 'bg-[#ffc20d]'],
+                                    ['name' => 'მწვანე', 'class' => 'bg-[#218125]'],
+                                    ['name' => 'შავი', 'class' => 'bg-[#000]'],
+                                ];
+
+                                $randColor = $colors[rand(0,3)];
+
+                                $colorName = $randColor['name'] ?? '';
+                                $color = $randColor['class'] ?? '';
                             @endphp
 
                             @foreach($details as $detail)
                                 <div
-                                    class="flex justify-between items-center  px-2 @if($loop->index == 0) py-4  @else py-4 @endif">
+                                    class="flex justify-between items-center  px-2 py-4">
                                     <div class="text-gray-400 font-medium">{{ $detail['name'] }}</div>
                                     <div class="text-gray-900 font-semibold">{{ $detail['value'] }}</div>
                                 </div>
                             @endforeach
+                            <div
+                                class="flex justify-between items-center  px-2  py-4  ">
+                                <div class="text-gray-400 font-medium">ფერი</div>
+                                <div class="flex justify-start items-center gap-2">
+                                    <div class="w-5 h-5 rounded-full overflow-hidden  {{ $color }}"></div>
+                                    <div>{{ $colorName }}</div>
+                                </div>
+                            </div>
                         </section>
                     </div>
                 </div>
