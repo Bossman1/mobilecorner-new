@@ -69,7 +69,7 @@
 
                             <div class="flex flex-col justify-between items-center mt-[16px] gap-[7px] w-full">
                                 <x-button size="sm" icon="phosphor-shopping-bag" iconPosition="left" class="w-full"
-                                          variant="primary" href="{{ route('pages.checkout') }}">ყიდვა
+                                          variant="primary" href="{{ route('pages.checkout') }}">განვადებით ყიდვა
                                 </x-button>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
 
                             <!-- Page Heading -->
                             <div class="flex justify-between items-center  my-5">
-                                <h1 class="text-xl font-custom-bold-upper">ყიდვა</h1>
+                                <h1 class="text-xl font-custom-bold-upper">მყიდველის მონაცემები</h1>
                             </div>
 
 
@@ -121,19 +121,14 @@
                                               :options="$optionsCities"/>
                                 </div>
 
-                                <div class="w-full">
-                                    <label for="">პირადი ნომერი <span
-                                            class="text-red-800 text-sm font-bold">*</span></label>
-                                    <x-input class="w-full mt-[5px]" placeholder="პირადი ნომერი"/>
-                                </div>
 
-                                <div class="w-full">
+                                <div class="w-full col-span-2">
                                     <label for="">ზუსტი მისამართი <span class="text-red-800 text-sm font-bold">*</span></label>
                                     <x-input class="w-full mt-[5px]" placeholder="ზუსტი მისამართი"/>
                                 </div>
-                                <div class="md:!col-span-2">
+                                <div class="col-span-2">
                                     <label for="">კომენტარი</label>
-                                    <x-textarea class="w-full !h-[200px]  mt-[5px]" placeholder="კომენტარი"/>
+                                    <x-textarea class="!w-full !h-[200px]  mt-[5px]" placeholder="კომენტარი"/>
                                 </div>
                             </div>
 
