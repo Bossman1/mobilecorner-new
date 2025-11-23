@@ -1,5 +1,5 @@
 @props([
-    'id' => 'checkbox',
+    'id' => uniqid(),
     'name' => 'checkbox',
     'value' => '1',
     'label' => '',

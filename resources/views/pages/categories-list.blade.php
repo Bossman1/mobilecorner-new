@@ -10,138 +10,29 @@
     $brands = ['Apple', 'Samsung', 'Xiaomi', 'Huawei', 'Oppo', 'Vivo', 'Nokia', 'Realme', 'OnePlus', 'Sony', 'Asus', 'Google', 'Honor'];
     shuffle($brands);
     @endphp
-    <div class="container mx-auto font-custom-regular">
-        <x-page-component class="my-[20px]"  sidebar-class="bg-[var(--color-footer)] rounded-md">
+    <div class="container mx-auto font-custom-regular relative">
+        <x-page-component class="my-[20px]"  sidebar-class="bg-[var(--color-footer)] rounded-md hidden xl:block">
             <x-slot:sidebar>
 
                 <div class="p-[16px]">
-                    <div class="flex justify-between items-center my-[16px]">
-                        <div class="font-custom-bold-upper text-xl">ფილტრი</div>
-                        <div><x-button icon="phosphor-trash-simple" iconPosition="right" size="sm" variant="transparent">გასუფთავება</x-button> </div>
-                    </div>
-
-
-                    <div class="my-[16px]">
-                        <x-input-range
-                            :showInputs="true"
-                            sliderClass="w-[94%] mt-[15px] mx-auto"
-                            class="gap-[24px]"
-                            minInputClass="flex-1 h-[40px] rounded-[12px] border-[1px] border-slate-300 text-center text-[16px] text-slate-600"
-                            maxInputClass="flex-1 h-[40px] rounded-[12px] border-[1px] border-slate-300 text-center text-[16px] text-slate-600"
-                            inputsWrapperClass="flex  gap-[8px]  mt-[36px] mx-auto"
-                            label="ფასი"
-                            labelClass="top-[18px] !left-[10px]"
-                            showValueInLabelText="ლარი"
-                            :showValueInLabel="true"
-                            inputMobileStyle="block mt-[10px]"
-                        />
-                    </div>
-
-                    <x-line class="!border-white" />
-
-                    <div class="my-[16px] font-custom-regular">
-
-                            <section class="my-[20px]">
-
-                                <div class="font-custom-bold-upper my-[10px] text-sm">მდგომარეობა</div>
-
-                                <div class="space-y-[10px] w-full">
-                                    <div>
-                                        <x-checkbox id="id_condition_1" name="condition[]" class="!text-[var(--color-main)] focus:!ring-0 !border-none"  label="ახალი" />
-                                    </div>
-                                    <div>
-                                        <x-checkbox id="id_condition_2" name="condition[]" class="!text-[var(--color-main)] focus:!ring-0 !border-none"  label="მეორადი" />
-                                    </div>
-                                </div>
-                            </section>
-
-
-                            <section>
-                                <div class="font-custom-bold-upper my-[10px] text-sm">ბრენდი</div>
-
-                                <div class="my-[10px]">
-                                    <x-input id="filter-search-brand" placeholder="ბრენდი" class="w-full !h-[45px]" />
-                                </div>
-
-                                <x-line class="!border-white" />
-
-                                <div class="h-[300px]  overflow-y-scroll space-y-[10px]">
-                                     @foreach($brands as $key => $brand)
-                                        <div>
-                                            <x-checkbox id="id_{{$key}}" name="models[]" class="!text-[var(--color-main)] focus:!ring-0 !border-none"  label="{{ $brand }}" />
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </section>
-
-
-                            <section class="my-[20px]">
-                                <x-line class="!border-white" />
-                                <div class="font-custom-bold-upper my-[10px] text-sm">სისტემა</div>
-
-                                <div class="space-y-[10px] w-full">
-                                    <div>
-                                        <x-checkbox id="id_system_1" name="system[]" class="!text-[var(--color-main)] focus:!ring-0 !border-none"  label="IOS" />
-                                    </div>
-
-                                    <div>
-                                        <x-checkbox id="id_system_2" name="system[]" class="!text-[var(--color-main)] focus:!ring-0 !border-none"  label="Andrroid" />
-                                    </div>
-                                </div>
-                            </section>
-
-
-                            <section class="my-[20px]">
-                                <x-line class="!border-white" />
-                                <div class="font-custom-bold-upper my-[10px] text-sm">მეხსიერება</div>
-
-                                <div class="space-y-[10px] w-full">
-                                    <div>
-                                        <x-checkbox id="id_int_memory_1" name="int_memory[]" class="!text-[var(--color-main)] focus:!ring-0 !border-none"  label="128" />
-                                    </div>
-
-                                    <div>
-                                        <x-checkbox id="id_int_memory_2" name="int_memory[]" class="!text-[var(--color-main)] focus:!ring-0 !border-none"  label="256" />
-                                    </div>
-                                </div>
-                            </section>
-
-                            <section class="my-[20px]">
-                                <x-line class="!border-white" />
-                                <div class="font-custom-bold-upper my-[10px] text-sm">ოპერატიული მეხსიერება</div>
-
-                                <div class="space-y-[10px] w-full">
-                                    <div>
-                                        <x-checkbox id="id_operation_memory_1" name="operation_memory[]" class="!text-[var(--color-main)] focus:!ring-0 !border-none"  label="2GB" />
-                                    </div>
-
-                                    <div>
-                                        <x-checkbox id="id_operation_memory_2" name="operation_memory[]" class="!text-[var(--color-main)] focus:!ring-0 !border-none"  label="4GB" />
-                                    </div>
-
-                                    <div>
-                                        <x-checkbox id="id_operation_memory_3" name="operation_memory[]" class="!text-[var(--color-main)] focus:!ring-0 !border-none"  label="6GB" />
-                                    </div>
-                                </div>
-                            </section>
-
-                    </div>
-
-
-
-
+                    @include('includes.filter-content',['brands'=>$brands])
                 </div>
 
 
             </x-slot:sidebar>
             <x-slot:content>
                 <x-breadcrumbs />
-                <div class="flex justify-between items-center my-[16px]">
+                <div class="flex flex-col xl:!flex-row justify-start xl:!justify-between items-start xl:!items-center my-[16px]">
                     <div class="flex flex-col">
                         <div class="font-custom-bold-upper text-xl">Apple</div>
                         <div class="font-custom-bold-upper text-xs text-gray-500">ნაპოვნია - 20 ჩანაწერი</div>
                     </div>
-                    <div>
+                    <div class="flex justify-between items-center w-full xl:w-auto xl:!hidden">
+                        <div class="flex justify-between items-center gap-2" id="filter-mobile-sort">
+                            <x-dynamic-component :component="'phosphor-list'" class="h-[30px] w-[30px]"/>
+                            <span class="leading-[16px]">ფილტრი</span>
+                        </div>
+
                         <x-select class="w-full flex-1 !h-[50px] !pt-[14px] !text-sm" placeholder="სორტირტება" :options="$optionsFilter"/>
                     </div>
                 </div>
@@ -170,7 +61,13 @@
 
             </x-slot:content>
         </x-page-component>
+
+
     </div>
+
+    <x-burger-slide-content burger-selector="filter-mobile-sort">
+        @include('includes.filter-content',['brands'=>$brands])
+    </x-burger-slide-content>
 @endsection
 
 
