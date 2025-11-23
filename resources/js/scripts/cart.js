@@ -448,7 +448,7 @@ window.renderCartCheckout = function () {
 
         container.append(`
               <div class="flex justify-start items-center gap-2 border-b border-[#dfd5d5] py-[10px] cart-item">
-                            <div class="w-[70px] h-[80px] overflow-hidden rounded-[5px] border border-[var(--color-main)] "><img src="${item.image}" class="w-[70px] h-[80px] overflow-hidden object-cover" alt=""></div>
+                            <div class="w-[90px] h-[80px] overflow-hidden rounded-[5px] border border-[var(--color-main-secondary-light)] p-1"><img src="${item.image}" class="w-[90px] h-[80px] overflow-hidden object-cover" alt=""></div>
 
                             <div class="flex flex-col justify-start items-center gap-2">
                                 <div class="flex-1 text-sm font-custom-bold-upper">${item.title}</div>
