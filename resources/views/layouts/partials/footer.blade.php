@@ -46,16 +46,6 @@
                             </a>
                         </li>
 
-                        <li>
-                            <a href="">
-                                <div class="flex justify-start items-center gap-2">
-                                     <span class="h-[25px] w-[25px] rounded-[4px] bg-[var(--color-main)] text-white flex justify-center items-center">
-                                        <x-dynamic-component :component="'phosphor-youtube-logo'" class="h-[20px] w-[20px]"/>
-                                    </span>
-                                    <span>Youtube</span>
-                                </div>
-                            </a>
-                        </li>
 
                         <li>
                             <a href="">
