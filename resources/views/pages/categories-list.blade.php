@@ -73,25 +73,28 @@
 
 @push('js')
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const searchInput = document.getElementById("filter-search-brand");
-            const checkboxes = document.querySelectorAll('[name="models[]"]');
+        $(document).ready(function() {
+            const $searchInput = $(".filter-search-brand");
+            const $checkboxes = $('[name="models[]"]');
 
-            searchInput.addEventListener("input", function () {
-                const query = this.value.toLowerCase().trim();
+            $searchInput.on("input", function() {
+                console.log(123123)
+                const query = $(this).val().toLowerCase().trim();
 
-                checkboxes.forEach(input => {
-                    // outer wrapper div that wraps the x-checkbox component
-                    const outerWrapper = input.closest('x-checkbox, div')?.parentElement || input.closest('div');
+                $checkboxes.each(function() {
+                    const $input = $(this);
+
+                    // outer wrapper div that wraps the checkbox component
+                    let $outerWrapper = $input.closest('x-checkbox, div').parent() || $input.closest('div');
 
                     // find label inside the checkbox component
-                    const labelEl = input.closest("div").querySelector("label");
-                    const labelText = labelEl ? labelEl.textContent.toLowerCase().trim() : "";
+                    const $label = $input.closest("div").find("label").first();
+                    const labelText = $label.length ? $label.text().toLowerCase().trim() : "";
 
                     if (labelText.includes(query)) {
-                        outerWrapper.style.display = "";
+                        $outerWrapper.show();
                     } else {
-                        outerWrapper.style.display = "none";
+                        $outerWrapper.hide();
                     }
                 });
             });

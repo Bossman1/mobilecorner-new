@@ -43,12 +43,12 @@
         <div class="font-custom-bold-upper my-[10px] text-sm">ბრენდი</div>
 
         <div class="my-[10px]">
-            <x-input id="filter-search-brand" placeholder="ბრენდი" class="w-full !h-[45px]" />
+            <x-input id="filter-search-brand" placeholder="ბრენდი" class="w-full !h-[45px] filter-search-brand" />
         </div>
 
         <x-line class="!border-white" />
 
-        <div class="h-[300px]  overflow-y-scroll space-y-[10px]">
+        <div class="min-h-[50px]  overflow-y-scroll space-y-[10px]">
             @foreach($brands as $key => $brand)
                 <div>
                     <x-checkbox  name="models[]" class="!text-[var(--color-main)] focus:!ring-0 !border-none"  label="{{ $brand }}" />
