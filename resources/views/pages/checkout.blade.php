@@ -99,7 +99,7 @@
                             </div>
 
 
-                            <div class="grid grid-cols-1  md:!grid-cols-2 gap-5">
+                            <div class="grid grid-cols-1 xl:!grid-cols-2 gap-5">
                                 <div class="w-full">
                                     <label for="">სახელი <span class="text-red-800 text-sm font-bold">*</span></label>
                                     <x-input class="w-full mt-[5px]" placeholder="სახელი"/>
@@ -122,11 +122,11 @@
                                 </div>
 
 
-                                <div class="w-full col-span-2">
+                                <div class="w-full xl:!col-span-2">
                                     <label for="">ზუსტი მისამართი <span class="text-red-800 text-sm font-bold">*</span></label>
                                     <x-input class="w-full mt-[5px]" placeholder="ზუსტი მისამართი"/>
                                 </div>
-                                <div class="col-span-2">
+                                <div class="xl:!col-span-2">
                                     <label for="">კომენტარი</label>
                                     <x-textarea class="!w-full !h-[200px]  mt-[5px]" placeholder="კომენტარი"/>
                                 </div>
