@@ -35,8 +35,8 @@
 
 
                             <!-- Cart Table Headings -->
-                            <div class="hidden md:flex justify-between items-start bg-gray-100 p-3 font-semibold text-gray-700 rounded-t">
-                                <div class="w-20 ">#ID</div>
+                            <div class="hidden xl:flex justify-between items-start bg-gray-100 p-3 font-semibold text-gray-700 rounded-t">
+                                <div class="w-20">#ID</div>
                                 <div class="w-24 mx-4">Image</div>
                                 <div class="flex-1">Title</div>
                                 <div class="w-24">Price</div>
