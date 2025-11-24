@@ -380,14 +380,14 @@ window.renderCart = function () {
                     <div class="hidden xl:!w-20  font-medium text-gray-700 overflow-hidden">#${item.id}</div>
 
                     <!-- Product Image -->
-                    <div class="w-fit h-24 flex-shrink-0 xl:!mx-4">
-                        <img src="${item.image}" alt="Product" class="w-full h-full object-cover rounded">
+                    <div class="w-[60px] sm:w-[80px] md:w-[100px] flex-shrink-0 xl:!mx-4">
+                        <img src="${item.image}" alt="Product" class="w-full aspect-square object-cover rounded">
                     </div>
 
                      <!-- Title -->
                     <div class="hidden xl:!block flex-1 text-gray-800 font-medium text-start xl:!text-left "><a href="">${item.title}</a></div>
 
-                    <div class="flex flex-col xl:!flex-row items-center gap-1">
+                    <div class="flex flex-col sm:!flex-row items-center md:!gap-1 sm:!gap-3">
                             <!-- Price -->
                             <div class="w-fit xl:!w-24  text-gray-700 text-center ">${item.price} ₾</div>
 
