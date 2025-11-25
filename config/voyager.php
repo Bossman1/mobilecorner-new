@@ -99,7 +99,7 @@ return [
         /*
          * Set whether or not the multilingual is supported by the BREAD input.
          */
-        'enabled' => true,
+        'enabled' => false,
 
         /*
          * Select default language
@@ -109,10 +109,10 @@ return [
         /*
          * Select languages that are supported.
          */
-        'locales' => [
-            'ka',
-            'en',
-        ],
+//        'locales' => [
+//            'ka',
+//            'en',
+//        ],
     ],
 
     /*
@@ -191,10 +191,14 @@ return [
     'additional_css' => [
         //'css/custom.css',
         '/assets/css/fonts.css',
+        '/assets/css/fancybox.css',
     ],
 
     'additional_js' => [
+//        '/assets/js/jquery.min.js',
         '/assets/js/chart.js',
+        '/assets/js/slugify.js',
+        '/assets/js/fancybox.umd.js',
 
     ],
 
