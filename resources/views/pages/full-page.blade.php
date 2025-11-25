@@ -198,7 +198,12 @@
 
                 <div class="p-[16px] sticky">
 
+                    <h2 class="text-[17px]  font-custom-bold-upper my-[5px] w-full">Apple iPhone Air e-SIM | 256GB Sky Blue-22191</h2>
+
+                    <x-line class="!border-t-[#dfd5d5] !my-[13px]"/>
                     <div class="flex justify-between items-center">
+
+
                         <div class="flex justify-start items-center gap-2">
                             <div class="text-[20px] text-[var(--color-main)] font-custom-bold-upper">2899 ₾</div>
                             <div class="line-through text-[14px]">2999 ₾</div>
