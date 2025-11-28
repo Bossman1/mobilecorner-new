@@ -17,10 +17,10 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => fake()->name,
-            'email' => fake()->unique()->safeEmail,
-        ]);
+//        User::factory()->create([
+//            'name' => fake()->name,
+//            'email' => fake()->unique()->safeEmail,
+//        ]);
 
         $this->call([
             AttributeSeeder::class,

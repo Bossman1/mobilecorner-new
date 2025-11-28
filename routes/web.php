@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +48,8 @@ Route::group(['prefix' => 'cart'], function () {
     Route::post('add-to-cart', [CartController::class, 'addItem'])->name('cart.add-to-cart');
 });
 
+
+Route::post('/get-content', [AjaxController::class, 'handle'])->name('ajax.call')->middleware('throttle:200,1');
 
 
 Route::group(['prefix' => 'nboard'], function () {

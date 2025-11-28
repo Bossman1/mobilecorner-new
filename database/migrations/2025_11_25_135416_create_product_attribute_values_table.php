@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->foreignId('attribute_id')->constrained('attributes')->cascadeOnDelete();
+            $table->foreignId('value_id')->constrained('attribute_values')->cascadeOnDelete();
             $table->string('value_text')->nullable();
             $table->decimal('value_number', 24, 8)->nullable();
             $table->json('value_json')->nullable();

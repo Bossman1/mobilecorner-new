@@ -9,8 +9,7 @@ class ProductAttributeValue extends Model
     protected $fillable = ['product_id', 'attribute_id', 'value_text', 'value_number', 'value_json'];
 
     protected $casts = [
-        'value_json' => 'array',
-        'value_number' => 'decimal:8',
+        'value_json' => 'array'
     ];
 
     public function product()
@@ -22,6 +21,14 @@ class ProductAttributeValue extends Model
     {
         return $this->belongsTo(Attribute::class);
     }
+
+
+    public function attribute_value()
+    {
+        return $this->hasOne(AttributeValue::class, 'id', 'value_id');
+    }
+
+
 
     // Convenient accessor
     public function getValueAttribute()

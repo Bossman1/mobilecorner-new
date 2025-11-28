@@ -46,17 +46,17 @@ class ProductSeeder extends Seeder
         $products = [
             [
                 'title' => 'iPhone 15 Pro Max 256GB',
-                'price' => 1299,
+                'a_old_price' => fake()->randomFloat(2, 100, 1000),
                 'stock' => 50,
             ],
             [
                 'title' => 'Samsung Galaxy S23 Ultra 512GB',
-                'price' => 1199,
+                'a_old_price' => fake()->randomFloat(2, 100, 1000),
                 'stock' => 40,
             ],
             [
                 'title' => 'Google Pixel 8 Pro 256GB',
-                'price' => 999,
+                'a_old_price' => fake()->randomFloat(2, 100, 1000),
                 'stock' => 25,
             ],
         ];
@@ -70,7 +70,7 @@ class ProductSeeder extends Seeder
                     'title' => $data['title'],
                     'description' => $data['title'] . ' — example product seeded.',
                     'slug' => Str::slug($data['title']),
-                    'price' => $data['price'],
+                    'a_old_price' => $data['a_old_price'],
                     'stock' => $data['stock'],
                     'status' => 'active',
                 ]
