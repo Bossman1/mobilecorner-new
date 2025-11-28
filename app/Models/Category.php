@@ -11,7 +11,7 @@ use TCG\Voyager\Traits\Resizable;
 class Category extends Model
 {
     use Resizable;
-    protected $fillable = ['name', 'slug', 'description', 'parent_id', 'position'];
+    protected $fillable = ['name', 'slug', 'description', 'parent_id', 'position', 'images','icon'];
 
 
     public static function boot()
