@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('currency', 4)->default('LARI');
             $table->integer('stock')->default(1);
             $table->enum('status', ['draft','active'])->default('active');
+            $table->enum('condition', ['owned','new'])->default('new');
             $table->longText('images')->nullable();
             $table->softDeletes();
             $table->timestamps();

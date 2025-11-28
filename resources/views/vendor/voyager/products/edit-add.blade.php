@@ -489,6 +489,39 @@
 
 
 
+        $(document).on('click', '.delete-product-attribute', function (e) {
+            e.preventDefault();
+            let id = $(this).data('id');
+            let row = $(this).closest('tr');
+
+            if (!confirm("Are you sure?")) return;
+
+
+            $.ajax({
+                url: '{{ route('ajax.call') }}',
+                type: 'POST',
+                data: {
+                    action: 'deleteProductAttribute',
+                    value: id,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (res) {
+                    if (res.success) {
+                        row.fadeOut(200, function () {
+                            $(this).remove();
+                        });
+                    } else {
+                        alert("Error: could not delete.");
+                    }
+                },
+                error: function () {
+                    alert("Server error");
+                }
+            });
+        });
+
+
+
 
 
 
