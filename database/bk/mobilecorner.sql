@@ -11,7 +11,7 @@
  Target Server Version : 50733
  File Encoding         : 65001
 
- Date: 28/11/2025 16:51:04
+ Date: 28/11/2025 17:08:32
 */
 
 SET NAMES utf8mb4;
@@ -142,6 +142,7 @@ CREATE TABLE `categories`  (
   `parent_id` bigint(20) UNSIGNED NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `images` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `icons` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `position` int(10) UNSIGNED NOT NULL DEFAULT 0,
@@ -156,12 +157,12 @@ CREATE TABLE `categories`  (
 -- ----------------------------
 -- Records of categories
 -- ----------------------------
-INSERT INTO `categories` VALUES (4, NULL, 'სმარტფონები', '[\"categories\\\\November2025\\\\eCbjCZh50dDl2V5EFGEU.jpeg\"]', 'smartfonebi', '<p>აქ რამე&nbsp;</p>', 0, NULL, NULL);
-INSERT INTO `categories` VALUES (5, NULL, 'ლეპტოპები', '[\"categories\\\\November2025\\\\zobwRwhjtwP6JIDAHZRD.jpeg\"]', 'leptopebi', '<p>ლეპტოპების&nbsp; აღწერა</p>', 0, NULL, NULL);
-INSERT INTO `categories` VALUES (6, 4, 'სამსუნგი', '[\"categories\\\\November2025\\\\NyYXEYEZSVxANGnYpfw1.jpeg\"]', 'samsungi', '<p>სამსუნგების აღწერა</p>', 0, NULL, NULL);
-INSERT INTO `categories` VALUES (7, 4, 'Iphone', '[\"categories\\\\November2025\\\\8bUVHruWNDNin9UE4u0k.jpeg\"]', 'iphone', '<p>აიფონის აღწერა</p>', 0, NULL, NULL);
-INSERT INTO `categories` VALUES (8, 5, 'Asus', '[\"categories\\\\November2025\\\\YduIJ7GP5hRwfk87uKme.jpeg\"]', 'asus', NULL, 0, NULL, NULL);
-INSERT INTO `categories` VALUES (9, 5, 'Acer', '[\"categories\\\\November2025\\\\Kxf3pLMKoJXnzQaO9IoO.jpeg\"]', 'acer', '<p>acer desc</p>', 0, NULL, NULL);
+INSERT INTO `categories` VALUES (4, NULL, 'სმარტფონები', '[\"categories\\\\November2025\\\\eCbjCZh50dDl2V5EFGEU.jpeg\"]', 'device-mobile', 'smartfonebi', '<p>აქ რამე</p>', 0, NULL, '2025-11-28 17:05:46');
+INSERT INTO `categories` VALUES (5, NULL, 'ლეპტოპები', '[\"categories\\\\November2025\\\\zobwRwhjtwP6JIDAHZRD.jpeg\"]', 'laptop', 'leptopebi', '<p>ლეპტოპების&nbsp; აღწერა</p>', 0, NULL, '2025-11-28 17:05:34');
+INSERT INTO `categories` VALUES (6, 4, 'სამსუნგი', '[\"categories\\\\November2025\\\\NyYXEYEZSVxANGnYpfw1.jpeg\"]', NULL, 'samsungi', '<p>სამსუნგების აღწერა</p>', 0, NULL, NULL);
+INSERT INTO `categories` VALUES (7, 4, 'Iphone', '[\"categories\\\\November2025\\\\8bUVHruWNDNin9UE4u0k.jpeg\"]', NULL, 'iphone', '<p>აიფონის აღწერა</p>', 0, NULL, NULL);
+INSERT INTO `categories` VALUES (8, 5, 'Asus', '[\"categories\\\\November2025\\\\YduIJ7GP5hRwfk87uKme.jpeg\"]', NULL, 'asus', NULL, 0, NULL, NULL);
+INSERT INTO `categories` VALUES (9, 5, 'Acer', '[\"categories\\\\November2025\\\\Kxf3pLMKoJXnzQaO9IoO.jpeg\"]', NULL, 'acer', '<p>acer desc</p>', 0, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for colors
@@ -205,7 +206,7 @@ CREATE TABLE `data_rows`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `data_rows_data_type_id_foreign`(`data_type_id`) USING BTREE,
   CONSTRAINT `data_rows_data_type_id_foreign` FOREIGN KEY (`data_type_id`) REFERENCES `data_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 86 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 87 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of data_rows
@@ -237,8 +238,8 @@ INSERT INTO `data_rows` VALUES (24, 4, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 1,
 INSERT INTO `data_rows` VALUES (25, 4, 'slug', 'text', 'Slug', 1, 0, 1, 1, 0, 1, '{}', 6);
 INSERT INTO `data_rows` VALUES (26, 4, 'description', 'rich_text_box', 'Description', 0, 1, 1, 1, 1, 1, '{}', 5);
 INSERT INTO `data_rows` VALUES (27, 4, 'position', 'text', 'Position', 1, 0, 0, 0, 0, 0, '{}', 7);
-INSERT INTO `data_rows` VALUES (28, 4, 'created_at', 'text', 'Created At', 0, 0, 0, 0, 1, 1, '{}', 9);
-INSERT INTO `data_rows` VALUES (29, 4, 'updated_at', 'text', 'Updated At', 0, 0, 0, 0, 1, 1, '{}', 10);
+INSERT INTO `data_rows` VALUES (28, 4, 'created_at', 'text', 'Created At', 0, 0, 0, 0, 1, 1, '{}', 10);
+INSERT INTO `data_rows` VALUES (29, 4, 'updated_at', 'text', 'Updated At', 0, 0, 0, 0, 1, 1, '{}', 11);
 INSERT INTO `data_rows` VALUES (30, 4, 'category_hasone_category_relationship', 'relationship', 'Parent category', 0, 1, 1, 1, 1, 1, '{\"default\":\"Default text\",\"model\":\"App\\\\Models\\\\Category\",\"table\":\"categories\",\"type\":\"belongsTo\",\"column\":\"parent_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"attributes\",\"pivot\":\"0\",\"taggable\":\"0\"}', 3);
 INSERT INTO `data_rows` VALUES (31, 4, 'images', 'multiple_images', 'Images', 0, 0, 1, 1, 1, 1, '{\"quality\":\"100%\",\"upsize\":true,\"thumbnails\":[{\"name\":\"medium\",\"scale\":\"50%\"},{\"name\":\"small\",\"scale\":\"25%\"},{\"name\":\"cropped\",\"crop\":{\"width\":\"300\",\"height\":\"250\"}}]}', 8);
 INSERT INTO `data_rows` VALUES (32, 5, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1);
@@ -291,6 +292,7 @@ INSERT INTO `data_rows` VALUES (82, 10, 'content', 'markdown_editor', 'Content',
 INSERT INTO `data_rows` VALUES (83, 10, 'position', 'select_dropdown', 'Position', 1, 1, 1, 1, 1, 1, '{\"default\":\"everywhere\",\"options\":{\"everywhere\":\"Everywhere\",\"header\":\"Header\",\"footer\":\"Footer\"}}', 4);
 INSERT INTO `data_rows` VALUES (84, 10, 'created_at', 'text', 'Created At', 0, 1, 1, 1, 1, 1, '{}', 6);
 INSERT INTO `data_rows` VALUES (85, 10, 'updated_at', 'text', 'Updated At', 0, 1, 1, 1, 1, 1, '{}', 7);
+INSERT INTO `data_rows` VALUES (86, 4, 'icons', 'text', 'Icons', 0, 1, 1, 1, 1, 1, '{\"description\":\"Icons from phosphoricons.com, Enter icon name, e.g: house-simple\"}', 9);
 
 -- ----------------------------
 -- Table structure for data_types
@@ -323,7 +325,7 @@ CREATE TABLE `data_types`  (
 INSERT INTO `data_types` VALUES (1, 'users', 'users', 'User', 'Users', 'voyager-person', 'TCG\\Voyager\\Models\\User', 'TCG\\Voyager\\Policies\\UserPolicy', 'TCG\\Voyager\\Http\\Controllers\\VoyagerUserController', '', 1, 0, NULL, '2025-11-02 23:32:50', '2025-11-02 23:32:50');
 INSERT INTO `data_types` VALUES (2, 'menus', 'menus', 'Menu', 'Menus', 'voyager-list', 'TCG\\Voyager\\Models\\Menu', NULL, '', '', 1, 0, NULL, '2025-11-02 23:32:50', '2025-11-02 23:32:50');
 INSERT INTO `data_types` VALUES (3, 'roles', 'roles', 'Role', 'Roles', 'voyager-lock', 'TCG\\Voyager\\Models\\Role', NULL, 'TCG\\Voyager\\Http\\Controllers\\VoyagerRoleController', '', 1, 0, NULL, '2025-11-02 23:32:50', '2025-11-02 23:32:50');
-INSERT INTO `data_types` VALUES (4, 'categories', 'categories', 'Category', 'Categories', NULL, 'App\\Models\\Category', NULL, 'App\\Http\\Controllers\\Nboard\\CategoryController', NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2025-11-25 14:40:27', '2025-11-28 09:37:01');
+INSERT INTO `data_types` VALUES (4, 'categories', 'categories', 'Category', 'Categories', NULL, 'App\\Models\\Category', NULL, 'App\\Http\\Controllers\\Nboard\\CategoryController', NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2025-11-25 14:40:27', '2025-11-28 17:05:59');
 INSERT INTO `data_types` VALUES (5, 'products', 'products', 'Product', 'Products', NULL, 'App\\Models\\Product', NULL, 'App\\Http\\Controllers\\Nboard\\ProductController', NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2025-11-27 21:34:24', '2025-11-28 09:51:52');
 INSERT INTO `data_types` VALUES (6, 'colors', 'colors', 'Color', 'Colors', NULL, 'App\\Models\\Color', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null}', '2025-11-27 22:10:32', '2025-11-27 22:10:32');
 INSERT INTO `data_types` VALUES (7, 'attributes', 'attributes', 'Attribute', 'Attributes', NULL, 'App\\Models\\Attribute', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2025-11-27 22:50:17', '2025-11-28 04:27:57');
@@ -825,7 +827,7 @@ CREATE TABLE `sessions`  (
 -- ----------------------------
 -- Records of sessions
 -- ----------------------------
-INSERT INTO `sessions` VALUES ('nPAq6yBtXSJOsfOlVSo6UNFNl4Al6A1JoWhw4m6l', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiMERJb1JiS1dyWkNXM0YzOWxuVzRubUhLN0I2WmE4UVNWZERYUTNReCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjI6Imh0dHA6Ly9tb2JpbGVjb3JuZXIubGMiO3M6NToicm91dGUiO3M6NDoiaG9tZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjA6e31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO3M6MjI6IlBIUERFQlVHQkFSX1NUQUNLX0RBVEEiO2E6MDp7fX0=', 1764334224);
+INSERT INTO `sessions` VALUES ('nPAq6yBtXSJOsfOlVSo6UNFNl4Al6A1JoWhw4m6l', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiMERJb1JiS1dyWkNXM0YzOWxuVzRubUhLN0I2WmE4UVNWZERYUTNReCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly9tb2JpbGVjb3JuZXIubGMvbmJvYXJkL2NhdGVnb3JpZXMiO3M6NToicm91dGUiO3M6MjQ6InZveWFnZXIuY2F0ZWdvcmllcy5pbmRleCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjA6e31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO3M6MjI6IlBIUERFQlVHQkFSX1NUQUNLX0RBVEEiO2E6MDp7fX0=', 1764335175);
 
 -- ----------------------------
 -- Table structure for settings
