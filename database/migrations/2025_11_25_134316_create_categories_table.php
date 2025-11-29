@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('parent_id')->nullable()->constrained('categories')->nullOnDelete();
+            $table->foreignId('banner_group_id')
+                ->nullable()
+                ->constrained('banner_groups')
+                ->nullOnDelete();
             $table->string('name');
             $table->longText('images')->nullable();
             $table->string('slug')->unique();

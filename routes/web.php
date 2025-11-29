@@ -4,9 +4,7 @@ use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('index');
-})->name('home');
+Route::get('/',[\App\Http\Controllers\HomeController::class,'index'])->name('home');
 
 
 Route::group(['prefix' => 'categories'], function () {

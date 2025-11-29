@@ -105,4 +105,10 @@ class Category extends Model
     }
 
 
+    public function bannerGroup()
+    {
+        return $this->belongsTo(BannerGroup::class);
+    }
+
+
 }
