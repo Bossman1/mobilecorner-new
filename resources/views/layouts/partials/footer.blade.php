@@ -5,11 +5,13 @@
                 <div class="py-[10px] border-b border-[var(--color-main)] font-custom-bold-upper">ნავიგაცია</div>
                 <div class="mt-[30px]">
                     <ul class="space-y-[15px]">
-                        <li><a href="">პერსონალურ მონაცემთა დაცვის პოლიტიკა</a></li>
-                        <li><a href="">ჩვენ შესახებ</a></li>
-                        <li><a href="">წესები და პირობები</a></li>
-                        <li><a href="">მიწოდების სერვისი</a></li>
-                        <li><a href="">კარიერა</a></li>
+                        @if(isset($staticPages) && count($staticPages) > 0)
+                            @foreach($staticPages as $staticPage)
+                                @if(in_array($staticPage->position,['everywhere','footer']))
+                                    <li><a href="{{ route('pages.page',$staticPage->slug) }}">{{ $staticPage->title }}</a></li>
+                                @endif
+                            @endforeach
+                        @endif
                     </ul>
                 </div>
             </div>

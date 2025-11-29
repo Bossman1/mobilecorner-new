@@ -17,9 +17,7 @@ Route::group(['prefix' => 'categories'], function () {
 
 Route::group(['prefix' => 'pages'], function () {
 
-    Route::get('/', function () {
-        return view('pages.page');
-    })->name('pages.page');
+    Route::get('/page/{slug}',[\App\Http\Controllers\PageController::class,'getPage'])->name('pages.page');
 
 
     Route::get('/product/{slug}',[\App\Http\Controllers\ProductController::class, 'view'])->name('pages.full-page');

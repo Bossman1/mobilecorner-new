@@ -14,10 +14,13 @@
 
             <div class="items-end">
                 <ul class="flex justify-between items-center gap-[20px]">
-                    <li><a href="{{ route('pages.page') }}">მენიუ</a></li>
-                    <li><a href="{{ route('pages.page') }}">მენიუ</a></li>
-                    <li><a href="{{ route('pages.page') }}">მენიუ</a></li>
-                    <li><a href="{{ route('pages.page') }}">მენიუ</a></li>
+                    @if(isset($staticPages) && count($staticPages) > 0)
+                        @foreach($staticPages as $staticPage)
+                            @if(in_array($staticPage->position,['everywhere','header']))
+                                <li><a href="{{ route('pages.page',$staticPage->slug) }}">{{ $staticPage->title }}</a></li>
+                            @endif
+                        @endforeach
+                    @endif
                     <li><a href="{{ route('pages.contact') }}">კონტაქტი</a></li>
                 </ul>
             </div>
