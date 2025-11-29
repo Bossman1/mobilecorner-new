@@ -34,7 +34,7 @@
                     <div class="col-span-12 md:col-span-8 mt-[20px]">
                         <div class="flex justify-between items-center">
                             <x-breadcrumbs/>
-                            <div class="text-sm text-slate-700">ID: 2342434</div>
+                            <div class="text-sm text-slate-700">ID: {{ $product->id }}</div>
                         </div>
                         <x-line class="!border-t-[#EDEDED] !my-[13px]"/>
                         <x-gallery
@@ -57,7 +57,7 @@
                                     'thumbWidth' => 120,
                                     'thumbHeight' => 80,
                                     'thumbMargin' => 10,
-                                    'condition' => 'owned'
+                                    'condition' => $product->condition
                                 ]"
                         />
                     </div>
@@ -198,22 +198,29 @@
 
                 <div class="p-[16px] sticky">
 
-                    <h2 class="text-[17px]  font-custom-bold-upper my-[5px] w-full">Apple iPhone Air e-SIM | 256GB Sky Blue-22191</h2>
+                    <h2 class="text-[17px]  font-custom-bold-upper my-[5px] w-full">{{ $product->title }}</h2>
 
                     <x-line class="!border-t-[#dfd5d5] !my-[13px]"/>
                     <div class="flex justify-between items-center">
 
 
                         <div class="flex justify-start items-center gap-2">
-                            <div class="text-[20px] text-[var(--color-main)] font-custom-bold-upper">2899 ₾</div>
-                            <div class="line-through text-[14px]">2999 ₾</div>
+                            <div class="text-[20px] text-[var(--color-main)] font-custom-bold-upper">{{ $product->a_old_price }} ₾</div>
+                            @if(isset($product->a_new_price) && trim($product->a_new_price) !=='')
+                                <div class="line-through text-[14px]">{{ $product->a_new_price }} ₾</div>
+                            @endif
+
                         </div>
 
                         <div class="flex justify-start items-center gap-2">
                             <x-dynamic-component :component="'phosphor-warehouse'"
                                                  class="h-[15px] w-[15px] !text-black/80 group-hover:!text-white"/>
-                            <span class="text-[12px] text-green-900 font-custom-bold-upper ">მარაგშია</span>
-                            <span class="text-[12px] text-red-900 font-custom-bold-upper hidden">არ არის მარაგში</span>
+
+
+                                <span class="text-[12px] @if(trim($product->stock) == 1) text-green-900 @elseif(trim($product->stock) == 2) text-red-900 @endif font-custom-bold-upper ">
+                                    @if(trim($product->stock) == 1) მარაგშია @elseif(trim($product->stock) == 2)  არ არის მარაგში @endif
+                                </span>
+
 
                             <x-button size="sm" icon="phosphor-heart" class="{{ $favoriteFullPage }}" variant="primary"  />
                         </div>

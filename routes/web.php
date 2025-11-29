@@ -21,9 +21,9 @@ Route::group(['prefix' => 'pages'], function () {
         return view('pages.page');
     })->name('pages.page');
 
-    Route::get('/full-page', function () {
-        return view('pages.full-page');
-    })->name('pages.full-page');
+
+    Route::get('/product/{slug}',[\App\Http\Controllers\ProductController::class, 'view'])->name('pages.full-page');
+
 
     Route::get('/cart',[CartController::class,'index'])->name('pages.cart');
 

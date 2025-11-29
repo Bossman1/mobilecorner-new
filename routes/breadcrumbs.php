@@ -14,9 +14,9 @@ Breadcrumbs::for('pages.categories-list', function (Trail $trail) {
     $trail->push( __("Categories"), route('pages.categories-list'));
 });
 
-Breadcrumbs::for('pages.full-page', function (Trail $trail) {
+Breadcrumbs::for('pages.full-page', function (Trail $trail, $slug) {
     $trail->parent('home');
-    $trail->push( __("Product"), route('pages.full-page'));
+    $trail->push( __("Product"), route('pages.full-page',$slug));
 });
 
 Breadcrumbs::for('pages.cart', function (Trail $trail) {

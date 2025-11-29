@@ -20,7 +20,7 @@
 <div {{ $attributes->merge(['class' => 'group']) }}>
 
     <div class="group flex flex-col h-auto  bg-white rounded-[8px] shadow-lg overflow-hidden py-3 relative {{ $wrapperClass }}">
-        <a href="{{ route('pages.full-page') }}">
+        <a href="{{ route('pages.full-page','samsung-sm-x210-galaxy-tab-a9-4gb-ram-64gb-wi-fi-navy') }}">
             <div class="group-hover:opacity-30 transition-opacity">
                 <div class="absolute top-2 right-1">
                     <span class="border rounded-[10px] text-xs text-white px-[5px] py-[3px] italic shadow-lg {{ $conditionColor }}">{{ $conditionText }}</span>
@@ -36,7 +36,7 @@
         <!-- Text + Button -->
         <div class="flex flex-col flex-1 px-[15px]  md:justify-between ">
             <!-- Text -->
-            <a href="{{ route('pages.full-page') }}">
+            <a href="{{ route('pages.full-page','samsung-sm-x210-galaxy-tab-a9-4gb-ram-64gb-wi-fi-navy') }}">
                 <div class="group-hover:opacity-30 transition-opacity">
                     <div class="space-y-[5px]">
                         <div class="text-[16px] font-custom-bold-upper text-[var(--color-main)] line-clamp-2">{{ $options['price'] }} ₾</div>

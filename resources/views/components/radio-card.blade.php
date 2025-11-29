@@ -2,6 +2,7 @@
     'id' => 'id_'.uniqid(),
     'name' => 'name_'.uniqid(),
     'value' => '',
+    'dataAttributes' => [],
     'label' => '',
     'labelDescription' => '',
     'labelDescriptionClass' => '',
@@ -51,6 +52,16 @@
                         class="w-[13px] h-[13px] text-[var(--color-main-light)] bg-gray-100 border-white hidden"
                         {{ $isChecked ? 'checked': '' }}
                         data-radio-input
+
+                        @if($dataAttributes && count($dataAttributes))
+                            @foreach($dataAttributes as $key => $dataAttribute)
+                                @if(is_int($key) || (is_numeric($key) && $key === $dataAttribute))
+                                    {{ $dataAttribute }}
+                                @else
+                                    {{ $key }}="{{ $dataAttribute }}"
+                               @endif
+                             @endforeach
+                        @endif
                     />
                     @if($iconPosition ==='right')
                         <div>
