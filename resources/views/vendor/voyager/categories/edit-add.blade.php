@@ -194,31 +194,30 @@
                                 @endif
 
                                     @if($row->field == 'images')
-                                        @php
-                                            $images = json_decode(old($row->field, $dataTypeContent->{$row->field} ?? '[]'), true);
-                                        @endphp
+
+
                                         <div class="form-group  col-md-12 ">
                                             <label class="control-label" for="{{ $row->field }}">{{ $row->display_name }}</label>
                                             <br>
                                             <div class="clearfix"></div>
-                                            <input type="file" name="images[]" multiple="multiple" accept="image/*">
-                                            @if(!empty($images))
+                                            <input type="file" name="images"  accept="image/*">
+                                            @if(!empty($dataTypeContent->{$row->field}))
                                                 <div class="row" style="margin:10px;">
-                                                    @foreach($images as $image)
+
                                                         <div class="col-md-1">
                                                             <div class="thumbnail" style="position:relative;">
-                                                                <a href="{{ Voyager::image($image) }}" class="img-responsive"
+                                                                <a href="{{ Voyager::image($dataTypeContent->{$row->field}) }}" class="img-responsive"
                                                                    data-fancybox="gallery">
-                                                                    <img src="{{ Voyager::image($dataTypeContent->getThumbnail($image, 'medium')) }}"
-                                                                         data-file-name="{{ $image }}"
+                                                                    <img src="{{ Voyager::image($dataTypeContent->getThumbnail($dataTypeContent->{$row->field}, 'medium')) }}"
+                                                                         data-file-name="{{ $dataTypeContent->{$row->field} }}"
                                                                          data-field-name="{{ $row->field }}"
                                                                          data-id="{{ $dataTypeContent->id }}"
                                                                     />
                                                                 </a>
-                                                                <button type="button" class="close remove-multi-image" style="position:absolute; top:5px; right:5px;">&times;</button>
+                                                                <button type="button" class="close remove-single-image" style="position:absolute; top:5px; right:5px;">&times;</button>
                                                             </div>
                                                         </div>
-                                                    @endforeach
+
                                                 </div>
                                             @endif
                                         </div>
