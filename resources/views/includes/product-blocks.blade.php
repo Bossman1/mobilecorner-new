@@ -19,7 +19,8 @@
                 @php
                     $options = [
                             'image' => asset('assets/images/temp/img1.webp'),
-                            'price' => rand(100,200),
+                            'price' => rand(10,50),
+                            'old_price' => rand(100,200),
                             'title' =>'Apple iPhone Air e-SIM | 256GB Sky Blue-'.rand(34,34565),
                       ];
                 $condition = rand(0, 1) ? 'new' : 'owned';

@@ -39,7 +39,11 @@
             <a href="{{ route('pages.full-page','samsung-sm-x210-galaxy-tab-a9-4gb-ram-64gb-wi-fi-navy') }}">
                 <div class="group-hover:opacity-30 transition-opacity">
                     <div class="space-y-[5px]">
-                        <div class="text-[16px] font-custom-bold-upper text-[var(--color-main)] line-clamp-2">{{ $options['price'] }} ₾</div>
+                        <div class="flex justify-start items-center gap-2">
+                            <div class="text-[16px] font-custom-bold-upper text-[var(--color-main)] line-clamp-2">{{ $options['price'] }} ₾</div>
+                            <div class="text-[13px] font-custom-bold-upper text-gray-400 line-clamp-2 line-through">{{ $options['old_price'] }} ₾</div>
+                        </div>
+
                         <div class="text-[12px] text-slate-800 line-clamp-2">{{ $options['title'] }}</div>
                     </div>
                 </div>
