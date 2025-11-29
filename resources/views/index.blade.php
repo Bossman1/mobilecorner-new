@@ -11,15 +11,15 @@
 
 
             {{-- Right slider --}}
-            <div class="flex-1 bg-white rounded-2xl self-start min-h-[380px]">
+            @if($carousels)
+             <div class="flex-1 bg-white rounded-2xl self-start min-h-[380px]">
                 @php
-                    $bannerOptions = [
-                        ['img' => asset('assets/images/temp/banner.jpg'), 'url' => 'https://google.ge'],
-                        ['img' => asset('assets/images/temp/banner2.webp'), 'url' => 'https://google.ge'],
-                    ];
-
+                    $bannerOptions = [];
+                    foreach ($carousels as $k => $carousel){
+                        $bannerOptions[$k]['img'] = Voyager::image($carousel->images);
+                        $bannerOptions[$k]['url'] = $carousel->link;
+                    }
                 @endphp
-
                 <x-carousel
                     perPage="1"
                     :pause-on-hover="true"
@@ -29,13 +29,11 @@
                     containerInlineClass="padding-bottom:0;"
                     splideTrackClass="padding-bottom:0;"
                 >
-
                     @foreach($bannerOptions as $k => $banner)
                         @php
                             $option = [$banner];
 
                         @endphp
-
                         <x-banners
                             wrapperClass="grid grid-cols-1 md:!grid-cols-1 }} gap-[12px]"
                             :options="$option"
@@ -44,12 +42,9 @@
                             imageClass="w-full object-cover h-[380px] overflow-hidden rounded-2xl"
                         />
                     @endforeach
-
-
-
                 </x-carousel>
             </div>
-
+            @endif
         </div>
 
 

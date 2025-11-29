@@ -9,14 +9,18 @@
     @if(count($options))
         @foreach($options as $k => $option)
             <div {{ $attributes->merge(['class' => '']) }}>
-                <a href="{{ $option['url'] }}"
-                @if(count($hrefOptions))
-                    @foreach($hrefOptions as $k =>  $hrefOption)
-                        {{ $k }}  =  {{ $hrefOption }}
-                    @endforeach
+
+                @if(isset($option['url'])  ||  $option['url'] !== null)
+                    <a href="{{ $option['url'] }}"
+                    @if(count($hrefOptions))
+                        @foreach($hrefOptions as $k =>  $hrefOption)
+                            {{ $k }}  =  {{ $hrefOption }}
+                        @endforeach
+                    @endif
+
+                    >
                 @endif
 
-                >
                 <img
                     src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
                     data-src="{{ $option['img'] }}" loading="lazy" class="lazyload {{ $imageClass }}"
@@ -26,7 +30,7 @@
                     @endforeach
                 @endif
                 />
-                </a>
+                    @if(isset($option['url'])  ||  $option['url'] !== null) </a> @endif
 
             </div>
         @endforeach
