@@ -56,7 +56,7 @@
 
                     @php
                         $cardOptions = [
-                            'data-product-id' => uniqid(),
+                            'data-product-id' => $options['id'],
                             'data-image' => $options['image'],
                             'data-title' => $options['title'],
                             'data-product-price' => $options['price']

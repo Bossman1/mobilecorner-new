@@ -1,8 +1,9 @@
 {{--product blocks start--}}
+@if($category->all_products->count())
 <div>
     <div class="flex justify-between items-center">
         <h2 class="text-[17px] font-custom-bold-upper my-[20px]">
-            <a href="{{ route('pages.categories-list') }}">კატეგორიის სახელი</a>
+            <a href="{{ route('pages.categories-list') }}">{{ $category->name ?? '' }}</a>
         </h2>
         <a href="{{ route('pages.categories-list') }}">
             <div class="flex justify-between items-center gap-1 group hover:text-[var(--color-main)] font-custom-regular">
@@ -13,37 +14,49 @@
     </div>
 
 
+
     <div>
-        <x-carousel  :pagination="false" perPage="6" perPageMobile="2" perPageTablet="3">
-            @for($i = 0; $i < 24; $i++)
-                @php
-                    $options = [
-                            'image' => asset('assets/images/temp/img1.webp'),
-                            'price' => rand(10,50),
-                            'old_price' => rand(100,200),
-                            'title' =>'Apple iPhone Air e-SIM | 256GB Sky Blue-'.rand(34,34565),
-                      ];
-                $condition = rand(0, 1) ? 'new' : 'owned';
-                $favorite = rand(0, 1) ? '!bg-white !text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)]' : '!bg-[var(--color-favorite)]';
-                @endphp
-                <x-card-product :condition="$condition" :favorite="$favorite" :options="$options"/>
-            @endfor
+        <x-carousel  :pagination="false" perPage="6" perPageMobile="2" perPageTablet="3" type="slider">
+            @foreach($category->all_products  as $product)
+                    @php
+                        $productImage = json_decode($product->images)[0] ??  '';
+                        $options = [
+                                'image' => Voyager::image($productImage),
+                                'price' => $product->a_old_price,
+                                'old_price' => $product->a_new_price,
+                                'title' => $product->title,
+                                'id' => $product->id,
+                          ];
+                    $condition = $product->condition;
+                    $favorite = rand(0, 1) ? '!bg-white !text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)]' : '!bg-[var(--color-favorite)]';
+                    @endphp
+                    <x-card-product :condition="$condition" :favorite="$favorite" :options="$options"/>
+            @endforeach
+
         </x-carousel>
     </div>
 
 
     {{--category ads block start--}}
+@if($category?->bannerGroup?->banners?->count())
 
-    @php
-        $bannerOptions = [
-            ['img' => asset('assets/images/temp/banner5.jpeg'), 'url' => 'https://google.ge'],
-            ['img' => asset('assets/images/temp/banner5.jpeg'), 'url' => 'https://google.ge'],
-            ['img' => asset('assets/images/temp/banner5.jpeg'), 'url' => 'https://google.ge'],
-            ['img' => asset('assets/images/temp/banner5.jpeg'), 'url' => 'https://google.ge'],
-        ];
-    @endphp
 
-    <x-products-ads-block :options="$bannerOptions" bg-color="bg-purple-300" />
-    {{--category ads block end--}}
+        @php
+
+            $bannerOptions = [];
+            foreach ($category?->bannerGroup?->banners as $k => $banner){
+                $bannerOptions[$k]['img'] =  Voyager::image($banner->image);
+                $bannerOptions[$k]['url'] = $banner->link;
+            }
+
+
+        @endphp
+
+        <x-products-ads-block :options="$bannerOptions" :bg-color="$category?->bannerGroup->bg_color" />
+        {{--category ads block end--}}
+
+        @endif
+
+    @endif
 </div>
 {{--product blocks end--}}

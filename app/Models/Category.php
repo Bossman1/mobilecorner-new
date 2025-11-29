@@ -110,5 +110,15 @@ class Category extends Model
         return $this->belongsTo(BannerGroup::class);
     }
 
+    public function allCategoryIds()
+    {
+        $ids = collect([$this->id]);
+
+        foreach ($this->children as $child) {
+            $ids = $ids->merge($child->allCategoryIds());
+        }
+
+        return $ids;
+    }
 
 }

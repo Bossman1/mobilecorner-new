@@ -49,29 +49,19 @@
 
 
         <div class="my-[50px]">
-
-            {{--product blocks start--}}
-            @include('includes.product-blocks')
-            {{--product blocks end--}}
-
-
-            {{--product blocks start--}}
-            @include('includes.product-blocks')
-            {{--product blocks end--}}
+{{--            --}}{{--product blocks start--}}
+{{--            @include('includes.product-blocks')--}}
+{{--            --}}{{--product blocks end--}}
 
 
-            {{--product blocks start--}}
-            @include('includes.product-blocks')
-            {{--product blocks end--}}
 
-            {{--product blocks start--}}
-            @include('includes.product-blocks')
-            {{--product blocks end--}}
+            @foreach($homePageCategories as $category)
 
+                {{--product blocks start--}}
+                @include('includes.product-blocks',['category' => $category])
+                {{--product blocks end--}}
+            @endforeach
 
-            {{--product blocks start--}}
-            @include('includes.product-blocks')
-            {{--product blocks end--}}
 
 
 
