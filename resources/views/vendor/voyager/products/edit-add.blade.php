@@ -277,7 +277,7 @@
                                                 <td>{{ $attr->attribute->unit ?? '-' }}</td>
 
                                                 <td>
-                                                    <button data-id="{{ $attr->id }}" class="btn btn-danger btn-sm delete-product-attribute" >
+                                                    <button type="button" data-id="{{ $attr->id }}" class="btn btn-danger btn-sm delete-product-attribute" >
                                                         Delete
                                                     </button>
                                                 </td>
@@ -428,7 +428,8 @@
             });
 
             // Remove attribute row
-            $(document).on("click", ".remove-attribute", function () {
+            $(document).on("click", ".remove-attribute", function (e) {
+                e.preventDefault();
                 $(this).closest(".attribute-row").remove();
             });
 

@@ -40,8 +40,12 @@
                 <div class="group-hover:opacity-30 transition-opacity">
                     <div class="space-y-[5px]">
                         <div class="flex justify-start items-center gap-2">
-                            <div class="text-[16px] font-custom-bold-upper text-[var(--color-main)] line-clamp-2">{{ $options['price'] }} ₾</div>
-                            <div class="text-[13px] font-custom-bold-upper text-gray-400 line-clamp-2 line-through">{{ $options['old_price'] }} ₾</div>
+                            @if(isset($options['old_price']) && trim($options['old_price']) !== '')
+                                <div class="text-[16px] font-custom-bold-upper text-[var(--color-main)] line-clamp-2 ">{{ $options['old_price'] }} ₾</div>
+                                <div class="text-[13px] font-custom-bold-upper text-gray-400 line-clamp-2 line-through">{{ $options['price'] }} ₾</div>
+                            @else
+                                <div class="text-[16px] font-custom-bold-upper text-[var(--color-main)] line-clamp-2">{{ $options['price'] }} ₾</div>
+                            @endif
                         </div>
 
                         <div class="text-[12px] text-slate-800 line-clamp-2">{{ $options['title'] }}</div>

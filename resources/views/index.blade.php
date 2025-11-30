@@ -49,14 +49,18 @@
 
 
         <div class="my-[50px]">
-{{--            --}}{{--product blocks start--}}
-{{--            @include('includes.product-blocks')--}}
-{{--            --}}{{--product blocks end--}}
+
+
+            {{--sales section start--}}
+
+                @include('includes.sales-product-blocks',['saledItemsOnly'=>$saledItemsOnly])
+
+            {{--sales section end--}}
 
 
 
-            @foreach($homePageCategories as $category)
 
+            @foreach($menuCategories as $category)
                 {{--product blocks start--}}
                 @include('includes.product-blocks',['category' => $category])
                 {{--product blocks end--}}

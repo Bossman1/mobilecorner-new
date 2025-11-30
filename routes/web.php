@@ -9,7 +9,7 @@ Route::get('/',[\App\Http\Controllers\HomeController::class,'index'])->name('hom
 
 Route::group(['prefix' => 'categories'], function () {
 
-    Route::get('/', function () {
+    Route::get('/{slug?}', function () {
         return view('pages.categories-list');
     })->name('pages.categories-list');
 
