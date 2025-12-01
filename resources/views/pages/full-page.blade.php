@@ -16,17 +16,14 @@
         <x-page-component position="right" class="my-[20px] !gap-[20px]"
                               sidebar-class="bg-[var(--color-second-header)] rounded-md xl:!w-[350px] 2xl:!w-[414px] sidebar-content-class transition-all duration-300 mt-[20px]">
             <x-slot:content>
-
                 @php
-                    $galleries = [
-                            ['thumb' =>  asset('assets/images/temp/img1.webp'), 'src' =>  asset('assets/images/temp/img1.webp'), 'caption' => 'image title'],
-                            ['thumb' =>  asset('assets/images/temp/img2.webp'), 'src' =>  asset('assets/images/temp/img2.webp'), 'caption' => 'image title'],
-                            ['thumb' =>  asset('assets/images/temp/img3.webp'), 'src' =>  asset('assets/images/temp/img3.webp'), 'caption' => 'image title'],
-                            ['thumb' =>  asset('assets/images/temp/img1.webp'), 'src' =>  asset('assets/images/temp/img1.webp'), 'caption' => 'image title'],
-                            ['thumb' =>  asset('assets/images/temp/img1.webp'), 'src' =>  asset('assets/images/temp/img1.webp'), 'caption' => 'image title'],
-                             ['thumb' =>  asset('assets/images/temp/img1.webp'), 'src' =>  asset('assets/images/temp/img1.webp'), 'caption' => 'image title'],
-                            ['thumb' =>  asset('assets/images/temp/img2.webp'), 'src' =>  asset('assets/images/temp/img2.webp'), 'caption' => 'image title'],
-                        ]
+                    $images = json_decode($product->images, true) ?: []; // ensures array
+                    $galleries = array_map(function($image) use ($product) {
+                        return [
+                            'thumb' => Voyager::image($product->getThumbnail($image, 'medium')),
+                            'src'   => Voyager::image($image),
+                        ];
+                    }, $images);
                 @endphp
 
 
@@ -303,7 +300,10 @@
                         $options = [
                                 'image' => asset('assets/images/temp/img1.webp'),
                                 'price' => rand(123,12338),
+                                'old_price' => rand(123,12338),
                                 'title' =>'Apple iPhone Air e-SIM | 256GB Sky Blue-'.rand(34,34565),
+                                'slug' =>'temp-slug',
+                                'id' =>'id',
                           ];
                     $condition = rand(0, 1) ? 'new' : 'owned';
                     $favorite = rand(0, 1) ? '!bg-white !text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)]' : '!bg-[var(--color-favorite)]';

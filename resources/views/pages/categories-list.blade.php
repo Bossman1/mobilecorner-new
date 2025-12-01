@@ -24,8 +24,8 @@
                 <x-breadcrumbs />
                 <div class="flex flex-col xl:!flex-row justify-start xl:!justify-between items-start xl:!items-center my-[16px]">
                     <div class="flex flex-col">
-                        <div class="font-custom-bold-upper text-xl">Apple</div>
-                        <div class="font-custom-bold-upper text-xs text-gray-500">ნაპოვნია - 20 ჩანაწერი</div>
+                        <div class="font-custom-bold-upper text-xl">{{ isset($category) ? $category->name : $heading ?? ''  }}</div>
+                        <div class="font-custom-bold-upper text-xs text-gray-500">ნაპოვნია - {{ $totalProducts }} ჩანაწერი</div>
                     </div>
                     <div class="flex justify-between items-center w-full xl:w-auto xl:!hidden">
                         <div class="flex justify-between items-center gap-2" id="filter-mobile-sort">
@@ -39,23 +39,29 @@
 
 
                 <div class="grid grid-cols-2 md:!grid-cols-3 gap-6">
-                    @for($i = 0; $i < 12; $i++)
+                    @foreach($products as $product)
                         @php
+                            $productImage = json_decode($product->images)[0] ??  '';
                             $options = [
-                                    'image' => asset('assets/images/temp/img1.webp'),
-                                    'price' => rand(123,12338),
-                                    'title' =>'Apple iPhone Air e-SIM | 256GB Sky Blue-'.rand(34,34565),
+                               'image' => Voyager::image($productImage),
+                                'price' => $product->a_old_price,
+                                'old_price' => $product->a_new_price,
+                                'title' => $product->title,
+                                'id' => $product->id,
+                                'slug' => $product->slug,
                               ];
-                        $condition = rand(0, 1) ? 'new' : 'owned';
-                        $favorite = rand(0, 1) ? '!bg-white !text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)]' : '!bg-[var(--color-favorite)]';
+                            $condition = $product->condition;
+                            $favorite = rand(0, 1) ? '!bg-white !text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)]' : '!bg-[var(--color-favorite)]';
                         @endphp
                         <x-card-product wrapper-class="!shadow-[0_0_15px_rgba(0,0,0,0.15)]" :condition="$condition" :favorite="$favorite" :options="$options"/>
-                    @endfor
+                    @endforeach
+
+
                 </div>
 
                 {{--pagination wrapper start--}}
                     <div class="pagination-wrapper text-center my-[16px] md:my-[38px] md:h-[48px] md:py-[12px]">
-                        pagination here
+                        {{ $products->links() }}
                     </div>
                 {{--pagination wrapper end--}}
 

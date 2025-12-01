@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\Page;
+use Illuminate\Routing\Events\RouteMatched;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,40 +26,41 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Event::listen(RouteMatched::class, function () {
+            $pages = Page::all();
 
-        $pages = Page::all();
 
-        // Load all categories + banners + products
-        $allCategories = Category::with(['bannerGroup.banners', 'products'])->get();
+            // Load all categories + banners + products
+            $allCategories = Category::with(['bannerGroup.banners', 'products'])->get();
 
-        // Build top-level categories
-        $childrenMap = [];
-        foreach ($allCategories as $cat) {
-            $childrenMap[$cat->parent_id ?? 0][] = $cat;
-        }
-        $homePageCategories = collect($childrenMap[0] ?? []);
-
-        // Recursive function to attach children and merge products
-        $attachChildren = function ($category) use (&$attachChildren, $childrenMap) {
-            $category->children = collect($childrenMap[$category->id] ?? []);
-            $category->all_products = collect($category->products ?? []);
-
-            foreach ($category->children as $child) {
-                $attachChildren($child);
-                $category->all_products = $category->all_products->merge($child->all_products);
+            // Build top-level categories
+            $childrenMap = [];
+            foreach ($allCategories as $cat) {
+                $childrenMap[$cat->parent_id ?? 0][] = $cat;
             }
-        };
+            $homePageCategories = collect($childrenMap[0] ?? []);
 
-        foreach ($homePageCategories as $cat) {
-            $attachChildren($cat);
-        }
+            // Recursive function to attach children and merge products
+            $attachChildren = function ($category) use (&$attachChildren, $childrenMap) {
+                $category->children = collect($childrenMap[$category->id] ?? []);
+                $category->all_products = collect($category->products ?? []);
 
-        // Share globally — no multiple queries
-        View::share([
-            'staticPages' => $pages,
-            'menuCategories' => $homePageCategories,
-        ]);
+                foreach ($category->children as $child) {
+                    $attachChildren($child);
+                    $category->all_products = $category->all_products->merge($child->all_products);
+                }
+            };
 
+            foreach ($homePageCategories as $cat) {
+                $attachChildren($cat);
+            }
 
+            // Share globally — no multiple queries
+            View::share([
+                'staticPages' => $pages,
+                'menuCategories' => $homePageCategories,
+            ]);
+
+        });
     }
 }

@@ -8,12 +8,12 @@ Route::get('/',[\App\Http\Controllers\HomeController::class,'index'])->name('hom
 
 
 Route::group(['prefix' => 'categories'], function () {
-
-    Route::get('/{slug?}', function () {
-        return view('pages.categories-list');
-    })->name('pages.categories-list');
-
+    Route::get('/{slug?}', [\App\Http\Controllers\CategoryController::class,'index'])
+        ->name('pages.categories-list');
 });
+
+Route::get('/discounted-products', [\App\Http\Controllers\CategoryController::class,'discountedProducts'])
+    ->name('discounted.products');
 
 Route::group(['prefix' => 'pages'], function () {
 

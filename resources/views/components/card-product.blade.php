@@ -20,7 +20,7 @@
 <div {{ $attributes->merge(['class' => 'group']) }}>
 
     <div class="group flex flex-col h-auto  bg-white rounded-[8px] shadow-lg overflow-hidden py-3 relative {{ $wrapperClass }}">
-        <a href="{{ route('pages.full-page','samsung-sm-x210-galaxy-tab-a9-4gb-ram-64gb-wi-fi-navy') }}">
+        <a href="{{ route('pages.full-page',$options['slug'] ?? 'temp-slug') }}">
             <div class="group-hover:opacity-30 transition-opacity">
                 <div class="absolute top-2 right-1">
                     <span class="border rounded-[10px] text-xs text-white px-[5px] py-[3px] italic shadow-lg {{ $conditionColor }}">{{ $conditionText }}</span>
@@ -36,7 +36,7 @@
         <!-- Text + Button -->
         <div class="flex flex-col flex-1 px-[15px]  md:justify-between ">
             <!-- Text -->
-            <a href="{{ route('pages.full-page','samsung-sm-x210-galaxy-tab-a9-4gb-ram-64gb-wi-fi-navy') }}">
+            <a href="{{ route('pages.full-page', $options['slug'] ?? '') }}">
                 <div class="group-hover:opacity-30 transition-opacity">
                     <div class="space-y-[5px]">
                         <div class="flex justify-start items-center gap-2">
@@ -48,7 +48,7 @@
                             @endif
                         </div>
 
-                        <div class="text-[12px] text-slate-800 line-clamp-2">{{ $options['title'] }}</div>
+                        <div class="text-[12px] text-slate-800 line-clamp-2 min-h-[34px]">{{ $options['title'] }}</div>
                     </div>
                 </div>
             </a>
@@ -63,7 +63,8 @@
                             'data-product-id' => $options['id'],
                             'data-image' => $options['image'],
                             'data-title' => $options['title'],
-                            'data-product-price' => $options['price']
+                            'data-product-price' => $options['price'],
+                            'data-slug' => $options['slug'],
                         ];
                      @endphp
 

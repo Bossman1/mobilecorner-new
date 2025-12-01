@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use TCG\Voyager\Traits\Resizable;
@@ -119,6 +120,11 @@ class Category extends Model
         }
 
         return $ids;
+    }
+
+    public function scopeBySlug($query, $slug)
+    {
+        return $query->where('slug', $slug);
     }
 
 }

@@ -3,9 +3,9 @@
 <div>
     <div class="flex justify-between items-center">
         <h2 class="text-[17px] font-custom-bold-upper my-[20px]">
-            <a href="{{ route('pages.categories-list') }}">{{ $category->name ?? '' }}</a>
+            <a href="{{ route('pages.categories-list',$category->slug) }}">{{ $category->name ?? '' }}</a>
         </h2>
-        <a href="{{ route('pages.categories-list') }}">
+        <a href="{{ route('pages.categories-list',$category->slug) }}">
             <div class="flex justify-between items-center gap-1 group hover:text-[var(--color-main)] font-custom-regular">
                 <span class="text-sm">ყველას ნახვა</span>
                 <x-dynamic-component :component="'phosphor-arrow-square-out'" class="h-5 w-5 group-hover:text-[var(--color-main)]"/>
@@ -26,6 +26,7 @@
                                 'old_price' => $product->a_new_price,
                                 'title' => $product->title,
                                 'id' => $product->id,
+                                'slug' => $product->slug,
                           ];
                     $condition = $product->condition;
                     $favorite = rand(0, 1) ? '!bg-white !text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)]' : '!bg-[var(--color-favorite)]';

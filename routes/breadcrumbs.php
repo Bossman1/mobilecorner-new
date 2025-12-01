@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as Trail;
 
@@ -9,14 +10,22 @@ Breadcrumbs::for('home', function (Trail $trail) {
     $trail->push( __("Home"), route('home'));
 });
 
-Breadcrumbs::for('pages.categories-list', function (Trail $trail) {
+Breadcrumbs::for('pages.categories-list', function (Trail $trail, $slug = null) {
     $trail->parent('home');
-    $trail->push( __("Categories"), route('pages.categories-list'));
+    $trail->push( __("Categories"), route('pages.categories-list',$slug));
 });
 
-Breadcrumbs::for('pages.full-page', function (Trail $trail, $slug) {
+Breadcrumbs::for('discounted.products', function (Trail $trail) {
     $trail->parent('home');
-    $trail->push( __("Product"), route('pages.full-page',$slug));
+    $trail->push( __("Discount Page"), route('discounted.products'));
+});
+
+
+Breadcrumbs::for('pages.full-page', function (Trail $trail, $slug=null) {
+    $trail->parent('home');
+    $product = Product::with('category')->where('slug', $slug)->first();
+    $trail->push( __($product->category->name), route('pages.categories-list', $product->category->slug));
+    $trail->push( $product->title ?? 'Unknown', route('pages.full-page',$slug));
 });
 
 Breadcrumbs::for('pages.cart', function (Trail $trail) {
