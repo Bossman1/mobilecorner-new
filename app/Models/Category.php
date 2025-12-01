@@ -94,6 +94,30 @@ class Category extends Model
         return $parents;
     }
 
+
+    public function allParentIds()
+    {
+        $ids = collect();
+
+        $parent = $this->parent;
+        while ($parent) {
+            $ids->push($parent->id);
+            $parent = $parent->parent;
+        }
+
+        return $ids;
+    }
+
+    public function allRelatedCategoryIds()
+    {
+        return collect([$this->id])
+            ->merge($this->allParentIds())
+            ->merge($this->allCategoryIds())
+            ->unique()
+            ->values();
+    }
+
+
     public function parentsOf($categoryId)
     {
         $category = Category::find($categoryId);

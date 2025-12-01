@@ -10,11 +10,36 @@
     $brands = ['Apple', 'Samsung', 'Xiaomi', 'Huawei', 'Oppo', 'Vivo', 'Nokia', 'Realme', 'OnePlus', 'Sony', 'Asus', 'Google', 'Honor'];
     shuffle($brands);
     $favoriteFullPage = rand(0, 1) ? '!text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)] !bg-[var(--color-second-header)]' : '!bg-[var(--color-favorite)]';
+
+     $details1 = [];
+     $details2 = [];
+    if($product->attributes->isNotEmpty()){
+            $chunks = $product->attributes->chunk(9);
+        $firstEight   = $chunks->get(0); // first 8 attributes
+        $remaining    = $chunks->get(1); // all others
+
+        if(!is_null($firstEight)){
+
+             foreach ($firstEight as $k =>  $attribute){
+                $details1[$k]['name'] = $attribute->name;
+                $details1[$k]['value'] = $attribute?->attribute_values?->value . ' ' . __($attribute->unit);
+            }
+        }
+        if($remaining != null){
+              foreach ($remaining as $k =>  $attribute){
+                $details2[$k]['name'] = $attribute->name;
+                $details2[$k]['value'] = $attribute?->attribute_values?->value . ' ' . __($attribute->unit);
+            }
+        }
+    }
+
+   $colorName = $product?->color?->name ?? '';
+   $color = $product?->color?->color ?? "";
     @endphp
     <div class="container mx-auto font-custom-regular">
 
         <x-page-component position="right" class="my-[20px] !gap-[20px]"
-                              sidebar-class="bg-[var(--color-second-header)] rounded-md xl:!w-[350px] 2xl:!w-[414px] sidebar-content-class transition-all duration-300 mt-[20px]">
+                          sidebar-class="bg-[var(--color-second-header)] rounded-md xl:!w-[350px] 2xl:!w-[414px] sidebar-content-class transition-all duration-300 mt-[20px]">
             <x-slot:content>
                 @php
                     $images = json_decode($product->images, true) ?: []; // ensures array
@@ -60,43 +85,22 @@
                     </div>
                     <div class="col-span-12 md:col-span-4  font-custom-regular text-[14px]">
                         <section class="[&>*+*]:border-t [&>*+*]:border-gray-300 [&>*+*]:border-dotted">
-                            @php
-                                $details = [
-                                    ['name'=>'გრაფიკული პროცესორი','value'=>'Adreno 830'],
-                                    ['name'=>'რეზოლუცია','value'=>'QHD+'],
-                                    ['name'=>'ეკრანის ზომა','value'=>'6.90 inches'],
-                                    ['name'=>'განახლების სიხშირე','value'=>'120 Hz'],
-                                    ['name'=>'ეკრანის ტიპი','value'=>'Dynamic AMOLED 2X'],
-                                    ['name'=>'შიდა მეხსიერება','value'=>'256 GB'],
-                                    ['name'=>'ოპერატიული მეხსიერება','value'=>'12 GB'],
-                                    ['name'=>'ელემენტი','value'=>'5000 mAh'],
-                                ];
 
-                                $colors = [
-                                    ['name' => 'წითელი', 'class' => 'bg-[#f00]'],
-                                    ['name' => 'ყვითელი', 'class' => 'bg-[#ffc20d]'],
-                                    ['name' => 'მწვანე', 'class' => 'bg-[#218125]'],
-                                    ['name' => 'შავი', 'class' => 'bg-[#000]'],
-                                ];
-
-                                $randColor = $colors[rand(0,3)];
-
-                                $colorName = $randColor['name'] ?? '';
-                                $color = $randColor['class'] ?? '';
-                            @endphp
-
-                            @foreach($details as $detail)
-                                <div
-                                    class="flex justify-between items-center  px-2 py-4">
-                                    <div class="text-gray-400 font-medium">{{ $detail['name'] }}</div>
-                                    <div class="text-gray-900 font-semibold">{{ $detail['value'] }}</div>
-                                </div>
-                            @endforeach
+                            @if(!empty($details1))
+                                @foreach($details1 as $detail)
+                                    <div
+                                        class="flex justify-between items-center  px-2 py-4">
+                                        <div class="text-gray-400 font-medium">{{ $detail['name'] }}</div>
+                                        <div class="text-gray-900 font-semibold">{{ $detail['value'] }}</div>
+                                    </div>
+                                @endforeach
+                            @endif
                             <div
                                 class="flex justify-between items-center  px-2  py-4  ">
                                 <div class="text-gray-400 font-medium">ფერი</div>
                                 <div class="flex justify-start items-center gap-2">
-                                    <div class="w-5 h-5 rounded-full overflow-hidden  {{ $color }}"></div>
+                                    <div class="w-5 h-5 rounded-full overflow-hidden "
+                                         style="background: {{ $color }};"></div>
                                     <div>{{ $colorName }}</div>
                                 </div>
                             </div>
@@ -105,19 +109,29 @@
                 </div>
 
 
-                    <x-line class="!mt-[10px]" />
+                <x-line class="!mt-[10px]"/>
+                @if(trim($product->description) !=='')
+                    <section class="my-[30px]">
+                        <h2 class="text-sm font-custom-bold-upper my-[10px]">აღწერა</h2>
 
-                <section class="my-[30px]">
-                    <h2 class="text-sm font-custom-bold-upper my-[10px]">აირჩიეთ მობილურის კატეგორია</h2>
-                    <div class="flex flex-wrap justify-start items-center gap-5">
-                        <div class="flex justify-start items-center gap-2"><img alt="👏" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t57/1.5/16/1f44f.png">
-                            ვიზუალური შეფასებით B კატეგორია</div>
-                        <div class="flex justify-start items-center gap-2"><img alt="⏳" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t3e/1.5/16/23f3.png">
-                            გარანტია 6 თვე</div>
-                        <div class="flex justify-start items-center gap-2"><img alt="🔌" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t99/1.5/16/1f50c.png">
-                            აქსესუარები: ორიგინალი USB კაბელი</div>
-                    </div>
-                </section>
+                        <div class="flex flex-wrap justify-start items-center gap-5">
+                            {!! $product->description !!}
+                            {{--                        <div class="flex justify-start items-center gap-2">--}}
+                            {{--                            --}}
+                            {{--                            <img alt="👏" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t57/1.5/16/1f44f.png">--}}
+                            {{--                            ვიზუალური შეფასებით B კატეგორია--}}
+                            {{--                        </div>--}}
+                            {{--                        <div class="flex justify-start items-center gap-2">--}}
+                            {{--                            <img alt="⏳" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t3e/1.5/16/23f3.png">--}}
+                            {{--                            გარანტია 6 თვე--}}
+                            {{--                        </div>--}}
+                            {{--                        <div class="flex justify-start items-center gap-2"><img alt="🔌"--}}
+                            {{--                                                                                src="https://static.xx.fbcdn.net/images/emoji.php/v9/t99/1.5/16/1f50c.png">--}}
+                            {{--                            აქსესუარები: ორიგინალი USB კაბელი--}}
+                            {{--                        </div>--}}
+                        </div>
+                    </section>
+                @endif
 
 
                 <section class="my-[30px]">
@@ -125,7 +139,10 @@
                     <div class="flex flex-col justify-between items-center gap-5">
                         <div class="flex justify-between items-center w-full">
                             <div class="leading-[16px] flex justify-start items-center gap-1.5">
-                                <div class=" rounded-full bg-white  p-1 text-[var(--color-main)]"><x-dynamic-component :component="'phosphor-map-pin-line'" class="h-[24px] w-[24px]"/></div>
+                                <div class=" rounded-full bg-white  p-1 text-[var(--color-main)]">
+                                    <x-dynamic-component :component="'phosphor-map-pin-line'"
+                                                         class="h-[24px] w-[24px]"/>
+                                </div>
                                 <div class="flex-1">ფილიალიდან გატანა</div>
                             </div>
                             <div class="flex-1 flex items-center mx-4">
@@ -136,7 +153,9 @@
 
                         <div class="flex justify-between items-center w-full">
                             <div class="leading-[16px] flex justify-start items-center gap-1.5">
-                                <div class=" rounded-full bg-white  p-1 text-[var(--color-main)]"><x-dynamic-component :component="'phosphor-moped'" class="h-[24px] w-[24px]"/></div>
+                                <div class=" rounded-full bg-white  p-1 text-[var(--color-main)]">
+                                    <x-dynamic-component :component="'phosphor-moped'" class="h-[24px] w-[24px]"/>
+                                </div>
                                 <div class="flex-1">თბილისში მიწოდება</div>
                             </div>
                             <div class="flex-1 flex items-center mx-4">
@@ -148,7 +167,9 @@
 
                         <div class="flex justify-between items-center w-full">
                             <div class="leading-[16px] flex justify-start items-center gap-1.5">
-                                <div class=" rounded-full bg-white  p-1 text-[var(--color-main)]"><x-dynamic-component :component="'phosphor-truck'" class="h-[24px] w-[24px]"/></div>
+                                <div class=" rounded-full bg-white  p-1 text-[var(--color-main)]">
+                                    <x-dynamic-component :component="'phosphor-truck'" class="h-[24px] w-[24px]"/>
+                                </div>
                                 <div class="flex-1">რეგიონებში მიწოდება</div>
                             </div>
                             <div class="flex-1 flex items-center mx-4">
@@ -162,32 +183,22 @@
                 </section>
 
 
-                <section class="[&>*+*]:border-t [&>*+*]:border-gray-300 [&>*+*]:border-dotted">
-                    <h2 class="text-sm font-custom-bold-upper my-[10px]">დამატებითი მონაცემები</h2>
-                    @php
-                        $details = [
-                            ['name'=>'გრაფიკული პროცესორი','value'=>'Adreno 830'],
-                            ['name'=>'რეზოლუცია','value'=>'QHD+'],
-                            ['name'=>'ეკრანის ზომა','value'=>'6.90 inches'],
-                            ['name'=>'განახლების სიხშირე','value'=>'120 Hz'],
-                            ['name'=>'ეკრანის ტიპი','value'=>'Dynamic AMOLED 2X'],
-                            ['name'=>'შიდა მეხსიერება','value'=>'256 GB'],
-                            ['name'=>'ოპერატიული მეხსიერება','value'=>'12 GB'],
-                            ['name'=>'ელემენტი','value'=>'5000 mAh'],
-                        ];
-                    @endphp
+                @if(!empty($details2))
+                    <section class="[&>*+*]:border-t [&>*+*]:border-gray-300 [&>*+*]:border-dotted">
+                        <h2 class="text-sm font-custom-bold-upper my-[10px]">დამატებითი მონაცემები</h2>
 
-                    @foreach($details as $detail)
-                        <div
-                            class="flex justify-between items-center  px-2 @if($loop->index == 0) py-4  @else py-4 @endif">
-                            <div class="text-gray-400 text-sm font-medium">{{ $detail['name'] }}</div>
-                            <div class="text-gray-900 text-sm font-semibold">{{ $detail['value'] }}</div>
-                        </div>
-                    @endforeach
-                </section>
 
-                <x-line class="!mt-[10px]" />
+                        @foreach($details2 as $detail)
+                            <div
+                                class="flex justify-between items-center  px-2 @if($loop->index == 0) py-4  @else py-4 @endif">
+                                <div class="text-gray-400 text-sm font-medium">{{ $detail['name'] }}</div>
+                                <div class="text-gray-900 text-sm font-semibold">{{ $detail['value'] }}</div>
+                            </div>
+                        @endforeach
+                    </section>
+                @endif
 
+                <x-line class="!mt-[10px]"/>
 
 
             </x-slot:content>
@@ -202,7 +213,10 @@
 
 
                         <div class="flex justify-start items-center gap-2">
-                            <div class="text-[20px] text-[var(--color-main)] font-custom-bold-upper">{{ $product->a_old_price }} ₾</div>
+                            <div
+                                class="text-[20px] text-[var(--color-main)] font-custom-bold-upper">{{ $product->a_old_price }}
+                                ₾
+                            </div>
                             @if(isset($product->a_new_price) && trim($product->a_new_price) !=='')
                                 <div class="line-through text-[14px]">{{ $product->a_new_price }} ₾</div>
                             @endif
@@ -214,12 +228,18 @@
                                                  class="h-[15px] w-[15px] !text-black/80 group-hover:!text-white"/>
 
 
-                                <span class="text-[12px] @if(trim($product->stock) == 1) text-green-900 @elseif(trim($product->stock) == 2) text-red-900 @endif font-custom-bold-upper ">
-                                    @if(trim($product->stock) == 1) მარაგშია @elseif(trim($product->stock) == 2)  არ არის მარაგში @endif
+                            <span
+                                class="text-[12px] @if(trim($product->stock) == 1) text-green-900 @elseif(trim($product->stock) == 2) text-red-900 @endif font-custom-bold-upper ">
+                                    @if(trim($product->stock) == 1)
+                                    მარაგშია
+                                @elseif(trim($product->stock) == 2)
+                                    არ არის მარაგში
+                                @endif
                                 </span>
 
 
-                            <x-button size="sm" icon="phosphor-heart" class="{{ $favoriteFullPage }}" variant="primary"  />
+                            <x-button size="sm" icon="phosphor-heart" class="{{ $favoriteFullPage }}"
+                                      variant="primary"/>
                         </div>
 
                     </div>
@@ -229,14 +249,16 @@
                     <div>
                         <h2 class="text-sm font-custom-bold-upper my-[5px]">აირჩიეთ მობილურის კატეგორია</h2>
                         <div class="flex flex-col justify-between items-center gap-[7px] w-full">
-                                 @php
-                                     $radios = [
-                                       ['label'=>'A)  ახალივით მდგომარეობაში 9.5/10','icon' => 'phosphor-radio-button','checked' => true,'value' => 1],
-                                       ['label'=>'B)  მცირედი მოხმარების კვალით 8/10','icon' => 'phosphor-radio-button','value' => 2],
-                                       ['label'=>'C)  შესამჩნევი მოხმარების კვალი 6/10','icon' => 'phosphor-radio-button','value' => 3]
-                                     ]
-                                 @endphp
-                                 <x-radio-card label-class="!text-[12px]" text-position="right" iconClass="!w-[20px] !h-[20px]" name="payment_options" iconPosition="right" :options="$radios" />
+                            @php
+                                $radios = [
+                                  ['label'=>'A)  ახალივით მდგომარეობაში 9.5/10','icon' => 'phosphor-radio-button','checked' => true,'value' => 1],
+                                  ['label'=>'B)  მცირედი მოხმარების კვალით 8/10','icon' => 'phosphor-radio-button','value' => 2],
+                                  ['label'=>'C)  შესამჩნევი მოხმარების კვალი 6/10','icon' => 'phosphor-radio-button','value' => 3]
+                                ]
+                            @endphp
+                            <x-radio-card label-class="!text-[12px]" text-position="right"
+                                          iconClass="!w-[20px] !h-[20px]" name="payment_options" iconPosition="right"
+                                          :options="$radios"/>
 
                         </div>
 
@@ -247,9 +269,9 @@
                             <h2 class="text-sm font-custom-bold-upper">ონლაინ განვადება</h2>
                             <span>
                               <x-tooltip icon="phosphor-warning-circle" iconClass="!w-[19.5px] !h-[19.5px]"
-                                       text="აქ რამე ტექსტი დაიწერება"
-                                       labelClass="!text-slate-500 !text-[11px] !px-0"
-                                       contentClass="!bg-slate-700 !text-[11px] text-white whitespace-nowrap "/>
+                                         text="აქ რამე ტექსტი დაიწერება"
+                                         labelClass="!text-slate-500 !text-[11px] !px-0"
+                                         contentClass="!bg-slate-700 !text-[11px] text-white whitespace-nowrap "/>
                             </span>
                         </div>
                         <div class="flex flex-col justify-between items-center  space-y-2 mt-[5px]">
@@ -257,20 +279,23 @@
                             <div
                                 class="border border-gray-300 shadow-md w-full rounded-[4px] flex justify-center items-center bg-white">
                                 <a href="{{ route('pages.checkout') }}">
-                                    <img src="{{ asset('assets/images/TBC.png') }}" alt="" class="w-[135px] object-cover transition duration-500 hover:scale-105 ">
+                                    <img src="{{ asset('assets/images/TBC.png') }}" alt=""
+                                         class="w-[135px] object-cover transition duration-500 hover:scale-105 ">
                                 </a>
                             </div>
 
                             <div
                                 class="border border-gray-300 shadow-md w-full rounded-[4px] flex justify-center items-center bg-white">
                                 <a href="{{ route('pages.checkout') }}">
-                                    <img src="{{ asset('assets/images/boglogo.png') }}" alt="" class="w-[135px] object-cover transition duration-500 hover:scale-105 ">
+                                    <img src="{{ asset('assets/images/boglogo.png') }}" alt=""
+                                         class="w-[135px] object-cover transition duration-500 hover:scale-105 ">
                                 </a>
                             </div>
                             <div
                                 class="border border-gray-300 shadow-md w-full rounded-[4px] flex justify-center items-center bg-white">
                                 <a href="{{ route('pages.checkout') }}">
-                                    <img src="{{ asset('assets/images/credo.png') }}" alt="" class="w-[135px] object-cover transition duration-500 hover:scale-105 ">
+                                    <img src="{{ asset('assets/images/credo.png') }}" alt=""
+                                         class="w-[135px] object-cover transition duration-500 hover:scale-105 ">
                                 </a>
                             </div>
 
@@ -280,9 +305,13 @@
 
                     <x-line class="!border-t-[#dfd5d5] !my-[13px]"/>
 
-                    <div  class="flex flex-col justify-between items-center mt-[16px] gap-[7px]">
-                            <x-button on size="sm" icon="phosphor-shopping-cart" iconPosition="left" class="w-full" variant="outline" href="{{ route('pages.cart') }}" >კალათის ნახვა</x-button>
-                            <x-button size="sm" icon="phosphor-shopping-bag" iconPosition="left" class="w-full" variant="primary" href="{{ route('pages.checkout') }}" >ყიდვა</x-button>
+                    <div class="flex flex-col justify-between items-center mt-[16px] gap-[7px]">
+                        <x-button on size="sm" icon="phosphor-shopping-cart" iconPosition="left" class="w-full"
+                                  variant="outline" href="{{ route('pages.cart') }}">კალათის ნახვა
+                        </x-button>
+                        <x-button size="sm" icon="phosphor-shopping-bag" iconPosition="left" class="w-full"
+                                  variant="primary" href="{{ route('pages.checkout') }}">ყიდვა
+                        </x-button>
                     </div>
 
                 </div>
@@ -292,26 +321,32 @@
 
         </x-page-component>
 
-        <section class="grid grid-cols-1">
-            <h2 class="text-sm font-custom-bold-upper my-[10px]">მსგავსი პროდუქტები</h2>
-            <x-carousel :autoplay="true" :pause-on-hover="true"  :pagination="false" perPage="4" perPageMobile="1" perPageTablet="3">
-                @for($i = 0; $i < 15; $i++)
-                    @php
-                        $options = [
-                                'image' => asset('assets/images/temp/img1.webp'),
-                                'price' => rand(123,12338),
-                                'old_price' => rand(123,12338),
-                                'title' =>'Apple iPhone Air e-SIM | 256GB Sky Blue-'.rand(34,34565),
-                                'slug' =>'temp-slug',
-                                'id' =>'id',
-                          ];
-                    $condition = rand(0, 1) ? 'new' : 'owned';
-                    $favorite = rand(0, 1) ? '!bg-white !text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)]' : '!bg-[var(--color-favorite)]';
-                    @endphp
-                    <x-card-product :condition="$condition" :favorite="$favorite" :options="$options"/>
-                @endfor
-            </x-carousel>
-        </section>
+        @if($relatedProducts->isNotEmpty())
+            <section class="grid grid-cols-1">
+                <h2 class="text-sm font-custom-bold-upper my-[10px]">მსგავსი პროდუქტები</h2>
+                <x-carousel :autoplay="true" :pause-on-hover="true" :pagination="false" perPage="4" perPageMobile="1" perPageTablet="3" type="slider">
+
+                    @foreach($relatedProducts as $relatedProduct)
+                        @php
+                            $productImage = json_decode($relatedProduct->images)[0] ??  '';
+                            $options = [
+                                   'image' => Voyager::image($productImage),
+                                   'price' => $relatedProduct->a_old_price,
+                                   'old_price' => $relatedProduct->a_new_price,
+                                   'title' => $relatedProduct->title,
+                                   'id' => $relatedProduct->id,
+                                   'slug' => $relatedProduct->slug,
+                             ];
+                       $condition = $relatedProduct->condition;
+                       $favorite = rand(0, 1) ? '!bg-white !text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)]' : '!bg-[var(--color-favorite)]';
+                        @endphp
+                        <x-card-product :condition="$condition" :favorite="$favorite" :options="$options"/>
+                    @endforeach
+
+
+                </x-carousel>
+            </section>
+        @endif
     </div>
 @endsection
 

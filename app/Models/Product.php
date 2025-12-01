@@ -97,4 +97,28 @@ class Product extends Model
             ->withTimestamps();
     }
 
+
+    public function relatedProducts($limit = 20)
+    {
+        $category = $this->category;
+        if (!$category) {
+            return collect();
+        }
+        $categoryIds = $category->allRelatedCategoryIds();
+
+        return Product::query()
+            ->whereIn('category_id', $categoryIds)
+            ->where('id', '!=', $this->id)
+            ->where('status', 'active')
+            ->inRandomOrder()
+            ->limit($limit)
+            ->get();
+    }
+
+
+    public function color()
+    {
+        return $this->belongsTo(Color::class);
+    }
+
 }

@@ -20,7 +20,7 @@ Route::group(['prefix' => 'pages'], function () {
     Route::get('/page/{slug}',[\App\Http\Controllers\PageController::class,'getPage'])->name('pages.page');
 
 
-    Route::get('/product/{slug}',[\App\Http\Controllers\ProductController::class, 'view'])->name('pages.full-page');
+
 
 
     Route::get('/cart',[CartController::class,'index'])->name('pages.cart');
@@ -40,6 +40,7 @@ Route::group(['prefix' => 'pages'], function () {
 
 });
 
+Route::get('product/{slug}',[\App\Http\Controllers\ProductController::class, 'view'])->name('pages.full-page');
 Route::group(['prefix' => 'cart'], function () {
     Route::post('add-to-cart', [CartController::class, 'addItem'])->name('cart.add-to-cart');
 });

@@ -15,18 +15,21 @@
             <!-- Left Navigation -->
             <div class="min-w-[280px] border-r border-slate-200 p-4 bg-white">
                 <ul class="space-y-2">
-                    @foreach($menuCategories as $index => $category)
-                        <li
-                            class="cursor-pointer px-3 py-2 rounded-lg text-[15px] hover:bg-[var(--color-main)] hover:text-white transition"
-                            data-menu="{{ $index }}">
-                            {{ $category->name }}
-                        </li>
-                    @endforeach
+                    @if(isset($menuCategories))
+                        @foreach($menuCategories as $index => $category)
+                            <li
+                                class="cursor-pointer px-3 py-2 rounded-lg text-[15px] hover:bg-[var(--color-main)] hover:text-white transition"
+                                data-menu="{{ $index }}">
+                                {{ $category->name }}
+                            </li>
+                        @endforeach
+                    @endif
                 </ul>
             </div>
 
             <!-- Right Content (shared area) -->
             <div class="flex-1 p-6 bg-slate-50 rounded-r-2xl relative overflow-y-scroll">
+                @if(isset($menuCategories))
                 @foreach($menuCategories as $index => $category)
                     <div class="menu-content absolute inset-0 opacity-0 invisible hidden transition-all duration-300" data-content="{{ $index }}">
 
@@ -48,7 +51,7 @@
 
                     </div>
                 @endforeach
-
+                @endif
                 <!-- Default Placeholder -->
                 <div
                     class="menu-content-default absolute inset-0 flex flex-col justify-center items-center text-slate-500 transition-all duration-300">
