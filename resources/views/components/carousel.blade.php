@@ -182,7 +182,6 @@
                             const mainSplide = new Splide(root, { ...defaultOptions, ...optsFromData });
                             mainSplide.on('mounted resize move refresh', () => {
                                 root.querySelectorAll('.splide-custom-class-prev, .splide-custom-class-thumb-prev').forEach(el => {
-                                    console.log(el);
                                     el.innerHTML = `<svg id="prev" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
                                 });
                                 root.querySelectorAll('.splide-custom-class-next, .splide-custom-class-thumb-next').forEach(el => {

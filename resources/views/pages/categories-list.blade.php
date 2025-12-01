@@ -84,7 +84,7 @@
             const $checkboxes = $('[name="models[]"]');
 
             $searchInput.on("input", function() {
-                console.log(123123)
+                // console.log(123123)
                 const query = $(this).val().toLowerCase().trim();
 
                 $checkboxes.each(function() {

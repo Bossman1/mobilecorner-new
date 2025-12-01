@@ -212,14 +212,23 @@
                     <div class="flex justify-between items-center">
 
 
-                        <div class="flex justify-start items-center gap-2">
-                            <div
-                                class="text-[20px] text-[var(--color-main)] font-custom-bold-upper">{{ $product->a_old_price }}
-                                ₾
+                        <div id="price-wrapper" class="flex justify-start items-center gap-2 relative">
+
+                            <!-- Loader (hidden by default) -->
+                            <div id="price-loader" class="hidden absolute inset-0 flex items-center gap-2">
+                                <div class="h-6 w-12 bg-gray-300 animate-pulse rounded"></div>
+                                <div class="h-4 w-10 bg-gray-300 animate-pulse rounded"></div>
                             </div>
-                            @if(isset($product->a_new_price) && trim($product->a_new_price) !=='')
-                                <div class="line-through text-[14px]">{{ $product->a_new_price }} ₾</div>
-                            @endif
+
+                            <!-- Actual price elements -->
+                            <div class="flex items-center gap-2" id="price-content">
+                                @if(isset($product->a_new_price) && trim($product->a_new_price) !== '')
+                                    <div class="text-[20px] text-[var(--color-main)] font-custom-bold-upper" data-new-price>{{ $product->a_new_price }} ₾ </div>
+                                    <div class="text-[14px] text-[var(--color-main)] font-custom-bold-upper line-through" data-old-price>{{ $product->a_old_price }} ₾ </div>
+                                @else
+                                    <div class="text-[20px] text-[var(--color-main)] font-custom-bold-upper" data-old-price>{{ $product->a_old_price }} ₾ </div>
+                                @endif
+                            </div>
 
                         </div>
 
@@ -250,15 +259,50 @@
                         <h2 class="text-sm font-custom-bold-upper my-[5px]">აირჩიეთ მობილურის კატეგორია</h2>
                         <div class="flex flex-col justify-between items-center gap-[7px] w-full">
                             @php
-                                $radios = [
-                                  ['label'=>'A)  ახალივით მდგომარეობაში 9.5/10','icon' => 'phosphor-radio-button','checked' => true,'value' => 1],
-                                  ['label'=>'B)  მცირედი მოხმარების კვალით 8/10','icon' => 'phosphor-radio-button','value' => 2],
-                                  ['label'=>'C)  შესამჩნევი მოხმარების კვალი 6/10','icon' => 'phosphor-radio-button','value' => 3]
-                                ]
+//                                $radios = [
+//                                  ['label'=>'A)  ახალივით მდგომარეობაში 9.5/10','icon' => 'phosphor-radio-button','checked' => true,'value' => 1],
+//                                  ['label'=>'B)  მცირედი მოხმარების კვალით 8/10','icon' => 'phosphor-radio-button','value' => 2],
+//                                  ['label'=>'C)  შესამჩნევი მოხმარების კვალი 6/10','icon' => 'phosphor-radio-button','value' => 3]
+//                                ]
+//
+
+                            $conditions = [
+                                1 => ['label' => 'A)  ახალივით მდგომარეობაში 9.5/10', 'field' => 'a_old_price'],
+                                2 => ['label' => 'B)  მცირედი მოხმარების კვალით 8/10', 'field' => 'b_old_price'],
+                                3 => ['label' => 'C)  შესამჩნევი მოხმარების კვალი 6/10', 'field' => 'c_old_price'],
+                            ];
+
+                            $radios = [];
+                            $firstAdded = false;
+
+                            foreach ($conditions as $value => $data) {
+                                if (trim($product->{$data['field']}) !== '') {
+
+                                    $item = [
+                                        'label' => $data['label'],
+                                        'icon'  => 'phosphor-radio-button',
+                                        'value' => $value
+                                    ];
+
+
+                                    if (!$firstAdded) {
+                                        $item['checked'] = true;
+                                        $firstAdded = true;
+                                    }
+
+                                    $radios[] = $item;
+                                }
+                            }
+
+
+
+
+
+
                             @endphp
                             <x-radio-card label-class="!text-[12px]" text-position="right"
                                           iconClass="!w-[20px] !h-[20px]" name="payment_options" iconPosition="right"
-                                          :options="$radios"/>
+                                          :options="$radios" :ajax="true"  :ajax="true"  :dataAttributes="['data-radio-ajax' => true]"   />
 
                         </div>
 
@@ -350,3 +394,61 @@
     </div>
 @endsection
 
+
+
+@push('js')
+
+    <script>
+        $(function (){
+
+           $(document).on('click', '[data-radio-ajax]', function (e){
+
+               let $this = $(this);
+               let $id = {{ $product->id }};
+               let $optionId = $this.val();
+
+               $.ajax({
+                   url: '{{ route('ajax.call') }}',
+                   type: 'POST',
+                   data: {
+                       action: 'getPriceById',
+                       value:{id:$id,optionId:$optionId },
+                       _token: $('meta[name="csrf-token"]').attr('content')
+                   },
+                   beforeSend: function () {
+                       // Show loader, hide prices
+                       $('#price-content').addClass('opacity-0');
+                       $('#price-loader').removeClass('hidden');
+                   },
+                   success: function (response) {
+
+
+                           if(response && response.success === true){
+                               console.log(response);
+                               let new_price_wrp =  $("[data-new-price]");
+                               let old_price_wrp =  $("[data-old-price]");
+
+                               if(response.new_price && response.old_price){
+                                   new_price_wrp.text(response.new_price + ' ₾')
+                                   old_price_wrp.text(response.old_price + ' ₾')
+                               }else if(response.old_price){
+                                   old_price_wrp.text("");
+                                   new_price_wrp.text(response.old_price + ' ₾')
+                               }
+
+
+                               window.applyRadioUI($this);
+                           }
+
+                   },
+                   complete: function () {
+                       // Hide loader, show updated prices
+                       $('#price-loader').addClass('hidden');
+                       $('#price-content').removeClass('opacity-0');
+                   }
+               });
+           })
+
+        });
+    </script>
+@endpush

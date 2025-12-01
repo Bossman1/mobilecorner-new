@@ -15,6 +15,7 @@
     'options' => [],
     'textPosition' => 'bottom', // bottom | right
     'textClass' => '', // bottom | right
+    'ajax' => false
 ])
 
 @if(is_array($options) && !empty($options))
@@ -96,7 +97,14 @@
     $(document).ready(function() {
         $('[data-radio-input]').on('change', function() {
             // Get the radio group name
-            const name = $(this).attr('name');
+            let $this = $(this);
+            const name = $this.attr('name');
+
+            @if($ajax)
+                return;
+           @endif
+
+
 
             // Reset all labels in this group
             $(`input[name="${name}"][data-radio-input]`).each(function() {
@@ -115,12 +123,15 @@
 
             if ($selectedLabel.length) {
                 $selectedLabel.removeClass('bg-white hover:bg-[var(--color-main-hover-bank-cards)]').addClass('bg-[var(--color-main)] text-white');
-                console.log(2)
+
 
             }
             $('[data-label-text]').removeClass('text-white');
             $selectedLabelText.removeClass('text-slate-800')
                 .addClass('text-white');
+
+
+
 
         });
     });

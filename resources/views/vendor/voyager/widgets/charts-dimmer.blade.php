@@ -40,7 +40,7 @@
         document.getElementById('downloadOfferReportBtn').addEventListener('click', function () {
             var details = {!! $offerData['details']->toJson() !!};
             var csv = 'Offer ID,Project name,ID - Developer,ID - User,Offer Status,Created At\n';
-            console.log(details);
+            // console.log(details);
             details.forEach(function(item){
 
                 var projectName = '';
@@ -50,7 +50,7 @@
                     } catch(e) {
                         projectName = item.project.name;
                     }
-                    console.log(projectName.ka);
+                    // console.log(projectName.ka);
                 }
 
 

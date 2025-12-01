@@ -162,7 +162,7 @@ $(function () {
             let price = parseFloat($(this).find('.flex-1 > div:nth-child(2)').text().replace(/[^\d\.]/g, ''));
             newTotalPrice += price * qty;
         });
-        console.log(newTotalPrice);
+        // console.log(newTotalPrice);
         changePriceInCartBtn(calculateCartTotals());
         updateCartItemCount();
     });
@@ -204,7 +204,7 @@ $(function () {
 
             newCartTotal += itemSubtotal;
         });
-        console.log(calculateCartTotals());
+        // console.log(calculateCartTotals());
         // Update cart UI price
         changePriceInCartBtn(calculateCartTotals());
         updateCartItemCount();
@@ -255,7 +255,7 @@ $(function () {
     window.updateCartItemCount = function updateCartItemCount() {
         let cart = JSON.parse(localStorage.getItem("cart")) || {};
         let countItems = Object.keys(cart).length;
-        console.log(countItems);
+        // console.log(countItems);
         if (countItems > 0) {
             $("#cart-count, #m-cart-count").text(countItems).removeClass("invisible opacity-0").addClass("opacity-100");
         } else {

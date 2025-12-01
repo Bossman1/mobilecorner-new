@@ -7,7 +7,7 @@
         const uniqueMapId = "{{ $mapId }}";
 
         window['initMap_' + uniqueMapId] = function() {
-            console.log("initMap called for:", uniqueMapId);
+            // console.log("initMap called for:", uniqueMapId);
 
             const map = new google.maps.Map(document.getElementById(uniqueMapId), {
                 zoom: {{ $zoom }},
@@ -200,7 +200,7 @@
 
                     baseImg.onerror = reject;
                     baseImg.src = basePinUrl;
-                    console.log(basePinUrl);
+                    // console.log(basePinUrl);
                 });
             }
 

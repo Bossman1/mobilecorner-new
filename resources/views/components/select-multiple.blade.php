@@ -38,7 +38,7 @@
             $('select[multiple][data-hs-select]').on('change', function () {
                 const $select = $(this);
                 const values = $select.val() || [];
-                console.log(values);
+                // console.log(values);
                 const $toggleBtn = $('.block-select-btn');
                 const placeholder = $select.attr('data-hs-select')?.match(/"placeholder":\s*"([^"]+)"/)?.[1] || 'Select multiple options...';
                 if (values.length === 0) {
