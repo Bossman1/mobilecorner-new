@@ -259,12 +259,6 @@
                         <h2 class="text-sm font-custom-bold-upper my-[5px]">აირჩიეთ მობილურის კატეგორია</h2>
                         <div class="flex flex-col justify-between items-center gap-[7px] w-full">
                             @php
-//                                $radios = [
-//                                  ['label'=>'A)  ახალივით მდგომარეობაში 9.5/10','icon' => 'phosphor-radio-button','checked' => true,'value' => 1],
-//                                  ['label'=>'B)  მცირედი მოხმარების კვალით 8/10','icon' => 'phosphor-radio-button','value' => 2],
-//                                  ['label'=>'C)  შესამჩნევი მოხმარების კვალი 6/10','icon' => 'phosphor-radio-button','value' => 3]
-//                                ]
-//
 
                             $conditions = [
                                 1 => ['label' => 'A)  ახალივით მდგომარეობაში 9.5/10', 'field' => 'a_old_price'],
@@ -293,11 +287,6 @@
                                     $radios[] = $item;
                                 }
                             }
-
-
-
-
-
 
                             @endphp
                             <x-radio-card label-class="!text-[12px]" text-position="right"
