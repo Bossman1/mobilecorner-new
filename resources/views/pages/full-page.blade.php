@@ -227,6 +227,7 @@
                                     <div class="text-[14px] text-[var(--color-main)] font-custom-bold-upper line-through" data-old-price>{{ $product->a_old_price }} ₾ </div>
                                 @else
                                     <div class="text-[20px] text-[var(--color-main)] font-custom-bold-upper" data-old-price>{{ $product->a_old_price }} ₾ </div>
+                                    <div class="text-[14px] text-[var(--color-main)] font-custom-bold-upper line-through" data-new-price></div>
                                 @endif
                             </div>
 
@@ -395,6 +396,10 @@
                let $this = $(this);
                let $id = {{ $product->id }};
                let $optionId = $this.val();
+               let new_price_wrp =  $("[data-new-price]");
+               let old_price_wrp =  $("[data-old-price]");
+
+
 
                $.ajax({
                    url: '{{ route('ajax.call') }}',
@@ -413,16 +418,15 @@
 
 
                            if(response && response.success === true){
-                               console.log(response);
-                               let new_price_wrp =  $("[data-new-price]");
-                               let old_price_wrp =  $("[data-old-price]");
+
 
                                if(response.new_price && response.old_price){
-                                   new_price_wrp.text(response.new_price + ' ₾')
-                                   old_price_wrp.text(response.old_price + ' ₾')
+                                   new_price_wrp.text(response.new_price + ' ₾');
+                                   old_price_wrp.text(response.old_price + ' ₾');
                                }else if(response.old_price){
                                    old_price_wrp.text("");
-                                   new_price_wrp.text(response.old_price + ' ₾')
+                                   old_price_wrp.text(response.old_price + ' ₾');
+                                   new_price_wrp.text('');
                                }
 
 
