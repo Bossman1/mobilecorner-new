@@ -48,7 +48,7 @@
         data-thumb-per-page="{{ $thumbPerPage }}"
         data-thumb-per-page-mobile="{{ $thumbPerPageMobile }}"
         data-thumb-per-page-tablet="{{ $thumbPerPageTablet }}"
-        style="padding-top: 12px; width: 80%; margin: 0 auto;"
+        style="padding-top: 12px;  width: 80%; margin: 0 auto;"
     >
         <div class="splide__track">
             <ul class="splide__list">

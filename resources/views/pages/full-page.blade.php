@@ -356,7 +356,7 @@
         @if($relatedProducts->isNotEmpty())
             <section class="grid grid-cols-1">
                 <h2 class="text-sm font-custom-bold-upper my-[10px]">მსგავსი პროდუქტები</h2>
-                <x-carousel :autoplay="true" :pause-on-hover="true" :pagination="false" perPage="4" perPageMobile="1" perPageTablet="3" type="slider">
+                <x-carousel :autoplay="true" :pause-on-hover="true" :pagination="false" perPage="4" perPageMobile="1" perPageTablet="3" type="slider" splideTrackClass="padding-bottom:23px">
 
                     @foreach($relatedProducts as $relatedProduct)
                         @php

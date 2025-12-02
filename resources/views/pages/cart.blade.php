@@ -130,7 +130,7 @@
         <section class="grid grid-cols-1">
             <h2 class="text-sm font-custom-bold-upper my-[10px]">ახალი დამატებული პროდუქტები</h2>
             <x-carousel :autoplay="true" :pause-on-hover="true" :pagination="false" perPage="4"
-                        perPageMobile="1" perPageTablet="3">
+                        perPageMobile="1" perPageTablet="3" splideTrackClass="padding-bottom:23px">
 
                 @foreach($newestProducts as $newestProduct)
                     @php

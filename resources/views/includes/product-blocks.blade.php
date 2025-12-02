@@ -16,7 +16,7 @@
 
 
     <div>
-        <x-carousel  :pagination="false" perPage="6" perPageMobile="2" perPageTablet="3" type="slider">
+        <x-carousel  :pagination="false" perPage="6" perPageMobile="2" perPageTablet="3" type="slider" splideTrackClass="padding-bottom:23px">
             @foreach($category->all_products  as $product)
                     @php
                         $productImage = json_decode($product->images)[0] ??  '';
