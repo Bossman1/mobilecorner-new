@@ -1,16 +1,6 @@
 @extends('layouts.app')
 @section('content')
     @php
-        $options = [
-           '1' => 'A ახალივით მდგომარეობაში 9.5/10',
-           '2' => 'B მცირედი მოხმარების კვალით 8/10',
-           '3' => 'C შესამჩნევი მოხმარების კვალი 6/10',
-           ];
-
-    $brands = ['Apple', 'Samsung', 'Xiaomi', 'Huawei', 'Oppo', 'Vivo', 'Nokia', 'Realme', 'OnePlus', 'Sony', 'Asus', 'Google', 'Honor'];
-    shuffle($brands);
-    $favoriteFullPage = rand(0, 1) ? '!text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)] !bg-[var(--color-second-header)]' : '!bg-[var(--color-favorite)]';
-
      $details1 = [];
      $details2 = [];
     if($product->attributes->isNotEmpty()){
@@ -116,19 +106,7 @@
 
                         <div class="flex flex-wrap justify-start items-center gap-5">
                             {!! $product->description !!}
-                            {{--                        <div class="flex justify-start items-center gap-2">--}}
-                            {{--                            --}}
-                            {{--                            <img alt="👏" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t57/1.5/16/1f44f.png">--}}
-                            {{--                            ვიზუალური შეფასებით B კატეგორია--}}
-                            {{--                        </div>--}}
-                            {{--                        <div class="flex justify-start items-center gap-2">--}}
-                            {{--                            <img alt="⏳" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t3e/1.5/16/23f3.png">--}}
-                            {{--                            გარანტია 6 თვე--}}
-                            {{--                        </div>--}}
-                            {{--                        <div class="flex justify-start items-center gap-2"><img alt="🔌"--}}
-                            {{--                                                                                src="https://static.xx.fbcdn.net/images/emoji.php/v9/t99/1.5/16/1f50c.png">--}}
-                            {{--                            აქსესუარები: ორიგინალი USB კაბელი--}}
-                            {{--                        </div>--}}
+
                         </div>
                     </section>
                 @endif
@@ -238,8 +216,25 @@
                                 @endif
                             </span>
 
+                            <x-button
+                                size="sm"
+                                icon="phosphor-heart"
+                                data-id="{{ $options['id'] ?? '' }}"
+                                data-btn-favorites
+                                class="hidden md:block not-fav relative !pr-[8px]"
+                                variant="primary"
+                                iconCustomClass=" !mr-[0]"
+                            >
+                                <span class="btn-text"></span>
+                                <span class="spinner absolute inset-0 flex items-center justify-center hidden">
+                                    <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                                    </svg>
+                                </span>
+                            </x-button>
 
-                            <x-button size="sm" icon="phosphor-heart" class="{{ $favoriteFullPage }}" variant="primary"/>
+
                         </div>
 
                     </div>

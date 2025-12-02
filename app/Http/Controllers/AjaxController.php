@@ -92,6 +92,7 @@ class AjaxController extends Controller
         $ids = $request->value ?? [];
 
         $products = Product::whereIn('id', $ids)
+            ->orderByDesc('created_at')
             ->paginate(config('siteconfig.perPage')); // amount per page
 
         $html = view('ajax-content.favorites', [
