@@ -219,7 +219,7 @@
                             <x-button
                                 size="sm"
                                 icon="phosphor-heart"
-                                data-id="{{ $options['id'] ?? '' }}"
+                                data-id="{{ $product->id ?? '' }}"
                                 data-btn-favorites
                                 class="hidden md:block not-fav relative !pr-[8px]"
                                 variant="primary"
