@@ -24,16 +24,17 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet"/>
-    <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css"
-    />
+{{--    <link--}}
+{{--        rel="stylesheet"--}}
+{{--        type="text/css"--}}
+{{--        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css"--}}
+{{--    />--}}
     <!-- Styles / Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="/assets/js/jquery-3.7.1.min.js"></script>
     <script src="/assets/js/jquery.easing.min.js"></script>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/toastr.min.css">

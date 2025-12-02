@@ -177,9 +177,8 @@
                                     'slug' => 'test-slug'
                               ];
                         $condition = rand(0, 1) ? 'new' : 'owned';
-                        $favorite = rand(0, 1) ? '!bg-white !text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)]' : '!bg-[var(--color-favorite)]';
-                        @endphp
-                        <x-card-product :condition="$condition" :favorite="$favorite" :options="$options"/>
+                         @endphp
+                        <x-card-product :condition="$condition"  :options="$options"/>
                     @endfor
                 </x-carousel>
             </section>

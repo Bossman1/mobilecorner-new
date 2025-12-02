@@ -69,7 +69,24 @@
                      @endphp
 
                     <x-button size="sm" icon="phosphor-shopping-cart" class="w-full flex-1 add-to-cart-btn" iconPosition="left" variant="primary" :options="$cardOptions">დამატება</x-button>
-                    <x-button size="sm" icon="phosphor-heart" class="{{ $favorite }} hidden md:block" variant="primary"  />
+
+                    <x-button
+                        size="sm"
+                        icon="phosphor-heart"
+                        data-id="{{ $options['id'] ?? '' }}"
+                        data-btn-favorites
+                        class="hidden md:block not-fav relative !pr-[8px]"
+                        variant="primary"
+                        iconCustomClass=" !mr-[0]"
+                    >
+                        <span class="btn-text"></span>
+                        <span class="spinner absolute inset-0 flex items-center justify-center hidden">
+                            <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                            </svg>
+                        </span>
+                    </x-button>
                 </div>
 
             </div>

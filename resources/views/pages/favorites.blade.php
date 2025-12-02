@@ -1,15 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    @php
-        $optionsFilter = [
-           '1' => 'ფილტრი',
-           '2' => 'ფილტრი',
-           '3' => 'ფილტრი',
-           ];
 
-    $brands = ['Apple', 'Samsung', 'Xiaomi', 'Huawei', 'Oppo', 'Vivo', 'Nokia', 'Realme', 'OnePlus', 'Sony', 'Asus', 'Google', 'Honor'];
-    shuffle($brands);
-    @endphp
     <div class="container mx-auto font-custom-regular">
 
         <div class="mt-[32px]">
@@ -20,26 +11,14 @@
                 </div>
             </div>
 
-
-            <div class="grid grid-cols-2 md:!grid-cols-3 xl:!grid-cols-4 gap-6">
-                @for($i = 0; $i < 12; $i++)
-                    @php
-                        $options = [
-                                'image' => asset('assets/images/temp/img1.webp'),
-                                'price' => rand(123,12338),
-                                'title' =>'Apple iPhone Air e-SIM | 256GB Sky Blue-'.rand(34,34565),
-                          ];
-                    $condition = rand(0, 1) ? 'new' : 'owned';
-                    $favorite = rand(0, 1) ? '!bg-white !text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)]' : '!bg-[var(--color-favorite)]';
-                    @endphp
-                    <x-card-product wrapper-class="!shadow-[0_0_15px_rgba(0,0,0,0.15)]" :condition="$condition" :favorite="$favorite" :options="$options"/>
-                @endfor
+<div class="relative">
+            <div id="favorite-wrapper" class="grid grid-cols-2 md:!grid-cols-3 xl:!grid-cols-4 gap-6"></div>
+            <div id="favorites-preloader" class="absolute inset-0 flex items-center justify-center hidden">
+                <div class="w-12 h-12 rounded-full animate-spin border-4 border-t-transparent border-b-[#7961b7] border-l-[#9f7aea] border-r-[#c4b5fd]"></div>
             </div>
-
+</div>
             {{--pagination wrapper start--}}
-            <div class="pagination-wrapper text-center my-[16px] md:my-[38px] md:h-[48px] md:py-[12px]">
-                pagination here
-            </div>
+            <div class="pagination-wrapper text-center my-[16px] md:my-[38px] md:h-[48px] md:py-[12px]"></div>
             {{--pagination wrapper end--}}
         </div>
     </div>
@@ -48,30 +27,10 @@
 
 @push('js')
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const searchInput = document.getElementById("filter-search-brand");
-            const checkboxes = document.querySelectorAll('[name="models[]"]');
 
-            searchInput.addEventListener("input", function () {
-                const query = this.value.toLowerCase().trim();
+           $(function (){
+               window.loadFavoritesOnPage();
+           });
 
-                checkboxes.forEach(input => {
-                    // outer wrapper div that wraps the x-checkbox component
-                    const outerWrapper = input.closest('x-checkbox, div')?.parentElement || input.closest('div');
-
-                    // find label inside the checkbox component
-                    const labelEl = input.closest("div").querySelector("label");
-                    const labelText = labelEl ? labelEl.textContent.toLowerCase().trim() : "";
-
-                    if (labelText.includes(query)) {
-                        outerWrapper.style.display = "";
-                    } else {
-                        outerWrapper.style.display = "none";
-                    }
-                });
-            });
-        });
     </script>
-
-
 @endpush

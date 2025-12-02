@@ -51,9 +51,8 @@
                                 'slug' => $product->slug,
                               ];
                             $condition = $product->condition;
-                            $favorite = rand(0, 1) ? '!bg-white !text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)]' : '!bg-[var(--color-favorite)]';
-                        @endphp
-                        <x-card-product wrapper-class="!shadow-[0_0_15px_rgba(0,0,0,0.15)]" :condition="$condition" :favorite="$favorite" :options="$options"/>
+                         @endphp
+                        <x-card-product wrapper-class="!shadow-[0_0_15px_rgba(0,0,0,0.15)]" :condition="$condition"  :options="$options"/>
                     @endforeach
 
 

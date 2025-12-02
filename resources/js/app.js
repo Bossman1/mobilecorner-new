@@ -9,6 +9,7 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import './scripts/header.js'
 import './scripts/cart.js'
 import './scripts/mobile.js'
+import './scripts/favorite.js'
 import './global.js'
 Fancybox.bind("[data-fancybox]", {
     // Custom options

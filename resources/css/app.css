@@ -104,3 +104,29 @@ input[type=number] {
 .splide__pagination__page {
     @apply !bg-[var(--color-main-hover)]  w-[6px] h-[6px] rounded-[32px];
 }
+
+
+.is-fav {
+    @apply  !bg-[var(--color-favorite)] !text-white
+
+}
+
+.not-fav {
+    @apply !bg-white !text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)]
+}
+
+.spinner {
+    pointer-events: none;
+}
+
+
+.is-fav .btn-text {
+    display: none;
+}
+
+.not-fav .btn-text {
+    display: inline;
+}
+.fav-btn {
+    transition: background-color 0.3s, color 0.3s;
+}

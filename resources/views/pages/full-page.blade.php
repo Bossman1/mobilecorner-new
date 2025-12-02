@@ -362,9 +362,9 @@
                                    'slug' => $relatedProduct->slug,
                              ];
                        $condition = $relatedProduct->condition;
-                       $favorite = rand(0, 1) ? '!bg-white !text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)]' : '!bg-[var(--color-favorite)]';
+
                         @endphp
-                        <x-card-product :condition="$condition" :favorite="$favorite" :options="$options"/>
+                        <x-card-product :condition="$condition" :options="$options"/>
                     @endforeach
 
 

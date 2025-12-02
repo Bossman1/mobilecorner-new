@@ -22,6 +22,7 @@ class AjaxController extends Controller
             'getAttributesValue' => $this->getAttributesValue($request),
             'deleteProductAttribute' => $this->deleteProductAttribute($request),
             'getPriceById' => $this->getPriceById($request),
+            'getFavoriteContent' => $this->getFavoriteContent($request),
             default => response()->json(['error' => 'Invalid action'], 400),
         };
     }
@@ -85,5 +86,30 @@ class AjaxController extends Controller
 
 
     }
+
+    private function getFavoriteContent(Request $request)
+    {
+        $ids = $request->value ?? [];
+
+        $products = Product::whereIn('id', $ids)
+            ->paginate(config('siteconfig.perPage')); // amount per page
+
+        $html = view('ajax-content.favorites', [
+            'products' => $products
+        ])->render();
+
+        $pagination = view('ajax-content.pagination', [
+            'paginator' => $products
+        ])->render();
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'html' => $html,
+                'pagination' => $pagination
+            ]
+        ]);
+    }
+
 
 }
