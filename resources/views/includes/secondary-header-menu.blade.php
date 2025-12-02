@@ -20,7 +20,7 @@
                             <li
                                 class="cursor-pointer px-3 py-2 rounded-lg text-[15px] hover:bg-[var(--color-main)] hover:text-white transition"
                                 data-menu="{{ $index }}">
-                                {{ $category->name }}
+                                <a href="{{ route('pages.categories-list',$category->slug ) }}" >{{ $category->name }}</a>
                             </li>
                         @endforeach
                     @endif
@@ -36,7 +36,7 @@
                         <div class="grid grid-cols-3 gap-3 p-[15px]">
                             <div class="col-span-3"> <x-line :text="$category->name"  /> </div>
                             @foreach($category->children as $child)
-                                <a href="">
+                                <a href="{{ route('pages.categories-list',$child->slug ) }}">
                                     <div
                                         class="relative border border-slate-200 rounded-xl hover:shadow-md transition p-2 flex flex-col items-center text-center bg-white w-[183px] h-[183px] overflow-hidden">
                                         <img src="{{ Voyager::image($child->getThumbnail($child->images, 'small')) }}" alt="product"

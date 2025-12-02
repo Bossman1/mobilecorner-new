@@ -43,12 +43,24 @@ class AppServiceProvider extends ServiceProvider
             // Recursive function to attach children and merge products
             $attachChildren = function ($category) use (&$attachChildren, $childrenMap) {
                 $category->children = collect($childrenMap[$category->id] ?? []);
-                $category->all_products = collect($category->products ?? []);
+
+                // base products
+                $category->all_products = collect($category->products ?? [])
+                    ->sortByDesc('created_at');
 
                 foreach ($category->children as $child) {
                     $attachChildren($child);
-                    $category->all_products = $category->all_products->merge($child->all_products);
+
+                    // merge child products
+                    $category->all_products = $category->all_products
+                        ->merge($child->all_products)
+                        ->sortByDesc('created_at');
                 }
+
+                // LIMIT products for this category (example: 20)
+                $category->all_products = $category->all_products
+                    ->take(12)
+                    ->values();
             };
 
             foreach ($homePageCategories as $cat) {

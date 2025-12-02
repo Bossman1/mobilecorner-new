@@ -173,6 +173,8 @@
                                     'image' => asset('assets/images/temp/img1.webp'),
                                     'price' => rand(123,12338),
                                     'title' =>'Apple iPhone Air e-SIM | 256GB Sky Blue-'.rand(34,34565),
+                                    'id' =>  uniqid(),
+                                    'slug' => 'test-slug'
                               ];
                         $condition = rand(0, 1) ? 'new' : 'owned';
                         $favorite = rand(0, 1) ? '!bg-white !text-slate-500 hover:!text-white hover:!bg-[var(--color-favorite)]' : '!bg-[var(--color-favorite)]';

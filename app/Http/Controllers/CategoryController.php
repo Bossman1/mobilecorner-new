@@ -18,9 +18,7 @@ class CategoryController extends Controller
             abort(404);
         }
 
-        $subcategoryIds = $category->children->pluck('id')->toArray();
-        $subcategoryIds[] = $category->id;
-
+        $subcategoryIds = $category->allCategoryIds();
 
 
         $productsQuery = Product::select('category_id', 'id', 'slug', 'title', 'a_old_price', 'a_new_price', 'images')->whereIn('category_id', $subcategoryIds)

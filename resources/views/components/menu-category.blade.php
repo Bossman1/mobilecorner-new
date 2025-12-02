@@ -3,7 +3,7 @@
 <li class="relative group hover:bg-[var(--color-main-hover)] hover:text-white transition-colors duration-200 flex items-center justify-between mx-[12px] hover:rounded-[10px]">
 
     {{-- Main category button --}}
-    <a href="" class="flex-1 p-3 pl-1 flex items-center gap-1.5">
+    <a href="{{ route('pages.categories-list',$category->slug) }}" class="flex-1 p-3 pl-1 flex items-center gap-1.5">
         @php
             if ($category->icons){
                 $icon =  'phosphor-'.$category->icons;
@@ -34,7 +34,7 @@
                 @foreach($category->children as $child)
                     <div>
                         <h3 class="font-semibold text-[16px] text-[var(--color-main)] mb-3 border-b border-slate-200 pb-2">
-                            {{ $child->name }}
+                            <a href="{{ route('pages.categories-list',$child->slug) }}">{{ $child->name }}</a>
                         </h3>
 
                         {{-- Sub-child levels --}}
@@ -42,7 +42,7 @@
                             <ul class="space-y-1">
                                 @foreach($child->children as $sub)
                                     <li>
-                                        <a href=""
+                                        <a href="{{ route('pages.categories-list',$sub->slug) }}"
                                            class="block text-[14px] text-gray-700 hover:text-[var(--color-main)] transition-colors">
                                             {{ $sub->name }}
                                         </a>
