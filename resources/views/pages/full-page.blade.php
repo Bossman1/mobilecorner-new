@@ -222,34 +222,24 @@
 
                             <!-- Actual price elements -->
                             <div class="flex items-center gap-2" id="price-content">
-                                @if(isset($product->a_new_price) && trim($product->a_new_price) !== '')
-                                    <div class="text-[20px] text-[var(--color-main)] font-custom-bold-upper" data-new-price>{{ $product->a_new_price }} ₾ </div>
-                                    <div class="text-[14px] text-[var(--color-main)] font-custom-bold-upper line-through" data-old-price>{{ $product->a_old_price }} ₾ </div>
-                                @else
-                                    <div class="text-[20px] text-[var(--color-main)] font-custom-bold-upper" data-old-price>{{ $product->a_old_price }} ₾ </div>
-                                    <div class="text-[14px] text-[var(--color-main)] font-custom-bold-upper line-through" data-new-price></div>
-                                @endif
+                                <div class="text-[20px] text-[var(--color-main)] font-custom-bold-upper" data-old-price>{{ trim($product->a_new_price) != '' ? $product->a_new_price : $product->a_old_price }} ₾ </div>
+                                <div class="text-[14px] text-[var(--color-main)] font-custom-bold-upper line-through @if(trim($product->a_new_price) != '') opacity-100 @else opacity-0 @endif " data-new-price>{{ $product->a_old_price }} ₾ </div>
                             </div>
 
                         </div>
 
                         <div class="flex justify-start items-center gap-2">
-                            <x-dynamic-component :component="'phosphor-warehouse'"
-                                                 class="h-[15px] w-[15px] !text-black/80 group-hover:!text-white"/>
-
-
-                            <span
-                                class="text-[12px] @if(trim($product->stock) == 1) text-green-900 @elseif(trim($product->stock) == 2) text-red-900 @endif font-custom-bold-upper ">
-                                    @if(trim($product->stock) == 1)
+                            <x-dynamic-component :component="'phosphor-warehouse'" class="h-[15px] w-[15px] !text-black/80 group-hover:!text-white"/>
+                            <span class="text-[12px] @if(trim($product->stock) == 1) text-green-900 @elseif(trim($product->stock) == 2) text-red-900 @endif font-custom-bold-upper ">
+                                @if(trim($product->stock) == 1)
                                     მარაგშია
                                 @elseif(trim($product->stock) == 2)
                                     არ არის მარაგში
                                 @endif
-                                </span>
+                            </span>
 
 
-                            <x-button size="sm" icon="phosphor-heart" class="{{ $favoriteFullPage }}"
-                                      variant="primary"/>
+                            <x-button size="sm" icon="phosphor-heart" class="{{ $favoriteFullPage }}" variant="primary"/>
                         </div>
 
                     </div>
@@ -399,8 +389,6 @@
                let new_price_wrp =  $("[data-new-price]");
                let old_price_wrp =  $("[data-old-price]");
 
-
-
                $.ajax({
                    url: '{{ route('ajax.call') }}',
                    type: 'POST',
@@ -413,22 +401,27 @@
                        // Show loader, hide prices
                        $('#price-content').addClass('opacity-0');
                        $('#price-loader').removeClass('hidden');
+                       new_price_wrp.addClass('opacity-0');
+
                    },
                    success: function (response) {
 
-
                            if(response && response.success === true){
+                               old_price_wrp.text("");
+                               new_price_wrp.text("");
 
-
-                               if(response.new_price && response.old_price){
+                               if(response.old_price && response.new_price){
+                                   old_price_wrp.text(response.new_price + ' ₾');
+                                   new_price_wrp.text(response.old_price + ' ₾');
+                                   new_price_wrp.removeClass('opacity-0');
+                               }
+                               if(response.new_price && !response.old_price){
                                    new_price_wrp.text(response.new_price + ' ₾');
-                                   old_price_wrp.text(response.old_price + ' ₾');
-                               }else if(response.old_price){
-                                   old_price_wrp.text("");
-                                   old_price_wrp.text(response.old_price + ' ₾');
-                                   new_price_wrp.text('');
                                }
 
+                               if(response.old_price &&  !response.new_price){
+                                   old_price_wrp.text(response.old_price + ' ₾');
+                               }
 
                                window.applyRadioUI($this);
                            }
@@ -440,7 +433,7 @@
                        $('#price-content').removeClass('opacity-0');
                    }
                });
-           })
+           });
 
         });
     </script>
