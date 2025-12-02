@@ -43,92 +43,147 @@ $(function () {
     }
 
 
-    // Add to cart - star
-    $(document).on("click", ".add-to-cart-btn", function (e) {
-        e.preventDefault();
-        let $btn = $(this);
-        let imgUrl = $btn.data("image");
-        let title = $btn.data("title");
-        let price = $btn.data("product-price");
-        let id = $btn.data("product-id");
+    function addToCartGlobal(options) {
+        // Destructure options
+        const {
+            $btn,                // jQuery button element
+            imgUrl,              // Product image URL
+            title,               // Product title
+            price,               // Product price
+            id,                  // Product ID
+            cartSelector = "#cart-btn"  // Optional cart button selector
+        } = options;
 
-
-        let check = isCartItemExists(id);
-        if (check) {
-
+        if (isCartItemExists(id)) {
             showModal({
                 title: "შეტყობინება",
                 text: "პროდუქტი უკვე დამატებულია კალათაში!"
             });
-            return false;
+            return Promise.resolve(false);
         }
-        ;
-        // Add item via AJAX first
-        $.ajax({
-            url: "/cart/add-to-cart",
-            type: "POST",
-            data: {
-                _token: $('meta[name="csrf-token"]').attr('content'),
-                image: imgUrl,
-                title: title,
-                price: price,
-                id: id
-            },
-            success: function (response) {
-                if (response.success) {
-                    $totalCartPrice += parseFloat(response.price);
-                    // console.log(totalCartPrice);
 
+        // Return a Promise that wraps the AJAX request
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: "/cart/add-to-cart",
+                type: "POST",
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    image: imgUrl,
+                    title: title,
+                    price: price,
+                    id: id
+                },
+                success: function (response) {
+                    if (response.success) {
+                        // Update total cart price
+                        $totalCartPrice += parseFloat(response.price);
 
-                    // saveCartQuantity(response.id, 1);
-                    saveCartItem(response.id, response.title, response.price, response.image, 1);
+                        // Save cart item locally
+                        saveCartItem(response.id, response.title, response.price, response.image, 1);
 
-                    // Hide placeholder if any
-                    $("#cart-placeholder").hide();
+                        // Hide placeholder if any
+                        $("#cart-placeholder").hide();
 
-                    // Append item HTML
-                    $("#mini-cart-items").append(response.html);
+                        // Append item HTML
+                        $("#mini-cart-items").append(response.html);
 
-                    // Update counter
-                    let count = $("#mini-cart-items  .cart-item").length;
-                    updateCartItemCount();
-                    window.renderCart();
-                    // update cart btn text with price
-                    changePriceInCartBtn(calculateCartTotals());
+                        // Update counter & cart
+                        updateCartItemCount();
+                        window.renderCart();
+                        changePriceInCartBtn(calculateCartTotals());
 
-                    // === Start flying image animation AFTER AJAX success ===
-                    let imgToDrag = $('<img />', {
-                        src: imgUrl,
-                        class: 'flying-img',
-                        css: {
-                            position: 'absolute',
-                            zIndex: 9999,
-                            width: '120px',
-                            height: '120px',
-                            borderRadius: '8px'
-                        }
-                    });
-                    $("body").append(imgToDrag);
+                        // Flying animation
+                        flyToCart(imgUrl, $btn, cartSelector);
 
-                    let btnOffset = $btn.offset();
-                    let cartOffset = $("#cart-btn").offset();
-
-                    imgToDrag.css({top: btnOffset.top, left: btnOffset.left});
-
-                    imgToDrag.animate({
-                        top: cartOffset.top,
-                        left: cartOffset.left + 100,
-                        width: 0,
-                        height: 0,
-                        opacity: 0.1
-                    }, 1000, "easeInOutExpo", function () {
-                        $(this).remove();
-                    });
+                        resolve(response);
+                    } else {
+                        resolve(response);
+                    }
+                },
+                error: function (error) {
+                    reject(error);
                 }
+            });
+        });
+    }
+    function flyToCart(imgUrl, $btn, cartSelector = "#cart-btn") {
+        let imgToDrag = $('<img />', {
+            src: imgUrl,
+            class: 'flying-img',
+            css: {
+                position: 'absolute',
+                zIndex: 9999,
+                width: '120px',
+                height: '120px',
+                borderRadius: '8px'
             }
+        });
+        $("body").append(imgToDrag);
+
+        let btnOffset = $btn.offset();
+        let cartOffset = $(cartSelector).offset();
+
+        imgToDrag.css({top: btnOffset.top, left: btnOffset.left});
+
+        imgToDrag.animate({
+            top: cartOffset.top,
+            left: cartOffset.left + 100,
+            width: 0,
+            height: 0,
+            opacity: 0.1
+        }, 1000, "easeInOutExpo", function () {
+            $(this).remove();
+        });
+    }
+
+
+
+    // Add to cart - start
+    $(document).on("click", ".add-to-cart-btn", function(e) {
+        e.preventDefault();
+        let $btn = $(this);
+
+        addToCartGlobal({
+            $btn: $btn,
+            imgUrl: $btn.data("image"),
+            title: $btn.data("title"),
+            price: $btn.data("product-price"),
+            id: $btn.data("product-id")
         });
     });
     // Add to cart - end
+
+
+
+    // Add to cart and redirect to check out page - start
+    $(document).on("click", "[add-to-cart-and-checkout-btn]", async  function(e) {
+        e.preventDefault();
+        let $btn = $(this);
+
+        let $price = parseFloat($("[data-old-price]").text().match(/[\d.]+/)?.[0]);
+
+        if (typeof $price !== 'number' || isNaN($price) || !isFinite($price) || $price <= 0) {
+            return false;
+        }
+
+        let productId = $btn.data("product-id");
+
+         if (!isCartItemExists(productId)){
+             await  addToCartGlobal({
+                 $btn: $btn,
+                 imgUrl: $btn.data("image"),
+                 title: $btn.data("title"),
+                 price: $price,
+                 id: $btn.data("product-id")
+             });
+         }
+
+
+        window.location.href = "/pages/checkout";
+    });
+    // Add to cart and redirect to check out page - end
+
 
     // Attach remove button event
     $(document).on("click", ".remove-cart-item", function () {

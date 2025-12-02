@@ -328,9 +328,22 @@
                         <x-button on size="sm" icon="phosphor-shopping-cart" iconPosition="left" class="w-full"
                                   variant="outline" href="{{ route('pages.cart') }}">კალათის ნახვა
                         </x-button>
-                        <x-button size="sm" icon="phosphor-shopping-bag" iconPosition="left" class="w-full"
-                                  variant="primary" href="{{ route('pages.checkout') }}">ყიდვა
+
+
+                        @php
+                            $productImage = json_decode($product->images)[0] ??  '';
+                            $cardOptions = [
+                                'data-product-id' => $product->id,
+                                'data-image' => Voyager::image($productImage),
+                                'data-title' => $product->title,
+                                'data-slug' => $product->slug,
+                            ];
+                        @endphp
+
+                        <x-button size="sm" icon="phosphor-shopping-bag" add-to-cart-and-checkout-btn  :options="$cardOptions" iconPosition="left" class="w-full" variant="primary">
+                            ყიდვა
                         </x-button>
+
                     </div>
 
                 </div>
