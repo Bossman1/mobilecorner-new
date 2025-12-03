@@ -98,10 +98,6 @@ class ProductController extends Controller
             })
             ->get();
 
-        // brands – you can generate them from DB or keep static like before
-        $brands = ['Apple', 'Samsung', 'Xiaomi', 'Huawei', 'Oppo', 'Vivo', 'Nokia', 'Realme', 'OnePlus', 'Sony', 'Asus', 'Google', 'Honor'];
-        shuffle($brands);
-
         $minPrice = $productsQuery->min('a_new_price');
         $maxPrice = $productsQuery->max('a_new_price');
 
@@ -111,7 +107,6 @@ class ProductController extends Controller
             'totalProducts',
             'heading',
             'attributeFilters',
-            'brands',
             'minPrice',
             'maxPrice'
         ));
