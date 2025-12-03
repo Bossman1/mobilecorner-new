@@ -1,4 +1,4 @@
-<div id="hs-full-screen-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-80 overflow-x-hidden overflow-y-auto pointer-events-none font-custom-regular" role="dialog" tabindex="-1" aria-labelledby="hs-full-screen-label">
+<div id="hs-full-screen-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-80 overflow-x-hidden overflow-y-auto  font-custom-regular" role="dialog" tabindex="-1" aria-labelledby="hs-full-screen-label">
     <div class="hs-overlay-open:mt-0 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-10 opacity-0 transition-all max-w-full   h-full">
         <div class="flex flex-col bg-white pointer-events-auto max-w-full  ">
             <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200  ">
