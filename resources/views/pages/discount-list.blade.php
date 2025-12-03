@@ -19,7 +19,7 @@
 
                 <div class="p-[16px]">
                     <form class="js-filters-form">
-                    @include('includes.filter-content',['brands'=>$brands,'attributeFilters'=>$attributeFilters])
+                    @include('includes.filter-content',['brands'=>$brands,'attributeFilters'=>$attributeFilters, 'minPrice' => $minPrice, 'maxPrice' => $maxPrice])
                     </form>
                 </div>
 
@@ -30,7 +30,7 @@
                 <div class="flex flex-col xl:!flex-row justify-start xl:!justify-between items-start xl:!items-center my-[16px]">
                     <div class="flex flex-col">
                         <div class="font-custom-bold-upper text-xl">{{ isset($category) ? $category->name : $heading ?? ''  }}</div>
-                        <div class="font-custom-bold-upper text-xs text-gray-500">ნაპოვნია - {{ $totalProducts }} ჩანაწერი</div>
+                        <div class="font-custom-bold-upper text-xs text-gray-500 ">ნაპოვნია - <span class="js-total-products">{{ $totalProducts }}</span> ჩანაწერი</div>
                     </div>
                     <div class="flex justify-between items-center w-full xl:w-auto xl:!hidden">
                         <div class="flex justify-between items-center gap-2" id="filter-mobile-sort">

@@ -40,12 +40,10 @@ $(function () {
 
 
     const $searchInput = $(".filter-search-brand");
-    const $checkboxes = $('[name="models[]"]');
+    const $checkboxes = $searchInput.closest('section').find('input[type=checkbox]');
 
     $searchInput.on("input", function() {
-
         const query = $(this).val().toLowerCase().trim();
-
         $checkboxes.each(function() {
             const $input = $(this);
 

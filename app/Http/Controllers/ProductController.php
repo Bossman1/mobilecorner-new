@@ -31,21 +31,14 @@ class ProductController extends Controller
             });
 
         // PRICE RANGE (make sure input names are price_min / price_max)
-//        if ($request->filled('price_min')) {
-//            $productsQuery->where('a_new_price', '>=', $request->price_min);
-//        }
-//
-//        if ($request->filled('price_max')) {
-//            $productsQuery->where('a_new_price', '<=', $request->price_max);
-//        }
-
-        // BRANDS (name="models[]")
-        if ($request->filled('models')) {
-            $productsQuery->whereIn('brand', (array) $request->input('models'));
+        if ($request->filled('price_min')) {
+            $productsQuery->where('a_new_price', '>=', $request->price_min);
         }
 
+        if ($request->filled('price_max')) {
+            $productsQuery->where('a_new_price', '<=', $request->price_max);
+        }
 
-        // BRANDS (name="models[]")
         if ($request->filled('condition')) {
             $productsQuery->whereIn('condition', (array) $request->input('condition'));
         }
@@ -109,12 +102,18 @@ class ProductController extends Controller
         $brands = ['Apple', 'Samsung', 'Xiaomi', 'Huawei', 'Oppo', 'Vivo', 'Nokia', 'Realme', 'OnePlus', 'Sony', 'Asus', 'Google', 'Honor'];
         shuffle($brands);
 
+        $minPrice = $productsQuery->min('a_new_price');
+        $maxPrice = $productsQuery->max('a_new_price');
+
+
         return view('pages.discount-list', compact(
             'products',
             'totalProducts',
             'heading',
             'attributeFilters',
-            'brands'
+            'brands',
+            'minPrice',
+            'maxPrice'
         ));
     }
 

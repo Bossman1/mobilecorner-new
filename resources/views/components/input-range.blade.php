@@ -2,7 +2,7 @@
     'id' => uniqid('slider_'),
     'min' => 0,
     'max' => 100,
-    'start' => [0, 100],
+    'start' => [$min, $max],
     'step' => 1,
     'connect' => true,
     'showInputs' => false,         // show min/max inputs

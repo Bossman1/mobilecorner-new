@@ -1,11 +1,14 @@
 <div class="flex justify-between items-center my-[16px]">
     <div class="font-custom-bold-upper text-xl">ფილტრი</div>
-    <div><x-button icon="phosphor-trash-simple" iconPosition="right" size="sm" variant="transparent">გასუფთავება</x-button> </div>
+    <div><x-button icon="phosphor-trash-simple" iconPosition="right" size="sm" :options="['clear-filter']" variant="transparent">გასუფთავება</x-button> </div>
 </div>
 
 
 <div class="my-[16px]">
     <x-input-range
+        id="discount-price-filter"
+        :min="(int)$minPrice"
+        :max="(int)$maxPrice"
         minInputName="price_min"
         maxInputName="price_max"
         :showInputs="true"
@@ -46,15 +49,22 @@
         <div class="font-custom-bold-upper my-[10px] text-sm">ბრენდი</div>
 
         <div class="my-[10px]">
-            <x-input id="filter-search-brand" placeholder="ბრენდი" class="w-full !h-[45px] filter-search-brand" />
+            <x-input id="filter-search-brand" name="filter-search-brand" placeholder="ბრენდი" class="w-full !h-[45px] filter-search-brand" />
         </div>
 
         <x-line class="!border-white" />
 
         <div class="min-h-[50px]  overflow-y-scroll space-y-[10px]">
-            @foreach($brands as $key => $brand)
+
+
+            @php
+                $brands = $attributeFilters->firstWhere('slug', 'brendi');
+            @endphp
+
+
+            @foreach($brands->values as $key => $brand)
                 <div>
-                    <x-checkbox  name="models[]" class="!text-[var(--color-main)] focus:!ring-0 !border-none"  label="{{ $brand }}" />
+                    <x-checkbox  name="attr[{{ $brands->slug }}][]" class="!text-[var(--color-main)] focus:!ring-0 !border-none" value="{{ $brand->id }}"  label="{{ $brand->value }}" />
                 </div>
             @endforeach
 
@@ -62,7 +72,9 @@
     </section>
 
     @foreach($attributeFilters as $filter)
-
+        @if($filter->slug === 'brendi')
+            @continue
+        @endif
         <section class="my-[20px]">
             <x-line class="!border-white" />
 

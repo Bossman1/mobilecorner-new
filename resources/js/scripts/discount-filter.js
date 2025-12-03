@@ -30,7 +30,7 @@ $(function (){
                 $('#product-wrapper').addClass('opacity-50 pointer-events-none');
             },
             success: function (res) {
-                console.log(res.html)
+                // console.log(res.html)
                 $('#product-wrapper')
                     .html(res.html)
                     .removeClass('opacity-50 pointer-events-none');
@@ -51,28 +51,17 @@ $(function (){
         });
     }
 
-    /**
-     * Pagination buttons call this.
-     * We keep your function name for compatibility.
-     */
-    function loadFavoritesOnPage(page) {
-        fetchDiscountProducts(page);
-    }
-    window.loadFavoritesOnPage = loadFavoritesOnPage; // make sure it's global
 
     // Trigger filtering on change
-    $(document).on('change', '.js-filters-form input, .js-filters-form select', function () {
-        // Always go back to first page when filter changes
-        fetchDiscountProducts(1);
-    });
-
-    // Optional: Enter in text inputs triggers filter
-    $(document).on('keyup', '.js-filters-form input[type="text"]', function (e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
+    $(document).on(
+        'change',
+        '.js-filters-form input:not([name="filter-search-brand"]), .js-filters-form select',
+        function () {
             fetchDiscountProducts(1);
         }
-    });
+    );
+
+
 
     // Optional: clear button (if you want to wire "გასუფთავება")
     $(document).on('click', '.js-clear-filters', function (e) {
@@ -81,5 +70,65 @@ $(function (){
         form.reset();
         fetchDiscountProducts(1);
     });
+
+
+
+
+
+
+
+
+    $("[id^='range-']").each(function () {
+        let slider = this;
+        if (!slider.noUiSlider) return;
+        slider.noUiSlider.on('change', function(values){
+            fetchDiscountProducts(1);
+        });
+    });
+
+
+    $(document).on('click', '[clear-filter]', function (e) {
+        e.preventDefault();
+
+        let $form = $(this).closest('form');
+
+        // 1) RESET TEXT INPUTS
+        $form.find('input[type="text"], input[type="number"]').val('');
+
+        // 2) RESET CHECKBOXES
+        $form.find('input[type="checkbox"]').prop('checked', false);
+
+        // 3) RESET SLIDERS
+        $form.find("[id^='range-']").each(function () {
+
+            let slider = this;
+            if (!slider.noUiSlider) return;
+
+            // find the related inputs
+            let id = slider.id.replace("range-", "");
+
+            let $minInput = $("#min-input-" + id);
+            let $maxInput = $("#max-input-" + id);
+
+            // read original min/max from HTML attributes
+            let min = parseFloat($minInput.attr("min"));
+            let max = parseFloat($maxInput.attr("max"));
+
+            // reset slider to default values
+            slider.noUiSlider.set([min, max]);
+
+            // update inputs as well
+            $minInput.val(min);
+            $maxInput.val(max);
+            fetchDiscountProducts(1);
+        });
+
+    });
+
+
+
+
+
+
 
 });
