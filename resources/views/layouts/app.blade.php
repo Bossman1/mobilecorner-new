@@ -105,6 +105,7 @@
     @endif
 </script>
 
+@include('includes.modals.mobile-search')
 </body>
 </html>
 

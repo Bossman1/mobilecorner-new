@@ -3,15 +3,21 @@
 <!-- ========================= -->
 <div class="xl:hidden w-full bg-[var(--color-main)] text-white h-[58px] shadow-md relative z-[60] font-custom-regular sticky top-0">
 
-    <div class="container mx-auto flex items-center justify-between h-full gap-5">
+    <div class="container mx-auto flex items-center justify-between h-full gap-4">
 
 
 
         <!-- Mobile Logo -->
         <a href="{{ route('home') }}" class="block flex-1">
-            <img src="{{ asset('assets/images/logo.png') }}" class="min-w-[200px]" alt="Logo">
+            <img src="{{ asset('assets/images/logo.png') }}" class="min-w-[100px]" alt="Logo">
         </a>
 
+         <x-button size="sm" icon="phosphor-magnifying-glass" class="!text-white !px-0" iconPosition="right" :options="[
+            'aria-haspopup' => 'dialog',
+            'aria-expanded' => 'false',
+            'aria-controls' => 'hs-full-screen-modal',
+            'data-hs-overlay' => '#hs-full-screen-modal'
+        ]" variant="transparent"   />
 
 
         <a href="{{ route('pages.favorites') }}" class="relative ml-auto w-auto">
@@ -34,6 +40,7 @@
         </button>
 
     </div>
+
 </div>
 
 
