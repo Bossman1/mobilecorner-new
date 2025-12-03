@@ -95,7 +95,7 @@ class AjaxController extends Controller
             ->orderByDesc('created_at')
             ->paginate(config('siteconfig.perPage')); // amount per page
 
-        $html = view('ajax-content.favorites', [
+        $html = view('ajax-content.product-block', [
             'products' => $products
         ])->render();
 

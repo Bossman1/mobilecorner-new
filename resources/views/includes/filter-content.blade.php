@@ -6,6 +6,8 @@
 
 <div class="my-[16px]">
     <x-input-range
+        minInputName="price_min"
+        maxInputName="price_max"
         :showInputs="true"
         sliderClass="w-[94%] mt-[15px] mx-auto"
         class="gap-[24px]"
@@ -17,6 +19,7 @@
         showValueInLabelText="ლარი"
         :showValueInLabel="true"
         inputMobileStyle="block mt-[10px]"
+
     />
 </div>
 
@@ -30,10 +33,10 @@
 
         <div class="space-y-[10px] w-full">
             <div>
-                <x-checkbox  name="attr['condition'][]" class="!text-[var(--color-main)] focus:!ring-0 !border-none" value="new"  label="ახალი" />
+                <x-checkbox  name="condition[]" class="!text-[var(--color-main)] focus:!ring-0 !border-none" value="new"  label="ახალი" />
             </div>
             <div>
-                <x-checkbox  name="attr['condition'][]" class="!text-[var(--color-main)] focus:!ring-0 !border-none" value="owned"  label="მეორადი" />
+                <x-checkbox  name="condition[]" class="!text-[var(--color-main)] focus:!ring-0 !border-none" value="owned"  label="მეორადი" />
             </div>
         </div>
     </section>
@@ -71,12 +74,12 @@
                     {{ $filter->name }}
                 </div>
 
-                <x-dynamic-component :component="'phosphor-caret-down'" class="h-[15px] w-[15px] js-filter-icon transition-transform duration-200"/>
+                <x-dynamic-component :component="'phosphor-caret-down'" class="h-[15px] w-[15px] js-filter-icon transition-transform duration-200 rotate-180"/>
             </div>
 
             {{-- Content to fold/unfold --}}
             <div
-                class="space-y-[10px] w-full js-filter-body @if($filter->values->count() > 1)  hidden  @endif "
+                class="space-y-[10px] w-full js-filter-body  "
                 data-filter-id="{{ $filter->id }}"
             >
                 @foreach($filter->values as $value)

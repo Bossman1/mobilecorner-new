@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',[\App\Http\Controllers\HomeController::class,'index'])->name('home');
@@ -10,10 +11,17 @@ Route::get('/',[\App\Http\Controllers\HomeController::class,'index'])->name('hom
 Route::group(['prefix' => 'categories'], function () {
     Route::get('/{slug?}', [\App\Http\Controllers\CategoryController::class,'index'])
         ->name('pages.categories-list');
+
 });
 
-Route::get('/discounted-products', [\App\Http\Controllers\CategoryController::class,'discountedProducts'])
+Route::get('/discounted-products', [\App\Http\Controllers\ProductController::class,'discountedProducts'])
     ->name('discounted.products');
+
+Route::post('/discounts/filter', [ProductController::class, 'discountedProductsAjax'])
+    ->name('products.discounted.filter');
+//todo nick -  pause here
+//Route::post('/categories/filter', [\App\Http\Controllers\CategoryController::class, 'discountedProductsAjax'])
+//    ->name('products.discounted.filter');
 
 Route::group(['prefix' => 'pages'], function () {
 
