@@ -106,6 +106,8 @@
     </div>
 </div>
 
+@if(isset($mobileMenu))
+    @include('layouts.partials.mobile-menu',['mobileMenu' => $mobileMenu])
+@endif
 
-@include('layouts.partials.mobile-menu')
 
