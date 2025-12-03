@@ -130,3 +130,6 @@ input[type=number] {
 .fav-btn {
     transition: background-color 0.3s, color 0.3s;
 }
+.ios-scroll-fix {
+    -webkit-overflow-scrolling: touch;
+}
