@@ -13,7 +13,7 @@
                     </svg>
                 </button>
             </div>
-            <div class="p-4 h-auto">
+            <div class="p-4 h-full overflow-scroll">
 
                 <div class="flex items-center  flex-1">
                     <div class="flex w-full h-[48px]">
