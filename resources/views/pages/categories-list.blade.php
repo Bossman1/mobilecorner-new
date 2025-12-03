@@ -14,8 +14,13 @@
         <x-page-component class="my-[20px]"  sidebar-class="bg-[var(--color-footer)] rounded-md hidden xl:block">
             <x-slot:sidebar>
 
+
+
+
                 <div class="p-[16px]">
-                    @include('includes.filter-content',['brands'=>$brands])
+                    <form class="js-filters-form">
+                    @include('includes.filter-content',['brands'=>$brands,'attributeFilters'=>$attributeFilters])
+                    </form>
                 </div>
 
 
@@ -38,7 +43,7 @@
                 </div>
 
 
-                <div class="grid grid-cols-2 md:!grid-cols-3 gap-6">
+                <div id="product-wrapper" class="grid grid-cols-2 md:!grid-cols-3 gap-6">
                     @foreach($products as $product)
                         @php
                             $productImage = json_decode($product->images)[0] ??  '';
@@ -78,32 +83,7 @@
 
 @push('js')
     <script>
-        $(document).ready(function() {
-            const $searchInput = $(".filter-search-brand");
-            const $checkboxes = $('[name="models[]"]');
 
-            $searchInput.on("input", function() {
-                // console.log(123123)
-                const query = $(this).val().toLowerCase().trim();
-
-                $checkboxes.each(function() {
-                    const $input = $(this);
-
-                    // outer wrapper div that wraps the checkbox component
-                    let $outerWrapper = $input.closest('x-checkbox, div').parent() || $input.closest('div');
-
-                    // find label inside the checkbox component
-                    const $label = $input.closest("div").find("label").first();
-                    const labelText = $label.length ? $label.text().toLowerCase().trim() : "";
-
-                    if (labelText.includes(query)) {
-                        $outerWrapper.show();
-                    } else {
-                        $outerWrapper.hide();
-                    }
-                });
-            });
-        });
     </script>
 
 

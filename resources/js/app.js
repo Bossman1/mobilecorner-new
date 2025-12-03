@@ -10,6 +10,7 @@ import './scripts/header.js'
 import './scripts/cart.js'
 import './scripts/mobile.js'
 import './scripts/favorite.js'
+import './scripts/filter.js'
 import './global.js'
 Fancybox.bind("[data-fancybox]", {
     // Custom options

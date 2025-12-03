@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -34,14 +35,14 @@ class CategoryController extends Controller
     {
 
 
-        $productsQuery = Product::select('id', 'title','slug','a_old_price', 'a_new_price', 'images')->where(function ($q) {
+        $productsQuery = Product::select('id', 'title', 'slug', 'a_old_price', 'a_new_price', 'images')->where(function ($q) {
             $q->where('a_new_price', '<>', '')
                 ->orWhere('b_new_price', '<>', '')
                 ->orWhere('c_new_price', '<>', '');
         });
 
 
-        if(!$productsQuery->count()){
+        if (!$productsQuery->count()) {
             abort(404);
         }
 
@@ -49,6 +50,24 @@ class CategoryController extends Controller
 
         $totalProducts = $products->total();
         $heading = 'ფასდაკლებები';
-        return view('pages.categories-list', compact('products', 'totalProducts', 'heading'));
+
+
+        $productIds = $productsQuery->pluck('id');
+
+        $attributeFilters = Attribute::query()
+            ->with(['values' => function ($q) use ($productIds) {
+                $q->whereHas('productValues', function ($qq) use ($productIds) {
+                    $qq->whereIn('product_id', $productIds);
+                })
+                    ->select('id', 'attribute_id', 'value')   // important!
+                    ->groupBy('value', 'id', 'attribute_id')  // remove duplicates
+                    ->orderBy('sort_order');
+            }])
+            ->whereHas('values.productValues', function ($q) use ($productIds) {
+                $q->whereIn('product_id', $productIds);
+            })
+            ->get();
+
+        return view('pages.categories-list', compact('products', 'totalProducts', 'heading', 'attributeFilters'));
     }
 }

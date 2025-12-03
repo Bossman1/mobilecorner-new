@@ -12,6 +12,16 @@ class ProductAttributeValue extends Model
         'value_json' => 'array'
     ];
 
+
+
+
+
+    public function attribute_value()
+    {
+        return $this->hasOne(AttributeValue::class, 'id', 'value_id');
+    }
+
+
     public function product()
     {
         return $this->belongsTo(Product::class);
@@ -22,12 +32,10 @@ class ProductAttributeValue extends Model
         return $this->belongsTo(Attribute::class);
     }
 
-
-    public function attribute_value()
+    public function attributeValue()
     {
-        return $this->hasOne(AttributeValue::class, 'id', 'value_id');
+        return $this->belongsTo(AttributeValue::class, 'attribute_value_id');
     }
-
 
 
     // Convenient accessor

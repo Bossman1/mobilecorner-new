@@ -31,9 +31,12 @@ class Attribute extends Model
         return $count ? "{$slug}-{$count}" : $slug;
     }
 
+
+
     public function values()
     {
-        return $this->hasMany(ProductAttributeValue::class);
+        // attribute_values table
+        return $this->hasMany(AttributeValue::class);
     }
 
     public function attribute_values()

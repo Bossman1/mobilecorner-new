@@ -9,5 +9,13 @@ class AttributeValue extends Model
     protected $fillable = ['attribute_id', 'value', 'slug','sort_order'];
 
 
+    public function attribute()
+    {
+        return $this->belongsTo(Attribute::class);
+    }
 
+    public function productValues()
+    {
+        return $this->hasMany(ProductAttributeValue::class, 'value_id');
+    }
 }
