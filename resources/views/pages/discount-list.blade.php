@@ -7,8 +7,6 @@
            '3' => 'ფილტრი',
            ];
 
-    $brands = ['Apple', 'Samsung', 'Xiaomi', 'Huawei', 'Oppo', 'Vivo', 'Nokia', 'Realme', 'OnePlus', 'Sony', 'Asus', 'Google', 'Honor'];
-    shuffle($brands);
     @endphp
     <div class="container mx-auto font-custom-regular relative">
         <x-page-component class="my-[20px]"  sidebar-class="bg-[var(--color-footer)] rounded-md hidden xl:block sidebar-content-class transition-all duration-300 mt-[20px]">
@@ -19,7 +17,7 @@
 
                 <div class="p-[16px]">
                     <form class="js-filters-form">
-                    @include('includes.filter-content',['brands'=>$brands,'attributeFilters'=>$attributeFilters, 'minPrice' => $minPrice, 'maxPrice' => $maxPrice])
+                    @include('includes.filter-content',['attributeFilters'=>$attributeFilters, 'minPrice' => $minPrice, 'maxPrice' => $maxPrice])
                     </form>
                 </div>
 
@@ -78,7 +76,7 @@
     </div>
 
     <x-burger-slide-content burger-selector="filter-mobile-sort">
-        @include('includes.filter-content',['brands'=>$brands])
+        @include('includes.filter-content',['attributeFilters'=>$attributeFilters, 'minPrice' => $minPrice, 'maxPrice' => $maxPrice])
     </x-burger-slide-content>
 @endsection
 
