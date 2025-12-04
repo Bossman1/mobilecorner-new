@@ -164,22 +164,24 @@
         <div class="order-3 w-full">
             <x-line class="!mt-[10px]"/>
             <section class="grid grid-cols-1">
-                <h2 class="text-sm font-custom-bold-upper my-[10px]">მსგავსი პროდუქტები</h2>
+                <h2 class="text-sm font-custom-bold-upper my-[10px]">ახალი დამატებული პროდუქტები</h2>
                 <x-carousel :autoplay="true" :pause-on-hover="true" :pagination="false" perPage="6"
                             perPageMobile="1" perPageTablet="3" splideTrackClass="padding-bottom:23px">
-                    @for($i = 0; $i < 15; $i++)
+                    @foreach($newestProducts as $newestProduct)
                         @php
+                            $productImage = json_decode($newestProduct->images)[0] ??  '';
                             $options = [
-                                    'image' => asset('assets/images/temp/img1.webp'),
-                                    'price' => rand(123,12338),
-                                    'title' =>'Apple iPhone Air e-SIM | 256GB Sky Blue-'.rand(34,34565),
-                                    'id' =>  uniqid(),
-                                    'slug' => 'test-slug'
+                               'image' => Voyager::image($productImage),
+                                'price' => $newestProduct->a_old_price,
+                                'old_price' => $newestProduct->a_new_price,
+                                'title' => $newestProduct->title,
+                                'id' => $newestProduct->id,
+                                'slug' => $newestProduct->slug,
                               ];
-                        $condition = rand(0, 1) ? 'new' : 'owned';
-                         @endphp
-                        <x-card-product :condition="$condition"  :options="$options"/>
-                    @endfor
+                            $condition = $newestProduct->condition;
+                        @endphp
+                        <x-card-product :condition="$condition"   :options="$options"/>
+                    @endforeach
                 </x-carousel>
             </section>
         </div>

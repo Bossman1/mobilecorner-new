@@ -11,7 +11,7 @@ class CartController extends Controller
 
     public function index()
     {
-        $newestProducts = Product::orderBy('created_at', 'desc')->take(8)->get();
+        $newestProducts = Product::orderBy('created_at', 'desc')->take(8)->get()->shuffle();
 
         return view('pages.cart', compact('newestProducts'));
     }

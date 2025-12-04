@@ -33,9 +33,7 @@ Route::group(['prefix' => 'pages'], function () {
 
     Route::get('/cart',[CartController::class,'index'])->name('pages.cart');
 
-    Route::get('/checkout', function () {
-        return view('pages.checkout');
-    })->name('pages.checkout');
+    Route::get('/checkout',[\App\Http\Controllers\CheckoutController::class,'index'])->name('pages.checkout');
 
     Route::get('/favorites', [\App\Http\Controllers\FavoriteController::class,'index'])->name('pages.favorites');
 
