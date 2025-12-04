@@ -6,7 +6,6 @@
 
 <div class="my-[16px]">
     <x-input-range
-        id="discount-price-filter"
         :min="(int)$minPrice"
         :max="(int)$maxPrice"
         minInputName="price_min"

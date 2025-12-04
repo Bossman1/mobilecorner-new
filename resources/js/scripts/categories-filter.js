@@ -10,12 +10,11 @@ $(function (){
      * Core AJAX fetch function (POST).
      * page = optional page number.
      */
-    function fetchProducts(page) {
+    function fetchProducts(page, form) {
         let slug = $('input[name="category_slug"]').val();
         const url = "/categories/filter/"+slug;
 
-        // Get form data (filters)
-        const form = $('.js-filters-categories-form').first();
+
         let data = form.serializeArray();
 
         // Add page manually (for paginator)
@@ -55,7 +54,8 @@ $(function (){
         'change',
         '.js-filters-categories-form input:not([name="filter-search-brand"]), .js-filters-categories-form select',
         function () {
-            fetchProducts(1);
+            let $form = $(this).closest('form');
+            fetchProducts(1, $form);
         }
     );
 
@@ -68,9 +68,10 @@ $(function (){
 
     $(".js-filters-categories-form [id^='range-']").each(function () {
         let slider = this;
+        let $form = $(this).closest('form');
         if (!slider.noUiSlider) return;
         slider.noUiSlider.on('change', function(values){
-            fetchProducts(1);
+            fetchProducts(1, $form);
         });
     });
 
@@ -108,7 +109,7 @@ $(function (){
             // update inputs as well
             $minInput.val(min);
             $maxInput.val(max);
-            fetchProducts(1);
+            fetchProducts(1, $form);
         });
 
     });

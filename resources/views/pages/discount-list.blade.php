@@ -36,7 +36,7 @@
                             <span class="leading-[16px]">ფილტრი</span>
                         </div>
 
-                        <x-select class="w-full flex-1 !h-[50px] !pt-[14px] !text-sm" placeholder="სორტირტება" :options="$optionsFilter"/>
+{{--                        <x-select class="w-full flex-1 !h-[50px] !pt-[14px] !text-sm" placeholder="სორტირტება" :options="$optionsFilter"/>--}}
                     </div>
                 </div>
 
@@ -76,7 +76,9 @@
     </div>
 
     <x-burger-slide-content burger-selector="filter-mobile-sort">
+        <form class="js-filters-form">
         @include('includes.filter-content',['attributeFilters'=>$attributeFilters, 'minPrice' => $minPrice, 'maxPrice' => $maxPrice])
+        </form>
     </x-burger-slide-content>
 @endsection
 

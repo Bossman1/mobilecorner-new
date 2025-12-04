@@ -10,11 +10,11 @@ $(function (){
      * Core AJAX fetch function (POST).
      * page = optional page number.
      */
-    function fetchDiscountProducts(page) {
+    function fetchDiscountProducts(page, form) {
         const url = "/discounts/filter";
 
         // Get form data (filters)
-        const form = $('.js-filters-form').first();
+
         let data = form.serializeArray();
 
         // Add page manually (for paginator)
@@ -54,7 +54,8 @@ $(function (){
         'change',
         '.js-filters-form input:not([name="filter-search-brand"]), .js-filters-form select',
         function () {
-            fetchDiscountProducts(1);
+            let $form = $(this).closest('form');
+            fetchDiscountProducts(1, $form);
         }
     );
 
@@ -64,9 +65,12 @@ $(function (){
 
     $(".js-filters-form [id^='range-']").each(function () {
         let slider = this;
+        let $form = $(this).closest('form');
         if (!slider.noUiSlider) return;
         slider.noUiSlider.on('change', function(values){
-            fetchDiscountProducts(1);
+
+
+            fetchDiscountProducts(1, $form);
         });
     });
 
@@ -104,7 +108,7 @@ $(function (){
             // update inputs as well
             $minInput.val(min);
             $maxInput.val(max);
-            fetchDiscountProducts(1);
+            fetchDiscountProducts(1, $form);
         });
 
     });

@@ -6,20 +6,14 @@
            '2' => 'ფილტრი',
            '3' => 'ფილტრი',
            ];
-
-    $brands = ['Apple', 'Samsung', 'Xiaomi', 'Huawei', 'Oppo', 'Vivo', 'Nokia', 'Realme', 'OnePlus', 'Sony', 'Asus', 'Google', 'Honor'];
-    shuffle($brands);
     @endphp
     <div class="container mx-auto font-custom-regular relative">
         <x-page-component class="my-[20px]"  sidebar-class="bg-[var(--color-footer)] rounded-md hidden xl:block sidebar-content-class transition-all duration-300 mt-[20px]">
             <x-slot:sidebar>
 
-
-
-
                 <div class="p-[16px]">
                     <form class="js-filters-categories-form">
-                    @include('includes.filter-content',['brands'=>$brands,'attributeFilters'=>$attributeFilters])
+                        @include('includes.filter-content',['attributeFilters'=>$attributeFilters, 'minPrice' => $minPrice, 'maxPrice' => $maxPrice])
                     </form>
                 </div>
 
@@ -39,7 +33,7 @@
                             <span class="leading-[16px]">ფილტრი</span>
                         </div>
 
-                        <x-select class="w-full flex-1 !h-[50px] !pt-[14px] !text-sm" placeholder="სორტირტება" :options="$optionsFilter"/>
+{{--                        <x-select class="w-full flex-1 !h-[50px] !pt-[14px] !text-sm" placeholder="სორტირტება" :options="$optionsFilter"/>--}}
                     </div>
                 </div>
 
@@ -79,7 +73,9 @@
     </div>
 
     <x-burger-slide-content burger-selector="filter-mobile-sort">
-        @include('includes.filter-content',['brands'=>$brands])
+        <form class="js-filters-categories-form">
+            @include('includes.filter-content',['attributeFilters'=>$attributeFilters, 'minPrice' => $minPrice, 'maxPrice' => $maxPrice])
+        </form>
     </x-burger-slide-content>
 @endsection
 
