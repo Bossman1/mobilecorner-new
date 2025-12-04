@@ -357,7 +357,7 @@
                         @endphp
 
                         <x-button size="sm" icon="phosphor-shopping-bag" add-to-cart-and-checkout-btn  :options="$cardOptions" iconPosition="left" class="w-full" variant="primary">
-                            ყიდვა
+                            განვადებით ყიდვა
                         </x-button>
 
                     </div>
