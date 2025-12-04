@@ -42,9 +42,6 @@ $(function (){
                     $('.js-total-products').text(res.total);
                 }
 
-                // We DO NOT change URL params -> filters stay hidden.
-                // If you want, you can still update history with just /discounts
-                // window.history.replaceState({}, '', "{{ route('products.discounted') }}");
             },
             error: function () {
                 $('#product-wrapper').removeClass('opacity-50 pointer-events-none');
