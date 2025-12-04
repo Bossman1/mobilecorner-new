@@ -116,7 +116,7 @@
                     <x-line class="!border-t-[#dfd5d5] !my-[13px]"/>
 
                     <div  class="flex flex-col justify-between items-center mt-[16px] gap-[7px]">
-                        <x-button size="sm" icon="phosphor-shopping-bag" iconPosition="left" class="w-full" variant="primary" href="{{ route('pages.checkout') }}" >ყიდვა</x-button>
+                        <x-button size="sm" icon="phosphor-shopping-bag" iconPosition="left" class="w-full" variant="primary" href="{{ route('pages.checkout') }}" >განვადებით ყიდვა</x-button>
                     </div>
 
 
