@@ -135,20 +135,46 @@ class Category extends Model
         return $this->belongsTo(BannerGroup::class);
     }
 
-    public function allCategoryIds()
-    {
-        $ids = collect([$this->id]);
-
-        foreach ($this->children as $child) {
-            $ids = $ids->merge($child->allCategoryIds());
-        }
-
-        return $ids;
-    }
+//    public function allCategoryIds()
+//    {
+//        $ids = collect([$this->id]);
+//
+//        foreach ($this->children as $child) {
+//            $ids = $ids->merge($child->allCategoryIds());
+//        }
+//
+//        return $ids;
+//    }
 
     public function scopeBySlug($query, $slug)
     {
         return $query->where('slug', $slug);
+    }
+
+
+    public function allCategoryIds()
+    {
+        static $allCategories = null;
+
+        // Load once
+        if ($allCategories === null) {
+            $allCategories = Category::select('id', 'parent_id')->get();
+        }
+
+        $ids = collect([$this->id]);
+
+        $traverse = function ($id) use (&$ids, $allCategories, &$traverse) {
+            $children = $allCategories->where('parent_id', $id);
+
+            foreach ($children as $child) {
+                $ids->push($child->id);
+                $traverse($child->id);
+            }
+        };
+
+        $traverse($this->id);
+
+        return $ids->values();
     }
 
 }

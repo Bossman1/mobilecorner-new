@@ -6,61 +6,90 @@ use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use function Pest\Laravel\get;
+
 
 class CategoryController extends Controller
 {
-    public function index($slug)
+
+
+    protected function buildCategoryProductsQuery(Request $request, $slug)
     {
+
 
         $category = Category::where('slug', $slug)
-            ->with('children:id,parent_id,name')
+            ->with('childrenRecursive')
             ->first();
-        if (!$category) {
-            abort(404);
+
+        $categoryIds = $category->allCategoryIds();
+        $productsQuery = Product::with('attributes')->whereIn('category_id', $categoryIds);
+
+
+        // PRICE RANGE (make sure input names are price_min / price_max)
+        if ($request->filled('price_min')) {
+            $productsQuery->whereRaw('COALESCE(a_new_price, a_old_price) >= ?', [$request->price_min]);
         }
 
-        $subcategoryIds = $category->allCategoryIds();
+        if ($request->filled('price_max')) {
+            $productsQuery->whereRaw('COALESCE(a_new_price, a_old_price) <= ?', [$request->price_max]);
+        }
 
 
-        $productsQuery = Product::select('category_id', 'id', 'slug', 'title', 'a_old_price', 'a_new_price', 'images')->whereIn('category_id', $subcategoryIds)
-            ->with('category'); // optional: eager load category if needed
+        if ($request->filled('condition')) {
+            $productsQuery->whereIn('condition', (array) $request->input('condition'));
+        }
 
-        $products = $productsQuery->orderByDesc('created_at')->paginate(config('siteconfig.perPage'));
+        // DYNAMIC ATTRIBUTES (name="attr[slug][]")
+        if ($request->filled('attr')) {
+            foreach ($request->input('attr') as $attrSlug => $values) {
+                $values = array_filter((array) $values);
+                if (empty($values)) {
+                    continue;
+                }
 
-        $totalProducts = $products->total();
-        return view('pages.categories-list', compact('products', 'totalProducts', 'category'));
+                $productsQuery->whereHas('attributes', function ($q) use ($attrSlug, $values) {
+                    $q->where('slug', $attrSlug)
+                        ->whereHas('attribute_values', function ($sub) use ($values) {
+                            $sub->whereIn('value_id', $values);
+                        });
+                });
+            }
+        }
+
+        return $productsQuery;
     }
 
-    public function discountedProducts()
+    /**
+     * GET: show   products page (no filters in URL).
+     */
+    public function categoriesProducts(Request $request, $slug)
     {
 
+        $productsQuery = $this->buildCategoryProductsQuery($request, $slug);
 
-        $productsQuery = Product::select('id', 'title', 'slug', 'a_old_price', 'a_new_price', 'images')->where(function ($q) {
-            $q->where('a_new_price', '<>', '')
-                ->orWhere('b_new_price', '<>', '')
-                ->orWhere('c_new_price', '<>', '');
-        });
+        // clone for filters
+        $queryForFilters = clone $productsQuery;
+
+        $products = $productsQuery->paginate(config('siteconfig.perPage'));
+        $totalProducts = $products->total();
+        $category = Category::select('name','slug')->where('slug', $slug)->first();
 
 
-        if (!$productsQuery->count()) {
+        // If nothing found, normal 404
+        if ($totalProducts === 0) {
             abort(404);
         }
 
-        $products = $productsQuery->paginate(config('siteconfig.perPage'));
-
-        $totalProducts = $products->total();
-        $heading = 'ფასდაკლებები';
-
-
-        $productIds = $productsQuery->pluck('id');
+        $productIds = $queryForFilters->pluck('id');
 
         $attributeFilters = Attribute::query()
             ->with(['values' => function ($q) use ($productIds) {
                 $q->whereHas('productValues', function ($qq) use ($productIds) {
                     $qq->whereIn('product_id', $productIds);
                 })
-                    ->select('id', 'attribute_id', 'value')   // important!
-                    ->groupBy('value', 'id', 'attribute_id')  // remove duplicates
+                    ->select('id', 'attribute_id', 'value')
+                    ->groupBy('value', 'id', 'attribute_id')
                     ->orderBy('sort_order');
             }])
             ->whereHas('values.productValues', function ($q) use ($productIds) {
@@ -68,6 +97,45 @@ class CategoryController extends Controller
             })
             ->get();
 
-        return view('pages.categories-list', compact('products', 'totalProducts', 'heading', 'attributeFilters'));
+        $minPrice = $productsQuery->min(DB::raw('COALESCE(a_new_price, a_old_price)'));
+        $maxPrice = $productsQuery->max(DB::raw('COALESCE(a_new_price, a_old_price)'));
+
+
+        return view('pages.categories-list', compact(
+            'products',
+            'totalProducts',
+            'attributeFilters',
+            'minPrice',
+            'maxPrice',
+            'category'
+        ));
     }
+
+    /**
+     * POST (AJAX): return only products + pagination as JSON.
+     */
+    public function categoriesProductsAjax(Request $request, $slug)
+    {
+        $productsQuery = $this->buildCategoryProductsQuery($request, $slug);
+
+        $products = $productsQuery->paginate(config('siteconfig.perPage'));
+        $totalProducts = $products->total();
+
+        // If nothing, return empty HTML but NOT 404
+        if ($totalProducts === 0) {
+            return response()->json([
+                'html'       => view('ajax-content.product-block', ['products' => collect()])->render(),
+                'pagination' => '',
+                'total'      => 0,
+            ]);
+        }
+
+        return response()->json([
+            'html'       => view('ajax-content.product-block', ['products' => $products])->render(),
+            'pagination' => view('ajax-content.pagination', ['paginator' => $products])->render(),
+            'total'      => $totalProducts,
+        ]);
+    }
+
+
 }

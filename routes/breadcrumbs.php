@@ -25,7 +25,7 @@ Breadcrumbs::for('pages.full-page', function (Trail $trail, $slug=null) {
     $trail->parent('home');
     $product = Product::with('category')->where('slug', $slug)->first();
     $trail->push( __($product->category->name), route('pages.categories-list', $product->category->slug));
-    $trail->push( $product->title ?? 'Unknown', route('pages.full-page',$slug));
+//    $trail->push( $product->title ?? 'Unknown', route('pages.full-page',$slug));
 });
 
 Breadcrumbs::for('pages.cart', function (Trail $trail) {

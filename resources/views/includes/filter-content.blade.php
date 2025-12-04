@@ -44,7 +44,10 @@
         </div>
     </section>
 
-
+    @php
+        $brands = $attributeFilters->firstWhere('slug', 'brendi');
+    @endphp
+    @if($brands)
     <section>
         <div class="font-custom-bold-upper my-[10px] text-sm">ბრენდი</div>
 
@@ -57,9 +60,7 @@
         <div class="min-h-[50px]  overflow-y-scroll space-y-[10px]">
 
 
-            @php
-                $brands = $attributeFilters->firstWhere('slug', 'brendi');
-            @endphp
+
 
 
             @foreach($brands->values as $key => $brand)
@@ -70,6 +71,7 @@
 
         </div>
     </section>
+    @endif
 
     @foreach($attributeFilters as $filter)
         @if($filter->slug === 'brendi')

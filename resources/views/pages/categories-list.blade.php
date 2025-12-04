@@ -11,14 +11,14 @@
     shuffle($brands);
     @endphp
     <div class="container mx-auto font-custom-regular relative">
-        <x-page-component class="my-[20px]"  sidebar-class="bg-[var(--color-footer)] rounded-md hidden xl:block">
+        <x-page-component class="my-[20px]"  sidebar-class="bg-[var(--color-footer)] rounded-md hidden xl:block sidebar-content-class transition-all duration-300 mt-[20px]">
             <x-slot:sidebar>
 
 
 
 
                 <div class="p-[16px]">
-                    <form class="js-filters-form">
+                    <form class="js-filters-categories-form">
                     @include('includes.filter-content',['brands'=>$brands,'attributeFilters'=>$attributeFilters])
                     </form>
                 </div>
@@ -28,9 +28,10 @@
             <x-slot:content>
                 <x-breadcrumbs />
                 <div class="flex flex-col xl:!flex-row justify-start xl:!justify-between items-start xl:!items-center my-[16px]">
+                    <input type="hidden" name="category_slug" value="{{ $category->slug ?? '' }}">
                     <div class="flex flex-col">
                         <div class="font-custom-bold-upper text-xl">{{ isset($category) ? $category->name : $heading ?? ''  }}</div>
-                        <div class="font-custom-bold-upper text-xs text-gray-500">ნაპოვნია - {{ $totalProducts }} ჩანაწერი</div>
+                        <div class="font-custom-bold-upper text-xs text-gray-500">ნაპოვნია - <span class="js-total-products">{{ $totalProducts }}</span> ჩანაწერი</div>
                     </div>
                     <div class="flex justify-between items-center w-full xl:w-auto xl:!hidden">
                         <div class="flex justify-between items-center gap-2" id="filter-mobile-sort">
@@ -45,6 +46,7 @@
 
                 <div id="product-wrapper" class="grid grid-cols-2 md:!grid-cols-3 gap-6">
                     @foreach($products as $product)
+
                         @php
                             $productImage = json_decode($product->images)[0] ??  '';
                             $options = [
@@ -57,6 +59,7 @@
                               ];
                             $condition = $product->condition;
                          @endphp
+
                         <x-card-product wrapper-class="!shadow-[0_0_15px_rgba(0,0,0,0.15)]" :condition="$condition"  :options="$options"/>
                     @endforeach
 

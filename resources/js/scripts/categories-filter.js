@@ -10,11 +10,12 @@ $(function (){
      * Core AJAX fetch function (POST).
      * page = optional page number.
      */
-    function fetchDiscountProducts(page) {
-        const url = "/discounts/filter";
+    function fetchProducts(page) {
+        let slug = $('input[name="category_slug"]').val();
+        const url = "/categories/filter/"+slug;
 
         // Get form data (filters)
-        const form = $('.js-filters-form').first();
+        const form = $('.js-filters-categories-form').first();
         let data = form.serializeArray();
 
         // Add page manually (for paginator)
@@ -55,9 +56,9 @@ $(function (){
     // Trigger filtering on change
     $(document).on(
         'change',
-        '.js-filters-form input:not([name="filter-search-brand"]), .js-filters-form select',
+        '.js-filters-categories-form input:not([name="filter-search-brand"]), .js-filters-categories-form select',
         function () {
-            fetchDiscountProducts(1);
+            fetchProducts(1);
         }
     );
 
@@ -65,16 +66,19 @@ $(function (){
 
 
 
-    $(".js-filters-form [id^='range-']").each(function () {
+
+
+
+    $(".js-filters-categories-form [id^='range-']").each(function () {
         let slider = this;
         if (!slider.noUiSlider) return;
         slider.noUiSlider.on('change', function(values){
-            fetchDiscountProducts(1);
+            fetchProducts(1);
         });
     });
 
 
-    $(document).on('click', '.js-filters-form [clear-filter]', function (e) {
+    $(document).on('click', '.js-filters-categories-form [clear-filter]', function (e) {
         e.preventDefault();
 
         let $form = $(this).closest('form');
@@ -107,7 +111,7 @@ $(function (){
             // update inputs as well
             $minInput.val(min);
             $maxInput.val(max);
-            fetchDiscountProducts(1);
+            fetchProducts(1);
         });
 
     });

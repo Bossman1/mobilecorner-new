@@ -3,22 +3,38 @@
     @php
      $details1 = [];
      $details2 = [];
-    if($product->attributes->isNotEmpty()){
-            $chunks = $product->attributes->chunk(9);
+    if($product->attributeValues->isNotEmpty()){
+          // important names you want at top (edit!)
+        $priorityNames = ['ბრენდი'];
+
+
+        // Sort attributes: priority first
+        $sortedAttributes = $product->attributeValues->sortBy(function ($item) use ($priorityNames) {
+            $name = $item->attribute?->name;
+            $index = array_search($name, $priorityNames);
+            return $index === false ? 999 : $index;
+        });
+
+        // Now chunk sorted results
+        $chunks = $sortedAttributes->chunk(9);
         $firstEight   = $chunks->get(0); // first 8 attributes
         $remaining    = $chunks->get(1); // all others
 
         if(!is_null($firstEight)){
-
              foreach ($firstEight as $k =>  $attribute){
-                $details1[$k]['name'] = $attribute->name;
-                $details1[$k]['value'] = $attribute?->attribute_values?->value . ' ' . __($attribute->unit);
+                $details1[$k]['name'] = $attribute?->attribute?->name;
+                if ($attribute->attribute->type == 'text'){
+                   $details1[$k]['value'] = $attribute->value_text;
+                }else{
+                    $details1[$k]['value'] = $attribute?->attribute_value?->value . ' ' . __($attribute->attribute->unit);
+                }
+
             }
         }
         if($remaining != null){
               foreach ($remaining as $k =>  $attribute){
-                $details2[$k]['name'] = $attribute->name;
-                $details2[$k]['value'] = $attribute?->attribute_values?->value . ' ' . __($attribute->unit);
+                $details2[$k]['name'] = $attribute?->attribute?->name;
+                $details2[$k]['value'] = $attribute?->attribute_value?->value . ' ' . __($attribute->attribute->unit);
             }
         }
     }
@@ -44,7 +60,7 @@
 
                 <div class="grid grid-cols-12 md:grid-cols-12 gap-5">
                     <div class="col-span-12 md:col-span-8 mt-[20px]">
-                        <div class="flex justify-between items-center">
+                        <div class="flex flex-col xl:!flex-row xl:!justify-between xl:!items-center">
                             <x-breadcrumbs/>
                             <div class="text-sm text-slate-700">ID: {{ $product->id }}</div>
                         </div>
@@ -81,7 +97,7 @@
                                     <div
                                         class="flex justify-between items-center  px-2 py-4">
                                         <div class="text-gray-400 font-medium">{{ $detail['name'] }}</div>
-                                        <div class="text-gray-900 font-semibold">{{ $detail['value'] }}</div>
+                                        <div class="text-gray-900 font-semibold text-right">{{ $detail['value'] }}</div>
                                     </div>
                                 @endforeach
                             @endif
@@ -170,7 +186,7 @@
                             <div
                                 class="flex justify-between items-center  px-2 @if($loop->index == 0) py-4  @else py-4 @endif">
                                 <div class="text-gray-400 text-sm font-medium">{{ $detail['name'] }}</div>
-                                <div class="text-gray-900 text-sm font-semibold">{{ $detail['value'] }}</div>
+                                <div class="text-gray-900 text-sm font-semibold text-right">{{ $detail['value'] }}</div>
                             </div>
                         @endforeach
                     </section>
