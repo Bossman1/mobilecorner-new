@@ -1,6 +1,6 @@
 <div class="w-full bg-[var(--color-footer)]">
     <div class="container mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-[15px] md:gap-[120px] text-slate-500 text-[12px] font-custom-regular py-[20px]">
+        <div class="grid grid-cols-1 xl:!grid-cols-3 gap-[15px] md:gap-[120px] text-slate-500 text-[12px] font-custom-regular py-[20px]">
             <div>
                 <div class="py-[10px] border-b border-[var(--color-main)] font-custom-bold-upper">ნავიგაცია</div>
                 <div class="mt-[30px]">
@@ -18,18 +18,18 @@
 
 
 
-            <div>
-                <div class="py-[10px] border-b border-[var(--color-main)] font-custom-bold-upper">რამე სახელი</div>
-                <div class="mt-[30px]">
-                    <ul class="space-y-[15px]">
-                        <li><a href="">პერსონალურ მონაცემთა დაცვის პოლიტიკა</a></li>
-                        <li><a href="">ჩვენ შესახებ</a></li>
-                        <li><a href="">წესები და პირობები</a></li>
-                        <li><a href="">მიწოდების სერვისი</a></li>
-                        <li><a href="">კარიერა</a></li>
-                    </ul>
-                </div>
-            </div>
+{{--            <div>--}}
+{{--                <div class="py-[10px] border-b border-[var(--color-main)] font-custom-bold-upper">რამე სახელი</div>--}}
+{{--                <div class="mt-[30px]">--}}
+{{--                    <ul class="space-y-[15px]">--}}
+{{--                        <li><a href="">პერსონალურ მონაცემთა დაცვის პოლიტიკა</a></li>--}}
+{{--                        <li><a href="">ჩვენ შესახებ</a></li>--}}
+{{--                        <li><a href="">წესები და პირობები</a></li>--}}
+{{--                        <li><a href="">მიწოდების სერვისი</a></li>--}}
+{{--                        <li><a href="">კარიერა</a></li>--}}
+{{--                    </ul>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
 
 
