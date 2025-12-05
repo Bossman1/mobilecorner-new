@@ -21,14 +21,20 @@ $(function (){
 
             // Simple frontend check (backend will validate too)
             if (!customer.fname || !customer.lname || !customer.phone || !customer.city || !customer.address) {
-                alert('გთხოვთ შეავსოთ სავალდებულო ველები (*)');
+                showModal({
+                    title: "შეცდომა",
+                    text: 'გთხოვთ შეავსოთ სავალდებულო ველები (*)',
+                });
                 return;
             }
 
             // 2) Selected bank (radio)
             const bankId = $('input[name="payment_options"]:checked').val();
             if (!bankId) {
-                alert('გთხოვთ აირჩიოთ ბანკი');
+                showModal({
+                    title: "შეცდომა",
+                    text: 'გთხოვთ აირჩიოთ ბანკი'
+                });
                 return;
             }
 
@@ -54,7 +60,10 @@ $(function (){
             }));
 
             if (!items.length) {
-                alert('კალათა ცარიელია');
+                showModal({
+                    title: "შეცდომა",
+                    text: 'კალათა ცარიელია'
+                });
                 return;
             }
 
@@ -135,7 +144,11 @@ $(function (){
                         // Credo style: we need to build and auto-submit a form
                         submitDynamicForm(response.form);
                     } else {
-                        alert(response.message || 'დაფიქსირდა შეცდომა, თავიდან სცადეთ.');
+                        showModal({
+                            title: "შეცდომა",
+                            text: response.message || 'დაფიქსირდა შეცდომა, თავიდან სცადეთ.'
+                        });
+
                     }
                 },
                 error: function (xhr) {
@@ -144,7 +157,11 @@ $(function (){
                         let msg = Object.values(errors).map(arr => arr.join('\n')).join('\n');
                         alert(msg);
                     } else {
-                        alert('სერვერზე შეცდომაა, სცადეთ მოგვიანებით.');
+                        showModal({
+                            title: "შეცდომა",
+                            text:'სერვერზე შეცდომაა, სცადეთ მოგვიანებით.'
+                        });
+
                     }
                 },
                 complete: function () {

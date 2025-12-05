@@ -11,27 +11,30 @@ class CredoInstallmentService
         $merchantId = config('services.credo.merchant_id', '20018');
         $secretKey  = config('services.credo.secret_key'); // for "check" md5
 
-        $amount = (int) round($order->amount * 100); // in tetri
+        $amount = 1; // in tetri
 
         $products = [];
         foreach ($order->items()->with('product')->get() as $item) {
             $products[] = [
                 'id'     => $item->product_id,
                 'title'  => $item->product->title ?? ('Product #' . $item->product_id),
-                'amount' => $amount, // or per-line amount
-                'price'  => (int) round($item->unit_price * 100), // tetri
-                'type'   => 'installment', // or your logic
+                'amount' => $item->qty,
+                'price'  => (int) round( $item->unit_price * $item->qty  * 100  / 0.95), // tetri
+                'type'   => 1,
             ];
         }
 
         $payload = [
             'merchantId' => $merchantId,
-            'orderCode'  => (string) $amount,
+            'orderCode'  => $order->id,
             'check'      => md5($merchantId . $amount . $secretKey),
             'products'   => $products,
         ];
 
-        // You know better what endpoint you use for Credo; example:
+
+
+
+
         $actionUrl = config('services.credo.endpoint_url', 'https://credo.example.com/installment');
 
         // This is what JS `submitDynamicForm` will receive
