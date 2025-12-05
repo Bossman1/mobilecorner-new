@@ -12,6 +12,7 @@ import './scripts/mobile.js'
 import './scripts/favorite.js'
 import './scripts/discount-filter.js'
 import './scripts/categories-filter.js'
+import './scripts/checkout.js'
 import './global.js'
 Fancybox.bind("[data-fancybox]", {
     // Custom options

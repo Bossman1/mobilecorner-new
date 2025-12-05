@@ -3,6 +3,7 @@
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\InstallmentCallbackController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,8 @@ Route::group(['prefix' => 'pages'], function () {
 
 });
 
+Route::post('/installment/checkout',[\App\Http\Controllers\InstallmentController::class,'installment'])->name('installment.checkout');
+
 Route::get('product/{slug}',[\App\Http\Controllers\ProductController::class, 'view'])->name('pages.full-page');
 Route::group(['prefix' => 'cart'], function () {
     Route::post('add-to-cart', [CartController::class, 'addItem'])->name('cart.add-to-cart');
@@ -51,6 +54,29 @@ Route::group(['prefix' => 'cart'], function () {
 
 
 Route::post('/get-content', [AjaxController::class, 'handle'])->name('ajax.call')->middleware('throttle:200,1');
+
+
+
+
+// BOG CALLBACK
+Route::post('/callback/bog', [InstallmentCallbackController::class, 'bog'])
+    ->name('installment.bog.callback');
+
+// TBC CALLBACK
+Route::get('/callback/tbc', [InstallmentCallbackController::class, 'tbc'])
+    ->name('installment.tbc.callback');
+
+// Credo CALLBACK
+Route::post('/callback/credo', [InstallmentCallbackController::class, 'credo'])
+    ->name('installment.credo.callback');
+
+
+// SUCCESS / FAIL pages
+Route::get('/installment/success', fn() => view('installment.success'))
+    ->name('installment.success');
+
+Route::get('/installment/fail', fn() => view('installment.fail'))
+    ->name('installment.fail');
 
 
 Route::group(['prefix' => 'nboard'], function () {

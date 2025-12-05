@@ -68,8 +68,8 @@
                             </div>
 
                             <div class="flex flex-col justify-between items-center mt-[16px] gap-[7px] w-full">
-                                <x-button size="sm" icon="phosphor-shopping-bag" iconPosition="left" class="w-full"
-                                          variant="primary" href="{{ route('pages.checkout') }}">განვადებით ყიდვა
+                                <x-button size="sm" icon="phosphor-shopping-bag" data-purchase iconPosition="left" class="w-full"
+                                          variant="primary">განვადებით ყიდვა
                                 </x-button>
                             </div>
                         </div>
@@ -84,6 +84,7 @@
             <x-slot:content>
 
 
+                <form class="user-information-form">
                 <div class="order-1">
                     <section class="grid grid-cols-1 md:grid-cols-12 gap-5 font-custom-regular">
                         <div class="mt-[20px]">
@@ -102,33 +103,33 @@
                             <div class="grid grid-cols-1 xl:!grid-cols-2 gap-5">
                                 <div class="w-full">
                                     <label for="">სახელი <span class="text-red-800 text-sm font-bold">*</span></label>
-                                    <x-input class="w-full mt-[5px]" placeholder="სახელი"/>
+                                    <x-input class="w-full mt-[5px]" name="fname" placeholder="სახელი"/>
                                 </div>
 
                                 <div class="w-full">
                                     <label for="">გვარი <span class="text-red-800 text-sm font-bold">*</span></label>
-                                    <x-input class="w-full mt-[5px]" placeholder="გვარი"/>
+                                    <x-input class="w-full mt-[5px]" name="lname" placeholder="გვარი"/>
                                 </div>
 
                                 <div class="w-full">
                                     <label for="">ტელეფონი <span class="text-red-800 text-sm font-bold">*</span></label>
-                                    <x-input class="w-full mt-[5px]" placeholder="ტელეფონი"/>
+                                    <x-input class="w-full mt-[5px]" name="phone" placeholder="ტელეფონი"/>
                                 </div>
 
                                 <div class="w-full">
                                     <label for="">ქალაქი <span class="text-red-800 text-sm font-bold">*</span></label>
-                                    <x-select class="w-full flex-1 !h-[55px] !pt-[15px]  mt-[5px]" placeholder="ქალაქი"
+                                    <x-select name="city" class="w-full flex-1 !h-[55px] !pt-[15px]  mt-[5px]" placeholder="ქალაქი"
                                               :options="$optionsCities"/>
                                 </div>
 
 
                                 <div class="w-full xl:!col-span-2">
                                     <label for="">ზუსტი მისამართი <span class="text-red-800 text-sm font-bold">*</span></label>
-                                    <x-input class="w-full mt-[5px]" placeholder="ზუსტი მისამართი"/>
+                                    <x-input class="w-full mt-[5px]" name="address" placeholder="ზუსტი მისამართი"/>
                                 </div>
                                 <div class="xl:!col-span-2">
                                     <label for="">კომენტარი</label>
-                                    <x-textarea class="!w-full !h-[200px]  mt-[5px]" placeholder="კომენტარი"/>
+                                    <x-textarea class="!w-full !h-[200px]  mt-[5px]" name="comment" placeholder="კომენტარი"/>
                                 </div>
                             </div>
 
@@ -153,7 +154,7 @@
                         <p>აქ ადმინკიდან დაწერ რაც გინდა იმას!!!!!</p>
                     </div>
                 </div>
-
+                </form>
 
             </x-slot:content>
 
@@ -191,7 +192,9 @@
 
 @push('js')
 
+    <script src="https://webstatic.bog.ge/bog-sdk/bog-sdk.js?version=2&client_id={{ config('services.bog.client_id') }}"></script>
     <script>
+
         $(function () {
 
             // Remove item

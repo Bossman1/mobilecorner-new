@@ -63,7 +63,7 @@
                             'data-product-id' => $options['id'],
                             'data-image' => $options['image'],
                             'data-title' => $options['title'],
-                            'data-product-price' => $options['price'],
+                            'data-product-price' => !empty($options['old_price']) ? $options['old_price'] : $options['price'],
                             'data-slug' => $options['slug'],
                         ];
                      @endphp

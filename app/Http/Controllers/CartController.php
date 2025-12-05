@@ -23,9 +23,10 @@ class CartController extends Controller
         $title = $request->input('title');
         $price = $request->input('price');
         $id = $request->input('id');
+        $price_category = $request->input('price_category') ?? 'A';
 
         // Render Blade partial and return HTML
-        $html = view('components.mini-cart-item', compact('id', 'image', 'title', 'price'))->render();
+        $html = view('components.mini-cart-item', compact('id', 'image', 'title', 'price','price_category'))->render();
 
         return response()->json([
             'success' => true,
@@ -34,6 +35,7 @@ class CartController extends Controller
             'image' => $image,
             'title' => $title,
             'price'=>(int)$price,
+            'price_category'=>$price_category
         ]);
     }
 }

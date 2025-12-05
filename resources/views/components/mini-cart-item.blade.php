@@ -5,6 +5,7 @@
     <input type="hidden" name="cart_price[{{$id}}][]" value="{{ $price }}">
     <input type="hidden" name="quantity[{{ $id }}][]" value="1">
     <input type="hidden" name="id" value="{{$id}}">
+    <input type="hidden" name="price_category" value="{{$price_category}}">
     <img src="{{ $image }}" class="w-[60px] h-[60px] object-cover rounded">
     <div class="flex-1">
         <div class="text-[13px] font-custom-bold-upper">{{ $title }}</div>

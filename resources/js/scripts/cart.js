@@ -51,6 +51,7 @@ $(function () {
             title,               // Product title
             price,               // Product price
             id,                  // Product ID
+            price_category,      // Price category 1 - A, 2- B, 3- C
             cartSelector = "#cart-btn"  // Optional cart button selector
         } = options;
 
@@ -72,7 +73,8 @@ $(function () {
                     image: imgUrl,
                     title: title,
                     price: price,
-                    id: id
+                    id: id,
+                    price_category:price_category
                 },
                 success: function (response) {
                     if (response.success) {
@@ -80,7 +82,7 @@ $(function () {
                         $totalCartPrice += parseFloat(response.price);
 
                         // Save cart item locally
-                        saveCartItem(response.id, response.title, response.price, response.image, 1);
+                        saveCartItem(response.id, response.title, response.price, response.image, 1, response.price_category);
 
                         // Hide placeholder if any
                         $("#cart-placeholder").hide();
@@ -168,6 +170,18 @@ $(function () {
         }
 
         let productId = $btn.data("product-id");
+        let priceCategoryRadio = parseInt($("input[name='payment_options']:checked").val());
+        let priceCategory;
+        if (priceCategoryRadio){
+            if (priceCategoryRadio === 1){
+                priceCategory = 'A';
+            }else if(priceCategoryRadio === 2){
+                priceCategory = 'B';
+            }else if(priceCategoryRadio === 3){
+                priceCategory = 'C';
+            }
+        }
+
 
          if (!isCartItemExists(productId)){
              await  addToCartGlobal({
@@ -175,7 +189,8 @@ $(function () {
                  imgUrl: $btn.data("image"),
                  title: $btn.data("title"),
                  price: $price,
-                 id: $btn.data("product-id")
+                 id: $btn.data("product-id"),
+                 price_category: priceCategory
              });
          }
 
@@ -320,7 +335,7 @@ $(function () {
     }
 
 
-    function saveCartItem(id, title, price, image, qty = 1) {
+    function saveCartItem(id, title, price, image, qty = 1, price_category) {
         let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
         cart[id] = {
@@ -328,7 +343,8 @@ $(function () {
             title,
             price,
             image,
-            qty
+            qty,
+            price_category
         };
 
         localStorage.setItem("cart", JSON.stringify(cart));
