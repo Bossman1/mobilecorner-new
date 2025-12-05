@@ -12,30 +12,55 @@
                 <x-slot:content>
                     <h2 class="w-full text-center font-custom-bold-upper text-[16px]  md:text-[24px] text-slate-700 my-[16px] md:my-[32px]">
                         მოგვწერეთ</h2>
-                    <form action="" method="post" class="w-full">
+                    <form action="{{ route('pages.contact.store') }}" method="post" class="w-full">
                         @csrf
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
                             <div class="w-full">
-                                <x-input class="w-full" placeholder="სახელი გვარი *"/>
+                               <div>
+                                   <x-input class="w-full" name="name" placeholder="სახელი გვარი *"/>
+                                   @error('name')
+                                   <div class="error-container text-[13px] text-red-700">{{ $message }}</div>
+                                   @enderror
+                               </div>
                             </div>
 
                             <div class="w-full">
-                                <x-input class="w-full" placeholder="ტელეფონი *"/>
+                               <div>
+                                   <x-input class="w-full" name="phone" placeholder="ტელეფონი *"/>
+                                   @error('phone')
+                                   <div class="error-container text-[13px] text-red-700">{{ $message }}</div>
+                                   @enderror
+                               </div>
                             </div>
                             <div class="w-full">
-                                <x-input class="w-full" placeholder="ელ ფოსტა *"/>
+                               <div>
+                                   <x-input class="w-full" name="email" placeholder="ელ ფოსტა *"/>
+                                   @error('email')
+                                   <div class="error-container text-[13px] text-red-700">{{ $message }}</div>
+                                   @enderror
+                               </div>
                             </div>
 
                             <div class="w-full">
-                                <x-input class="w-full" placeholder="სათაური"/>
+                                <x-input class="w-full" name="subject" placeholder="სათაური *"/>
+                                @error('subject')
+                                <div class="error-container text-[13px] text-red-700">{{ $message }}</div>
+                                @enderror
                             </div>
 
                         </div>
 
                         <div class="grid grid-cols-1 space-y-[16px] mt-[16px] mb-[48px]">
 
-                            <x-textarea class="w-full !min-h-[189px]" placeholder="შეტყობინება *"/>
+                           <div>
+                               <x-textarea class="w-full !min-h-[189px]" name="message" placeholder="შეტყობინება *"/>
+                               @error('message')
+                               <div class="error-container text-[13px] text-red-700">{{ $message }}</div>
+                               @enderror
+                           </div>
+
+
                             <x-button type="submit" class="w-full cursor-pointer" size="lg" variant="primary">
                                 შეტყობინების გაგზავნა
                             </x-button>
@@ -102,20 +127,20 @@
 
                     </div>
 
-                    @php
-                        $banner1 = [
-                            ['img' => asset('assets/images/temp/banner6.webp'), 'url' => 'https://google.ge'],
-                        ];
+{{--                    @php--}}
+{{--                        $banner1 = [--}}
+{{--                            ['img' => asset('assets/images/temp/banner6.webp'), 'url' => 'https://google.ge'],--}}
+{{--                        ];--}}
 
-                    @endphp
-                    <x-banners
-                        wrapperClass="grid grid-cols-1 gap-[12px]"
-                        :options="$banner1"
-                        class="mt-[24px] w-full"
-                        :hrefOptions="['target' => '_blank']"
-                        :imageOptions="['rel' => 'image title']"
-                        imageClass="w-full"
-                    />
+{{--                    @endphp--}}
+{{--                    <x-banners--}}
+{{--                        wrapperClass="grid grid-cols-1 gap-[12px]"--}}
+{{--                        :options="$banner1"--}}
+{{--                        class="mt-[24px] w-full"--}}
+{{--                        :hrefOptions="['target' => '_blank']"--}}
+{{--                        :imageOptions="['rel' => 'image title']"--}}
+{{--                        imageClass="w-full"--}}
+{{--                    />--}}
                 </x-slot:sidebar>
             </x-page-component>
         </div>

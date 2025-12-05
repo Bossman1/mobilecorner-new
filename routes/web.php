@@ -38,9 +38,9 @@ Route::group(['prefix' => 'pages'], function () {
 
     Route::get('/favorites', [\App\Http\Controllers\FavoriteController::class,'index'])->name('pages.favorites');
 
-    Route::get('/contact', function () {
-        return view('pages.contact');
-    })->name('pages.contact');
+    Route::get('/contact', [\App\Http\Controllers\ContactController::class,'index'])->name('pages.contact');
+
+    Route::post('/contact/store',[\App\Http\Controllers\ContactController::class,'store'])->name('pages.contact.store');
 
 
 });
