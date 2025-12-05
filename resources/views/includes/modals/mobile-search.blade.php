@@ -13,27 +13,22 @@
                     </svg>
                 </button>
             </div>
-            <div class="p-4 h-full overflow-auto ios-scroll-fix">
+            <div class="p-4 h-full overflow-auto ios-scroll-fix relative">
 
                 <div class="flex items-center  flex-1">
                     <div class="flex w-full h-[48px]">
                         <span class="flex items-center justify-center h-full border border-[var(--color-main)] rounded-l-[12px] !border-r-0 px-3 bg-white !mr-[-1px]">
                             <x-dynamic-component :component="'phosphor-magnifying-glass'" class="h-6 w-6 text-[var(--color-main)] !rounded-r-[0px] !border-r-transparent"/>
                         </span>
-                        <x-input :options="['mobile-search-input']" class="flex-1 !h-full !rounded-none !border-[var(--color-main)] !border-l-0 focus:!outline-none !rounded-r-[12px] !rounded-l-[0px]  focus:!ring-0 !border-l-transparent" placeholder="ძიება"/>
+                        <x-input :options="['search-input-mobile']" class="flex-1 !h-full !rounded-none !border-[var(--color-main)] !border-l-0 focus:!outline-none !rounded-r-[12px] !rounded-l-[0px]  focus:!ring-0 !border-l-transparent" placeholder="ძიება"/>
                     </div>
                 </div>
                 <x-line class="!my-[20px]" />
-                <div class="grid grid-cols-2 gap-3" mobile-search-wrp>
-                    @for($i = 0; $i < 10; $i++)
-                        <div class="flex flex-col justify-center items-center gap-2 border border-[var(--color-main)]  rounded-lg p-3">
-                            <a href="">
-                                <img src="{{ asset('assets/images/temp/img1.webp') }}" class="w-[100px] h-[100px] object-cover rounded">
-                            </a>
-                            <div class="text-[14px] font-custom-bold-upper">სახელი აქ იქნება რამე და დიდი თუა უნდა მოვჭრათ</div>
-                            <div class="text-[20px] text-[var(--color-main)] font-custom-bold-upper">399 ₾</div>
-                        </div>
-                    @endfor
+                <div class="grid grid-cols-2 gap-3 hidden" search-result-mobile>
+
+                </div>
+                <div search-loader class="absolute top-[50px] left-0 w-full bg-white shadow-lg rounded-[10px] p-6 flex items-center justify-center hidden">
+                    <div class="search-loader"></div>
                 </div>
                 <p class="mt-1 text-gray-800 dark:text-neutral-400 text-center hidden">
                     ჩაწერეთ საძიებო სიტყვა.

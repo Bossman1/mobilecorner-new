@@ -8,6 +8,7 @@ use App\Models\AttributeValue;
 
 use App\Models\Product;
 use App\Models\ProductAttributeValue;
+use Couchbase\SearchQuery;
 use Illuminate\Http\Request;
 
 
@@ -23,6 +24,8 @@ class AjaxController extends Controller
             'deleteProductAttribute' => $this->deleteProductAttribute($request),
             'getPriceById' => $this->getPriceById($request),
             'getFavoriteContent' => $this->getFavoriteContent($request),
+            'search' => $this->getSearchData($request),
+            'searchMobile' => $this->getSearchDataMobile($request),
             default => response()->json(['error' => 'Invalid action'], 400),
         };
     }
@@ -110,6 +113,82 @@ class AjaxController extends Controller
                 'pagination' => $pagination
             ]
         ]);
+    }
+
+
+    private function searchQuery($term){
+        $products = Product::query()
+            ->select([
+                'id',
+                'slug',
+                'title',
+                'a_old_price', 'a_new_price',
+                'b_old_price', 'b_new_price',
+                'c_old_price', 'c_new_price',
+                'status',
+                'images'
+            ])
+            ->where('status', 'active')
+            ->where(function ($q) use ($term) {
+                $q->where('title', 'LIKE', "%{$term}%")
+                    ->orWhereHas('category', fn($c) =>
+                    $c->where('name', 'LIKE', "%{$term}%")
+                    );
+            })
+            ->get();
+
+        // -------------------------------------
+        // 🧠 Add computed attributes dynamically
+        // -------------------------------------
+        foreach ($products as $p) {
+
+            // Price logic
+            $p->final_price =
+                $p->a_new_price ?: $p->a_old_price ?:
+                    $p->b_new_price ?: $p->b_old_price ?:
+                        $p->c_new_price ?: $p->c_old_price;
+
+
+        }
+        return $products;
+    }
+
+
+    private function getSearchData(Request $request){
+        $term = $request->post('q');
+
+        if (!$term || mb_strlen($term) < 2) {
+            return response()->json(['html' => '']);
+        }
+
+        // -------------------------------------
+        // 🔍 Full Eloquent Search Query
+        // -------------------------------------
+
+        $products = $this->searchQuery($term);
+
+        $html = view('ajax-content.search-desktop', compact('products'))->render();
+
+        return response()->json(['html' => $html]);
+    }
+
+
+    private function getSearchDataMobile(Request $request){
+        $term = $request->post('q');
+
+        if (!$term || mb_strlen($term) < 2) {
+            return response()->json(['html' => '']);
+        }
+
+        // -------------------------------------
+        // 🔍 Full Eloquent Search Query
+        // -------------------------------------
+
+        $products = $this->searchQuery($term);
+
+        $html = view('ajax-content.search-mobile', compact('products'))->render();
+
+        return response()->json(['html' => $html]);
     }
 
 

@@ -44,16 +44,32 @@
 
         <!-- Search -->
         <div class="flex items-center h-full flex-1 mr-4">
-            <div class="flex w-full h-[48px]">
-                <a href="" class="flex">
-                    <span class="flex items-center justify-center h-full border border-[var(--color-main)] rounded-l-[12px] !border-r-0 px-3 bg-white">
-                        <x-dynamic-component :component="'phosphor-magnifying-glass'" class="h-6 w-6 text-[var(--color-main)]"/>
-                    </span>
-                </a>
-                <x-input class="flex-1 !h-full !rounded-none !border-[var(--color-main)] !border-l-0 focus:!outline-none !rounded-r-[12px]"
-                         placeholder="ძიება"/>
+            <div class="flex w-full h-[48px] relative">
+
+        <span class="flex items-center justify-center h-full border border-[var(--color-main)] rounded-l-[12px] !border-r-0 px-3 bg-white">
+            <x-dynamic-component :component="'phosphor-magnifying-glass'" class="h-6 w-6 text-[var(--color-main)]"/>
+        </span>
+
+                <!-- SEARCH INPUT -->
+                <x-input search-input-desktop
+                         class="flex-1 !h-full !rounded-none !border-[var(--color-main)] !border-l-0 focus:!outline-none !rounded-r-[12px]"
+                         placeholder="ძიება"
+                         autocomplete="off"/>
+
+                <!-- DROPDOWN RESULTS -->
+                <div search-result-desktop
+                     class="absolute top-[50px] left-0 w-full bg-white text-black shadow-lg rounded-[10px] p-4 divide-y divide-slate-200 max-h-[500px] overflow-y-auto hidden">
+                </div>
+
+                <!-- LOADER (hidden by default) -->
+                <div search-loader
+                     class="absolute top-[50px] left-0 w-full bg-white shadow-lg rounded-[10px] p-6 flex items-center justify-center hidden">
+                    <div class="search-loader"></div>
+                </div>
+
             </div>
         </div>
+
 
         <!-- Favorites + Cart -->
         <div class="gap-[15px] flex items-center relative">
