@@ -258,7 +258,11 @@
 
 
                     <div>
-                        <h2 class="text-sm font-custom-bold-upper my-[5px]">აირჩიეთ მობილურის კატეგორია</h2>
+
+                        @if( !is_null($product->b_old_price) ||  !is_null($product->c_old_price))
+                            <h2 class="text-sm font-custom-bold-upper my-[5px]">აირჩიეთ კატეგორია</h2>
+                        @endif
+
                         <div class="flex flex-col justify-between items-center gap-[7px] w-full">
                             @php
 
@@ -270,6 +274,7 @@
 
                             $radios = [];
                             $firstAdded = false;
+
 
                             foreach ($conditions as $value => $data) {
                                 if (trim($product->{$data['field']}) !== '') {
