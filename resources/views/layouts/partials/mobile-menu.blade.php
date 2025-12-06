@@ -9,7 +9,7 @@
 
         <!-- Mobile Logo -->
         <a href="{{ route('home') }}" class="block flex-1">
-            <img src="{{ asset('assets/images/logo.png') }}" class="min-w-[100px]" alt="Logo">
+            <img src="{{ asset('assets/images/logo-white.png') }}" class="min-w-[100px]" alt="Logo">
         </a>
 
          <x-button size="sm" icon="phosphor-magnifying-glass" class="!text-white !px-0" iconPosition="right" :options="[

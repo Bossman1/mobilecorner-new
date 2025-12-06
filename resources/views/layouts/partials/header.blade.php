@@ -37,7 +37,7 @@
 
         <!-- Logo -->
         <div class="flex items-center h-full mr-6">
-            <a href="{{ route('home') }}"><img src="{{ asset('assets/images/logo.png') }}" alt=""></a>
+            <a href="{{ route('home') }}"><img src="{{ asset('assets/images/logo-black.png') }}" alt=""></a>
         </div>
 
         @include('includes.secondary-header-menu')
