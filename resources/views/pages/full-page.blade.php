@@ -249,11 +249,7 @@
                                     </svg>
                                 </span>
                             </x-button>
-
-
-
                         </div>
-
                     </div>
                     <x-line class="!border-t-[#dfd5d5] !my-[13px]"/>
 
