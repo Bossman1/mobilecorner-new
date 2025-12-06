@@ -51,7 +51,7 @@
                     $images = json_decode($product->images, true) ?: []; // ensures array
                     $galleries = array_map(function($image) use ($product) {
                         return [
-                            'thumb' => Voyager::image($product->getThumbnail($image, 'medium')),
+                            'thumb' => Voyager::image($product->getThumbnail($image, 'small')),
                             'src'   => Voyager::image($image),
                         ];
                     }, $images);
