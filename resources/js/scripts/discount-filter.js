@@ -1,5 +1,28 @@
 $(function (){
 
+
+    function getVisibleDiscount() {
+        let result = null;
+
+        $('.js-filters-form').each(function () {
+            let rect = this.getBoundingClientRect();
+
+            // element is visible if width & height > 0 AND inside viewport
+            if (rect.width > 0 && rect.height > 0) {
+                result = $(this);
+            }
+        });
+
+        if (result){
+            return result.closest('form');
+        }
+
+        return null;
+    }
+
+
+    let activeForm = getVisibleDiscount();
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -54,7 +77,7 @@ $(function (){
         'change',
         '.js-filters-form input:not([name="filter-search-brand"]), .js-filters-form select',
         function () {
-            let $form = $(this).closest('form');
+            let $form = activeForm.closest('form');
             fetchDiscountProducts(1, $form);
         }
     );
@@ -65,7 +88,7 @@ $(function (){
 
     $(".js-filters-form [id^='range-']").each(function () {
         let slider = this;
-        let $form = $(this).closest('form');
+        let $form = activeForm.closest('form');
         if (!slider.noUiSlider) return;
         slider.noUiSlider.on('change', function(values){
 
@@ -78,7 +101,7 @@ $(function (){
     $(document).on('click', '.js-filters-form [clear-filter]', function (e) {
         e.preventDefault();
 
-        let $form = $(this).closest('form');
+        let $form = activeForm.closest('form');
 
         // 1) RESET TEXT INPUTS
         $form.find('input[type="text"], input[type="number"]').val('');
@@ -118,5 +141,18 @@ $(function (){
 
 
 
+
+    function loadDiscountsOnPage(page = 1) {
+        // let $form = $('.js-filters-form:visible').closest('form');
+
+
+        const $form = activeForm.closest('form');
+
+        console.log($form)
+        fetchDiscountProducts(page, $form);
+    }
+
+
+    window.loadDiscountsOnPage = loadDiscountsOnPage;
 
 });

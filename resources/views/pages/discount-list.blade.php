@@ -16,7 +16,7 @@
 
 
                 <div class="p-[16px]">
-                    <form class="js-filters-form">
+                    <form class="js-filters-form desktop hidden xl:block">
                     @include('includes.filter-content',['attributeFilters'=>$attributeFilters, 'minPrice' => $minPrice, 'maxPrice' => $maxPrice])
                     </form>
                 </div>
@@ -76,7 +76,7 @@
     </div>
 
     <x-burger-slide-content burger-selector="filter-mobile-sort">
-        <form class="js-filters-form">
+        <form class="js-filters-form mobile block xl:hidden">
         @include('includes.filter-content',['attributeFilters'=>$attributeFilters, 'minPrice' => $minPrice, 'maxPrice' => $maxPrice])
         </form>
     </x-burger-slide-content>

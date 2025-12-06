@@ -13,7 +13,12 @@ return [
     |
     */
 
-    'previous' => '&laquo; Previous',
-    'next' => 'Next &raquo;',
+    'previous' => 'წინა',
+    'next' => 'შემდეგი',
+    'showing' => 'ნაჩვენებია',
+    'to'      => '-დან',
+    'until'   => '-მდე',
+    'of'      => 'შედეგიდან',
+    'results' => 'სულ',
 
 ];

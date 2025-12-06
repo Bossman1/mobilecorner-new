@@ -73,6 +73,7 @@ class ProductController extends Controller
 
         // clone for filters
         $queryForFilters = clone $productsQuery;
+        $queryForPrice   = clone $productsQuery;
 
         $products = $productsQuery->paginate(config('siteconfig.perPage'));
         $totalProducts = $products->total();
@@ -99,8 +100,8 @@ class ProductController extends Controller
             })
             ->get();
 
-        $minPrice = $productsQuery->min('a_new_price');
-        $maxPrice = $productsQuery->max('a_new_price');
+        $minPrice = $queryForPrice->min('a_new_price');
+        $maxPrice = $queryForPrice->max('a_new_price');
 
 
         return view('pages.discount-list', compact(
@@ -134,7 +135,7 @@ class ProductController extends Controller
 
         return response()->json([
             'html'       => view('ajax-content.product-block', ['products' => $products])->render(),
-            'pagination' => view('ajax-content.pagination', ['paginator' => $products])->render(),
+            'pagination' => view('ajax-content.discount-page-pagination', ['paginator' => $products])->render(),
             'total'      => $totalProducts,
         ]);
     }

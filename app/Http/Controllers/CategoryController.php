@@ -65,18 +65,15 @@ class CategoryController extends Controller
      */
     public function categoriesProducts(Request $request, $slug)
     {
-
         $productsQuery = $this->buildCategoryProductsQuery($request, $slug);
 
-        // clone for filters
+        // Clone before pagination
         $queryForFilters = clone $productsQuery;
+        $queryForPrice   = clone $productsQuery;
 
         $products = $productsQuery->paginate(config('siteconfig.perPage'));
         $totalProducts = $products->total();
-        $category = Category::select('name','slug')->where('slug', $slug)->first();
 
-
-        // If nothing found, normal 404
         if ($totalProducts === 0) {
             abort(404);
         }
@@ -97,9 +94,11 @@ class CategoryController extends Controller
             })
             ->get();
 
-        $minPrice = $productsQuery->min(DB::raw('COALESCE(a_new_price, a_old_price)'));
-        $maxPrice = $productsQuery->max(DB::raw('COALESCE(a_new_price, a_old_price)'));
+        // Compute from full set (NOT paginated)
+        $minPrice = $queryForPrice->min(DB::raw('COALESCE(a_new_price, a_old_price)'));
+        $maxPrice = $queryForPrice->max(DB::raw('COALESCE(a_new_price, a_old_price)'));
 
+        $category = Category::select('name','slug')->where('slug', $slug)->first();
 
         return view('pages.categories-list', compact(
             'products',
@@ -110,6 +109,7 @@ class CategoryController extends Controller
             'category'
         ));
     }
+
 
     /**
      * POST (AJAX): return only products + pagination as JSON.
@@ -132,7 +132,7 @@ class CategoryController extends Controller
 
         return response()->json([
             'html'       => view('ajax-content.product-block', ['products' => $products])->render(),
-            'pagination' => view('ajax-content.pagination', ['paginator' => $products])->render(),
+            'pagination' => view('ajax-content.category-page-pagination', ['paginator' => $products])->render(),
             'total'      => $totalProducts,
         ]);
     }

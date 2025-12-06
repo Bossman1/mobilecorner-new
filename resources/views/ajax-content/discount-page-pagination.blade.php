@@ -29,7 +29,7 @@
                     </span>
                 </span>
             @else
-                <button onclick="loadFavoritesOnPage({{ $paginator->currentPage() - 1 }})"
+                <button onclick="loadDiscountsOnPage({{ $paginator->currentPage() - 1 }})"
                         class="cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md leading-5 hover:bg-[#7961b7] hover:text-white focus:outline-none focus:ring ring-[#7961b7] focus:border-[#7961b7] active:bg-[#674fa5] active:text-white transition ease-in-out duration-150">
                     {{ __('pagination.previous') }}
                 </button>
@@ -44,7 +44,7 @@
                         </span>
                     </span>
                 @else
-                    <button onclick="loadFavoritesOnPage({{ $page }})"
+                    <button onclick="loadDiscountsOnPage({{ $page }})"
                             class="cursor-pointer relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 hover:bg-[#7961b7] hover:text-white focus:outline-none focus:ring ring-[#7961b7] focus:border-[#7961b7] active:bg-[#674fa5] active:text-white transition ease-in-out duration-150">
                         {{ $page }}
                     </button>
@@ -53,7 +53,7 @@
 
             {{-- Next --}}
             @if ($paginator->hasMorePages())
-                <button onclick="loadFavoritesOnPage({{ $paginator->currentPage() + 1 }})"
+                <button onclick="loadDiscountsOnPage({{ $paginator->currentPage() + 1 }})"
                         class="cursor-pointer relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md leading-5 hover:bg-[#7961b7] hover:text-white focus:outline-none focus:ring ring-[#7961b7] focus:border-[#7961b7] active:bg-[#674fa5] active:text-white transition ease-in-out duration-150">
                     {{ __('pagination.next') }}
                 </button>

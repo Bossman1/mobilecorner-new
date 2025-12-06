@@ -12,7 +12,7 @@
             <x-slot:sidebar>
 
                 <div class="p-[16px]">
-                    <form class="js-filters-categories-form">
+                    <form class="js-filters-categories-form desktop hidden xl:block">
                         @include('includes.filter-content',['attributeFilters'=>$attributeFilters, 'minPrice' => $minPrice, 'maxPrice' => $maxPrice])
                     </form>
                 </div>
@@ -73,7 +73,7 @@
     </div>
 
     <x-burger-slide-content burger-selector="filter-mobile-sort">
-        <form class="js-filters-categories-form">
+        <form class="js-filters-categories-form mobile block xl:hidden">
             @include('includes.filter-content',['attributeFilters'=>$attributeFilters, 'minPrice' => $minPrice, 'maxPrice' => $maxPrice])
         </form>
     </x-burger-slide-content>

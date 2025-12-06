@@ -1,5 +1,27 @@
 $(function (){
 
+    function getVisibleFormCategoryDiv() {
+        let result = null;
+
+        $('.js-filters-categories-form').each(function () {
+            let rect = this.getBoundingClientRect();
+
+            // element is visible if width & height > 0 AND inside viewport
+            if (rect.width > 0 && rect.height > 0) {
+                result = $(this);
+            }
+        });
+
+        if (result){
+            return result.closest('form');
+        }
+
+        return null;
+
+    }
+
+    const activeFormCategory = getVisibleFormCategoryDiv();
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -54,7 +76,7 @@ $(function (){
         'change',
         '.js-filters-categories-form input:not([name="filter-search-brand"]), .js-filters-categories-form select',
         function () {
-            let $form = $(this).closest('form');
+            let $form = activeFormCategory.closest('form');
             fetchProducts(1, $form);
         }
     );
@@ -68,7 +90,7 @@ $(function (){
 
     $(".js-filters-categories-form [id^='range-']").each(function () {
         let slider = this;
-        let $form = $(this).closest('form');
+        let $form = activeFormCategory.closest('form');
         if (!slider.noUiSlider) return;
         slider.noUiSlider.on('change', function(values){
             fetchProducts(1, $form);
@@ -79,7 +101,7 @@ $(function (){
     $(document).on('click', '.js-filters-categories-form [clear-filter]', function (e) {
         e.preventDefault();
 
-        let $form = $(this).closest('form');
+        let $form = activeFormCategory.closest('form');
 
         // 1) RESET TEXT INPUTS
         $form.find('input[type="text"], input[type="number"]').val('');
@@ -116,7 +138,13 @@ $(function (){
 
 
 
+    function loadCategoryOnPage(page = 1) {
+        let $form = activeFormCategory.closest('form');
+        fetchProducts(page, $form);
+    }
 
+
+    window.loadCategoryOnPage = loadCategoryOnPage;
 
 
 
