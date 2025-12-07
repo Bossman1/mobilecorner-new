@@ -5,7 +5,7 @@
      $details2 = [];
     if($product->attributeValues->isNotEmpty()){
           // important names you want at top (edit!)
-        $priorityNames = ['ბრენდი'];
+        $priorityNames = ['ბრენდი','მოდელი'];
 
 
         // Sort attributes: priority first
