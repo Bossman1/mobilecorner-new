@@ -65,29 +65,34 @@
             }
 
             // Accordion
-            $("#mMenu button").on("click", function (e) {
-                const $btn = $(this);
-                const $menu = $btn.next("ul");
-                if (!$menu.length) return;
+            $mMenu.on("click", "[data-toggle-arrow]", function (e) {
+                e.preventDefault();
+                e.stopPropagation();
 
-                const $arrow = $btn.find('span[class*="Arrow"]');
+                const $arrow = $(this);
+                const $wrapper = $arrow.closest("div");
+                const $submenu = $wrapper.next(".submenu");
 
-                if ($menu[0].style.maxHeight && $menu[0].style.maxHeight !== "0px") {
-                    // Close
-                    $menu[0].style.maxHeight = "0px";
+                if (!$submenu.length) return;
+
+                const menu = $submenu[0];
+
+                // Close submenu
+                if (menu.style.maxHeight && menu.style.maxHeight !== "0px") {
+                    menu.style.maxHeight = "0px";
                     $arrow.css("transform", "");
-                } else {
-                    // Open
-                    const totalHeight = getTotalHeight($menu);
-                    $menu[0].style.maxHeight = totalHeight + "px";
-                    $arrow.css("transform", "rotate(180deg)");
+                    return;
                 }
 
-                // Update parents
-                setTimeout(() => updateParentHeights($menu), 20);
+                // Open submenu
+                const totalHeight = getTotalHeight($submenu);
+                menu.style.maxHeight = totalHeight + "px";
+                $arrow.css("transform", "rotate(180deg)");
 
-                e.stopPropagation();
+                // Update parent heights
+                setTimeout(() => updateParentHeights($submenu), 20);
             });
+
 
         });
 
