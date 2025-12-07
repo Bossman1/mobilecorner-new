@@ -58,7 +58,8 @@
 @include('layouts.partials.footer')
 <!-- End of Footer -->
 
-
+<x-cookie-consent />
+<x-scroll-to-top />
 
 
 <script src="/assets/js/toastr.min.js"></script>
