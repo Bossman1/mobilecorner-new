@@ -113,14 +113,14 @@
                             <div class="flex gap-[8px]">
                                 <x-button class="text-slate-500" size="sm" icon="phosphor-facebook-logo"
                                           variant="outline"
-                                          href="https://www.facebook.com/autoc.ge"
+                                          href="https://www.facebook.com/mobilecorner.ge"
                                           :href-options="['target'=>'_blank']"/>
                                 <x-button class="text-slate-500" size="sm" icon="phosphor-instagram-logo"
                                           variant="outline"
                                           href="https://www.instagram.com/autocareplatform"
                                           :href-options="['target'=>'_blank']"/>
                                 <x-button class="text-slate-500" size="sm" icon="phosphor-tiktok-logo" variant="outline"
-                                          href="https://www.tiktok.com/@autoc.ge" :href-options="['target'=>'_blank']"/>
+                                          href="https://www.tiktok.com/@mobilecornerge" :href-options="['target'=>'_blank']"/>
 
                             </div>
                         </div>

@@ -38,7 +38,7 @@
                 <div class="mt-[30px]">
                     <ul class="space-y-[15px] text-[14px]">
                         <li>
-                            <a href="">
+                            <a href="https://www.facebook.com/mobilecorner.ge" target="_blank">
                                 <div class="flex justify-start items-center gap-2">
                                     <span class="h-[25px] w-[25px] rounded-[4px] bg-[var(--color-main)] text-white flex justify-center items-center">
                                         <x-dynamic-component :component="'phosphor-facebook-logo'" class="h-[20px] w-[20px]"/>
@@ -50,7 +50,7 @@
 
 
                         <li>
-                            <a href="">
+                            <a href="https://www.instagram.com/mobilecorner.ge" target="_blank">
                                 <div class="flex justify-start items-center gap-2">
                                      <span class="h-[25px] w-[25px] rounded-[4px] bg-[var(--color-main)] text-white flex justify-center items-center">
                                         <x-dynamic-component :component="'phosphor-instagram-logo'" class="h-[20px] w-[20px]"/>
@@ -61,7 +61,7 @@
                         </li>
 
                         <li>
-                            <a href="">
+                            <a href="https://www.tiktok.com/@mobilecornerge" target="_blank">
                                 <div class="flex justify-start items-center gap-2">
                                     <span class="h-[25px] w-[25px] rounded-[4px] bg-[var(--color-main)] text-white flex justify-center items-center">
                                         <x-dynamic-component :component="'phosphor-tiktok-logo'" class="h-[20px] w-[20px]"/>
