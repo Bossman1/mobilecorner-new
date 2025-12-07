@@ -36,14 +36,16 @@
                         <div class="grid grid-cols-3 gap-3 p-[15px]">
                             <div class="col-span-3"> <x-line :text="$category->name"  /> </div>
                             @foreach($category->children as $child)
-                                <a href="{{ route('pages.categories-list',$child->slug ) }}">
-                                    <div
-                                        class="relative border border-slate-200 rounded-xl hover:shadow-md transition p-2 flex flex-col items-center text-center bg-white w-[183px] h-[183px] overflow-hidden">
-                                        <img src="{{ Voyager::image($child->getThumbnail($child->images, 'small')) }}" alt="product"
-                                             class="rounded-md object-cover">
-                                        <h4 class="text-[14px] font-custom-bold-upper text-slate-700 absolute bottom-[5px] text-center">{{ $child->name }}</h4>
-                                    </div>
-                                </a>
+                                @foreach($child->children as $sub)
+                                    <a href="{{ route('pages.categories-list',$sub->slug ) }}">
+                                        <div
+                                            class="relative border border-slate-200 rounded-xl hover:shadow-md transition p-2 flex flex-col items-center text-center bg-white w-[183px] h-[183px] overflow-hidden">
+                                            <img src="{{ Voyager::image($sub->getThumbnail($sub->images, 'small')) }}" alt="product"
+                                                 class="rounded-md object-cover">
+                                            <h4 class="text-[14px] font-custom-bold-upper text-slate-700 absolute bottom-[5px] text-center">{{ $sub->name }}</h4>
+                                        </div>
+                                    </a>
+                                @endforeach
                             @endforeach
                         </div>
 
