@@ -306,7 +306,7 @@
                             <h2 class="text-sm font-custom-bold-upper">ონლაინ განვადება</h2>
                             <span>
                               <x-tooltip icon="phosphor-warning-circle" iconClass="!w-[19.5px] !h-[19.5px]"
-                                         text="აქ რამე ტექსტი დაიწერება"
+                                         text="განვადების შესავსებად აირჩიეთ სასურველი ბანკი"
                                          labelClass="!text-slate-500 !text-[11px] !px-0"
                                          contentClass="!bg-slate-700 !text-[11px] text-white whitespace-nowrap "/>
                             </span>
