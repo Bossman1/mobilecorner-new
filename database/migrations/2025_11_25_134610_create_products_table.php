@@ -19,11 +19,14 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->decimal('a_old_price', 12, 2)->default(0);
-            $table->decimal('b_old_price', 12, 2)->default(0)->nullable();
-            $table->decimal('c_old_price', 12, 2)->default(0)->nullable();
             $table->decimal('a_new_price', 12, 2)->default(0)->nullable();
+            $table->text('a_text')->nullable();
+            $table->decimal('b_old_price', 12, 2)->default(0)->nullable();
             $table->decimal('b_new_price', 12, 2)->default(0)->nullable();
+            $table->text('b_text')->nullable();
+            $table->decimal('c_old_price', 12, 2)->default(0)->nullable();
             $table->decimal('c_new_price', 12, 2)->default(0)->nullable();
+            $table->text('c_text')->nullable();
             $table->string('currency', 4)->default('LARI');
             $table->integer('stock')->default(1);
             $table->enum('status', ['draft','active'])->default('active');

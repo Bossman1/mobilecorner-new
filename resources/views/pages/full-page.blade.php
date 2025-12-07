@@ -262,11 +262,14 @@
 
                         <div class="flex flex-col justify-between items-center gap-[7px] w-full">
                             @php
+                            $a_text = isset($product->a_text) && trim($product->a_text) !=='' ? $product->a_text : 'A)  ახალივით მდგომარეობაში 9.5/10';
+                            $b_text = isset($product->b_text) && trim($product->b_text) !=='' ? $product->b_text : 'B)  მცირედი მოხმარების კვალით 8/10';
+                            $c_text = isset($product->c_text) && trim($product->c_text) !=='' ? $product->c_text : 'C)  შესამჩნევი მოხმარების კვალი 6/10';
 
                             $conditions = [
-                                1 => ['label' => 'A)  ახალივით მდგომარეობაში 9.5/10', 'field' => 'a_old_price'],
-                                2 => ['label' => 'B)  მცირედი მოხმარების კვალით 8/10', 'field' => 'b_old_price'],
-                                3 => ['label' => 'C)  შესამჩნევი მოხმარების კვალი 6/10', 'field' => 'c_old_price'],
+                                1 => ['label' => $a_text, 'field' => 'a_old_price'],
+                                2 => ['label' => $b_text, 'field' => 'b_old_price'],
+                                3 => ['label' => $c_text, 'field' => 'c_old_price'],
                             ];
 
                             $radios = [];

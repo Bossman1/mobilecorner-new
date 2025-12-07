@@ -30,7 +30,10 @@ class Product extends Model
         'a_new_price',
         'b_new_price',
         'c_new_price',
-        'condition'
+        'condition',
+        'a_text',
+        'b_text',
+        'c_text',
 
     ];
 
