@@ -3,5 +3,8 @@
     "email": "მეილი",
     "phone": "ტელ.ნომერი",
     "subject": "თემა",
-    "message": "შეტყობინება"
+    "message": "შეტყობინება",
+    "The page you are looking for doesn’t exist or has been moved": "გვერდი, რომელსაც ეძებთ, არ არსებობს ან გადატანილია.",
+    "Oops! Page not found": "გვერდი ვერ მოიძებნა!",
+    "Go Back Home": "გადასვლა მთავარ გვერდზე"
 }
