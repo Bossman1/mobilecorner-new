@@ -8,7 +8,7 @@
             <div class="items-start">
                 <div class="flex justify-between items-center gap-[8px]">
                     <span><x-dynamic-component :component="'phosphor-phone'" class="h-[24px] w-[24px]"/></span>
-                    <span>+995 (32) 2 60 30 60</span>
+                    <span>+995 597 04 04 45</span>
                 </div>
             </div>
 

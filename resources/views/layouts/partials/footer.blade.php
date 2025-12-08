@@ -85,7 +85,7 @@
                                     <span class="h-[25px] w-[25px] rounded-[4px] bg-[var(--color-main)] text-white flex justify-center items-center">
                                         <x-dynamic-component :component="'phosphor-envelope-simple'" class="h-[20px] w-[20px]"/>
                                     </span>
-                                    <span>mail@mail.com</span>
+                                    <span>info@mobilecorner.ge</span>
                                 </div>
                         </li>
 
@@ -94,7 +94,7 @@
                                      <span class="h-[25px] w-[25px] rounded-[4px] bg-[var(--color-main)] text-white flex justify-center items-center">
                                         <x-dynamic-component :component="'phosphor-phone'" class="h-[20px] w-[20px]"/>
                                     </span>
-                                    <span>(+995) 555 11 11 11</span>
+                                    <span>(+995) 597 04 04 45</span>
                                 </div>
                         </li>
 

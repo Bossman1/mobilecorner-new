@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="flex flex-col text-slate-600">
                                     <span class="font-custom-bold text-[14px]">ტელეფონი</span>
-                                    <span class="font-custom-regular text-[16px]">+995 555 11 11 11</span>
+                                    <span class="font-custom-regular text-[16px]">(+995) 597 04 04 45</span>
                                 </div>
                             </div>
                             <div class="flex justify-start items-center gap-[8px]">
@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="flex flex-col text-slate-600">
                                     <span class="font-custom-bold text-[14px]">მისამართი</span>
-                                    <span class="font-custom-regular text-[16px]">თბილისი, ც დადიანის #15</span>
+                                    <span class="font-custom-regular text-[16px]">თბილისი, გიორგი ცაბაძის 8გ</span>
                                 </div>
                             </div>
                             <div class="flex justify-start items-center gap-[8px]">
@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="flex flex-col text-slate-600">
                                     <span class="font-custom-bold text-[14px]">ელ.ფოსტა</span>
-                                    <span class="font-custom-regular text-[16px]">contact@mobilecorner.ge</span>
+                                    <span class="font-custom-regular text-[16px]">info@mobilecorner.ge</span>
                                 </div>
                             </div>
                         </div>

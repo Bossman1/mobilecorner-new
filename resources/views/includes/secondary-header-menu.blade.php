@@ -3,13 +3,13 @@
     <x-button
         :options="['data-secondary-menu-btn']"
         size="md" icon="phosphor-dots-nine" iconPosition="left" variant="primary"
-              class="text-[18px] group-hover:bg-[var(--color-main-hover)] transition-colors"
-              href="/">ნავიგაცია
+        class="text-[18px] group-hover:bg-[var(--color-main-hover)] transition-colors"
+        href="/">ნავიგაცია
     </x-button>
 
     <!-- Dropdown Content -->
     <div class="absolute top-full left-0  min-w-[900px]  h-[400px] bg-white text-black shadow-xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0 z-50 overflow-hidden hidden"
-    data-menu-content
+         data-menu-content
     >
         <div class="flex h-full">
             <!-- Left Navigation -->
@@ -30,29 +30,29 @@
             <!-- Right Content (shared area) -->
             <div class="flex-1 p-6 bg-slate-50 rounded-r-2xl relative overflow-y-scroll">
                 @if(isset($menuCategories))
-                @foreach($menuCategories as $index => $category)
-                    <div class="menu-content absolute inset-0 opacity-0 invisible hidden transition-all duration-300" data-content="{{ $index }}">
+                    @foreach($menuCategories as $index => $category)
+                        <div class="menu-content absolute inset-0 opacity-0 invisible hidden transition-all duration-300" data-content="{{ $index }}">
 
-                        <div class="grid grid-cols-3 gap-3 p-[15px]">
-                            <div class="col-span-3"> <x-line :text="$category->name"  /> </div>
-                            @foreach($category->children as $child)
-                                @foreach($child->children as $sub)
-                                    <a href="{{ route('pages.categories-list',$sub->slug ) }}">
-                                        <div
-                                            class="relative border border-slate-200 rounded-xl hover:shadow-md transition p-2 flex flex-col items-center text-center bg-white w-[183px] h-[183px] overflow-hidden">
-                                            <img src="{{ Voyager::image($sub->getThumbnail($sub->images, 'small')) }}" alt="product"
-                                                 class="rounded-md object-cover">
-                                            <h4 class="text-[14px] font-custom-bold-upper text-slate-700 absolute bottom-[5px] text-center">{{ $sub->name }}</h4>
-                                        </div>
-                                    </a>
+                            <div class="grid grid-cols-3 gap-3 p-[15px]">
+                                <div class="col-span-3"> <x-line :text="$category->name"  /> </div>
+                                @foreach($category->children as $child)
+                                    @foreach($child->children as $sub)
+                                        <a href="{{ route('pages.categories-list',$sub->slug ) }}">
+                                            <div
+                                                class="relative border border-slate-200 rounded-xl hover:shadow-md transition p-2 flex flex-col items-center text-center bg-white w-[183px] h-[183px] overflow-hidden">
+                                                <img src="{{ Voyager::image($sub->getThumbnail($sub->images, 'small')) }}" alt="product"
+                                                     class="rounded-md object-cover">
+                                                <h4 class="text-[14px] font-custom-bold-upper text-slate-700 absolute bottom-[5px] text-center">{{ $sub->name }}</h4>
+                                            </div>
+                                        </a>
+                                    @endforeach
                                 @endforeach
-                            @endforeach
+                            </div>
+
+
+
                         </div>
-
-
-
-                    </div>
-                @endforeach
+                    @endforeach
                 @endif
                 <!-- Default Placeholder -->
                 <div
