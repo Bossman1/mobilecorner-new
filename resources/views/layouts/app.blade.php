@@ -6,24 +6,30 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'ონლაინ მაღაზია') }}</title>
 
-    <meta name="keywords" content=""/>
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="keywords" content="მეორადი, ტელეფონები, ამერიკიდან, გარანტიით, შემოწმებული"/>
+    <meta name="description" content="მეორადი და ახალი ტელეფონები ამერიკიდან">
+    <meta name="og:type" content="მეორადი და ახალი ტელეფონები ამერიკიდან">
+    <meta name="og:title" content="მეორადი და ახალი ტელეფონები ამერიკიდან">
+    <meta name="og:image" content="https://mobilecorner.ge/assets/images/logo-fb-v2.png">
+    <meta name="og:image:width" content="700">
+    <meta name="og:image:height" content="600">
+    <meta name="og:description" content="მეორადი და ახალი ტელეფონები ამერიკიდან">
+    <meta name="og:site_name" content="Mobilecorner.ge">
+    <meta name="og:locale" content="ka_GE">
+    <meta name="og:ttl" content="2419200">
 
-    <link rel="icon" type="image/png" href="{{ asset('assets/images/fav.png') }}">
+    <link rel="icon" type="image/png" href="https://bolecorner.ge/assets/images/fav.png">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
 
-    <meta property="og:title"
-          content="@if(isset($ogTitle) && $ogTitle !=''){{$ogTitle}}@else{{ config('app.name', 'Laravel') }}@endif">
-    <meta property="og:image"
-          content="@if(isset($ogImage) && $ogImage !=''){{ $ogImage }}@else{{ config('app.url') }}/img/frontend/logo.png @endif">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet"/>
+{{--    <link rel="preconnect" href="https://fonts.bunny.net">--}}
+{{--    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet"/>--}}
 {{--    <link--}}
 {{--        rel="stylesheet"--}}
 {{--        type="text/css"--}}
@@ -65,34 +71,6 @@
 <script src="/assets/js/toastr.min.js"></script>
 <script src="/assets/js/currency.js"></script>
 @stack('js')
-
-<script>
-    $(function(){
-        // Mobile menu toggle
-        $("#mobile-menu-btn").click(function(){
-            $("#mobile-menu").slideToggle(200);
-        });
-
-        // Mobile dropdown toggle
-        $(".dropdown-toggle").click(function(){
-            $(this).next("div").slideToggle(200);
-        });
-
-        // Desktop dropdown hover (hover parent OR dropdown)
-        $("[data-dropdown]").each(function(){
-            var $container = $(this);
-            var $menu = $container.find("div").first();
-
-            $container.on("mouseenter", function(){
-                $menu.stop(true,true).fadeIn(150);
-            }).on("mouseleave", function(){
-                $menu.stop(true,true).fadeOut(150);
-            });
-        });
-    });
-</script>
-
-
 
 
 
