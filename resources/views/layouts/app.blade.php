@@ -6,7 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'ონლაინ მაღაზია') }}</title>
+    <title>{{ config('app.name', '') }} - ონლაინ მაღაზია</title>
 
     <meta name="keywords" content="მეორადი, ტელეფონები, ამერიკიდან, გარანტიით, შემოწმებული"/>
     <meta name="description" content="მეორადი და ახალი ტელეფონები ამერიკიდან">
