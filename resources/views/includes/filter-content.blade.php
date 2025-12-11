@@ -87,12 +87,12 @@
                     {{ $filter->name }}
                 </div>
 
-                <x-dynamic-component :component="'phosphor-caret-down'" class="h-[15px] w-[15px] js-filter-icon transition-transform duration-200 rotate-180"/>
+                <x-dynamic-component :component="'phosphor-caret-down'" class="h-[15px] w-[15px] js-filter-icon transition-transform duration-200 rotate-0"/>
             </div>
 
             {{-- Content to fold/unfold --}}
             <div
-                class="space-y-[10px] w-full js-filter-body  "
+                class="space-y-[10px] w-full js-filter-body  hidden"
                 data-filter-id="{{ $filter->id }}"
             >
                 @foreach($filter->values as $value)
