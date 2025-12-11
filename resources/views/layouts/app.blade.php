@@ -20,12 +20,10 @@
     <meta name="og:locale" content="ka_GE">
     <meta name="og:ttl" content="2419200">
 
-    <link rel="icon" type="image/png" href="https://bolecorner.ge/assets/images/fav.png">
+    <link rel="icon" type="image/png" href="{{ asset('assets/images/fav.png') }}">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
 
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
 
     <!-- Fonts -->
 {{--    <link rel="preconnect" href="https://fonts.bunny.net">--}}
