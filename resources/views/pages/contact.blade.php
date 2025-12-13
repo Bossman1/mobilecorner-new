@@ -117,7 +117,7 @@
                                           :href-options="['target'=>'_blank']"/>
                                 <x-button class="text-slate-500" size="sm" icon="phosphor-instagram-logo"
                                           variant="outline"
-                                          href="https://www.instagram.com/autocareplatform"
+                                          href="https://www.instagram.com/mobilecorner.ge"
                                           :href-options="['target'=>'_blank']"/>
                                 <x-button class="text-slate-500" size="sm" icon="phosphor-tiktok-logo" variant="outline"
                                           href="https://www.tiktok.com/@mobilecornerge" :href-options="['target'=>'_blank']"/>
