@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\SendMail;
+use App\Rules\RecaptchaV3;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -24,6 +25,7 @@ class ContactController extends Controller
             'phone'   => 'required|string|max:50',
             'email'   => 'required|email',
             'message' => 'required|string',
+            'g-recaptcha-response' => [new RecaptchaV3('contact')],
         ]);
 
         // ------------------------------

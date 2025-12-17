@@ -12,9 +12,10 @@
                 <x-slot:content>
                     <h2 class="w-full text-center font-custom-bold-upper text-[16px]  md:text-[24px] text-slate-700 my-[16px] md:my-[32px]">
                         მოგვწერეთ</h2>
+
                     <form action="{{ route('pages.contact.store') }}" method="post" class="w-full">
                         @csrf
-
+                        <x-recaptcha-v3 action="contact" formId="contact-form" />
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
                             <div class="w-full">
                                <div>
@@ -60,6 +61,9 @@
                                @enderror
                            </div>
 
+                            @error('g-recaptcha-response')
+                            <div class="text-red-600 text-sm mt-2">{{ $message }}</div>
+                            @enderror
 
                             <x-button type="submit" class="w-full cursor-pointer" size="lg" variant="primary">
                                 შეტყობინების გაგზავნა
