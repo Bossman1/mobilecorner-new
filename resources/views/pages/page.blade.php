@@ -10,7 +10,7 @@
                     <div class="font-custom-bold-upper text-xl">{{ $page->title }}</div>
                 </div>
             </div>
-            <div class="grid grid-cols-1"> {{ $page->content }} </div>
+            <div class="grid grid-cols-1"> {!! $page->content !!} </div>
         </div>
     </div>
 @endsection
