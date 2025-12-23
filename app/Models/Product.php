@@ -124,4 +124,12 @@ class Product extends Model
         return $this->belongsTo(Color::class);
     }
 
+
+    public function getFinalPriceAttribute()
+    {
+        return $this->a_new_price ?? $this->a_old_price
+            ?? $this->b_new_price ?? $this->b_old_price
+            ?? $this->c_new_price ?? $this->c_old_price;
+    }
+
 }

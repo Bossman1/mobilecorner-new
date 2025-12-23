@@ -128,28 +128,17 @@ class AjaxController extends Controller
                 'status',
                 'images'
             ])
+            ->with('category:id,name,slug')
             ->where('status', 'active')
             ->where(function ($q) use ($term) {
                 $q->where('title', 'LIKE', "%{$term}%")
-                    ->orWhereHas('category', fn($c) =>
+                    ->orWhere('slug', 'LIKE', "%{$term}%")
+                    ->orWhereHas('category', fn ($c) =>
                     $c->where('name', 'LIKE', "%{$term}%")
                     );
             })
             ->get();
 
-        // -------------------------------------
-        // 🧠 Add computed attributes dynamically
-        // -------------------------------------
-        foreach ($products as $p) {
-
-            // Price logic
-            $p->final_price =
-                $p->a_new_price ?: $p->a_old_price ?:
-                    $p->b_new_price ?: $p->b_old_price ?:
-                        $p->c_new_price ?: $p->c_old_price;
-
-
-        }
         return $products;
     }
 
