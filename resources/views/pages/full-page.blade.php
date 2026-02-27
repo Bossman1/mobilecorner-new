@@ -1,51 +1,50 @@
 @extends('layouts.app')
 @section('content')
     @php
-     $details1 = [];
-     $details2 = [];
-    if($product->attributeValues->isNotEmpty()){
-          // important names you want at top (edit!)
-        $priorityNames = ['ბრენდი','მოდელი'];
+        $details1 = [];
+        $details2 = [];
+       if($product->attributeValues->isNotEmpty()){
+             // important names you want at top (edit!)
+           $priorityNames = ['ბრენდი','მოდელი'];
 
 
-        // Sort attributes: priority first
-        $sortedAttributes = $product->attributeValues->sortBy(function ($item) use ($priorityNames) {
-            $name = $item->attribute?->name;
-            $index = array_search($name, $priorityNames);
-            return $index === false ? 999 : $index;
-        });
+           // Sort attributes: priority first
+           $sortedAttributes = $product->attributeValues->sortBy(function ($item) use ($priorityNames) {
+               $name = $item->attribute?->name;
+               $index = array_search($name, $priorityNames);
+               return $index === false ? 999 : $index;
+           });
 
-        // Now chunk sorted results
-        $chunks = $sortedAttributes->chunk(9);
-        $firstEight   = $chunks->get(0); // first 8 attributes
-        $remaining    = $chunks->get(1); // all others
+           // Now chunk sorted results
+           $chunks = $sortedAttributes->chunk(9);
+           $firstEight   = $chunks->get(0); // first 8 attributes
+           $remaining    = $chunks->get(1); // all others
 
-        if(!is_null($firstEight)){
-             foreach ($firstEight as $k =>  $attribute){
-                $details1[$k]['name'] = $attribute?->attribute?->name;
-                if ($attribute->attribute->type == 'text'){
-                   $details1[$k]['value'] = $attribute->value_text;
-                }else{
-                    $details1[$k]['value'] = $attribute?->attribute_value?->value . ' ' . __($attribute->attribute->unit);
-                }
+           if(!is_null($firstEight)){
+                foreach ($firstEight as $k =>  $attribute){
+                   $details1[$k]['name'] = $attribute?->attribute?->name;
+                   if ($attribute->attribute->type == 'text'){
+                      $details1[$k]['value'] = $attribute->value_text;
+                   }else{
+                       $details1[$k]['value'] = $attribute?->attribute_value?->value . ' ' . __($attribute->attribute->unit);
+                   }
 
-            }
-        }
-        if($remaining != null){
-              foreach ($remaining as $k =>  $attribute){
-                $details2[$k]['name'] = $attribute?->attribute?->name;
-                $details2[$k]['value'] = $attribute?->attribute_value?->value . ' ' . __($attribute->attribute->unit);
-            }
-        }
-    }
+               }
+           }
+           if($remaining != null){
+                 foreach ($remaining as $k =>  $attribute){
+                   $details2[$k]['name'] = $attribute?->attribute?->name;
+                   $details2[$k]['value'] = $attribute?->attribute_value?->value . ' ' . __($attribute->attribute->unit);
+               }
+           }
+       }
 
-   $colorName = $product?->color?->name ?? '';
-   $color = $product?->color?->color ?? "";
+      $colorName = $product?->color?->name ?? '';
+      $color = $product?->color?->color ?? "";
     @endphp
     <div class="container mx-auto font-custom-regular">
 
-        <x-page-component position="right" class="my-[20px] !gap-[20px]"
-                          sidebar-class="bg-[var(--color-second-header)] rounded-md xl:!w-[350px] 2xl:!w-[414px] sidebar-content-class transition-all duration-300 mt-[20px]">
+        <x-page-component position="right" class="my-[20px] !gap-[20px]" sidebar-class="bg-[var(--color-second-header)] rounded-md xl:!w-[350px] 2xl:!w-[414px] sidebar-content-class transition-all duration-300 mt-[20px]">
             <x-slot:content>
                 @php
                     $images = json_decode($product->images, true) ?: []; // ensures array
@@ -65,10 +64,7 @@
                             <div class="text-sm text-slate-700">ID: {{ $product->id }}</div>
                         </div>
                         <x-line class="!border-t-[#EDEDED] !my-[13px]"/>
-                        <x-gallery
-                            :isThumbnail="true"
-                            :images="$galleries"
-                            :options="[
+                        <x-gallery :isThumbnail="true" :images="$galleries" :options="[
                                     'cols' => 1,
                                     'gap' => 'gap-4',
                                     'mode' => 'lg-slide',
@@ -86,27 +82,23 @@
                                     'thumbHeight' => 80,
                                     'thumbMargin' => 10,
                                     'condition' => $product->condition
-                                ]"
-                        />
+                                ]"/>
                     </div>
                     <div class="col-span-12 md:col-span-4  font-custom-regular text-[14px]">
                         <section class="[&>*+*]:border-t [&>*+*]:border-gray-300 [&>*+*]:border-dotted">
 
                             @if(!empty($details1))
                                 @foreach($details1 as $detail)
-                                    <div
-                                        class="flex justify-between items-center  px-2 py-4">
+                                    <div class="flex justify-between items-center  px-2 py-4">
                                         <div class="text-gray-400 font-medium">{{ $detail['name'] }}</div>
                                         <div class="text-gray-900 font-semibold text-right">{{ $detail['value'] }}</div>
                                     </div>
                                 @endforeach
                             @endif
-                            <div
-                                class="flex justify-between items-center  px-2  py-4  ">
+                            <div class="flex justify-between items-center  px-2  py-4  ">
                                 <div class="text-gray-400 font-medium">ფერი</div>
                                 <div class="flex justify-start items-center gap-2">
-                                    <div class="w-5 h-5 rounded-full overflow-hidden "
-                                         style="background: {{ $color }};"></div>
+                                    <div class="w-5 h-5 rounded-full overflow-hidden " style="background: {{ $color }};"></div>
                                     <div>{{ $colorName }}</div>
                                 </div>
                             </div>
@@ -134,8 +126,7 @@
                         <div class="flex justify-between items-center w-full">
                             <div class="leading-[16px] flex justify-start items-center gap-1.5">
                                 <div class=" rounded-full bg-white  p-1 text-[var(--color-main)]">
-                                    <x-dynamic-component :component="'phosphor-map-pin-line'"
-                                                         class="h-[24px] w-[24px]"/>
+                                    <x-dynamic-component :component="'phosphor-map-pin-line'" class="h-[24px] w-[24px]"/>
                                 </div>
                                 <div class="flex-1">ფილიალიდან გატანა</div>
                             </div>
@@ -183,8 +174,7 @@
 
 
                         @foreach($details2 as $detail)
-                            <div
-                                class="flex justify-between items-center  px-2 @if($loop->index == 0) py-4  @else py-4 @endif">
+                            <div class="flex justify-between items-center  px-2 @if($loop->index == 0) py-4  @else py-4 @endif">
                                 <div class="text-gray-400 text-sm font-medium">{{ $detail['name'] }}</div>
                                 <div class="text-gray-900 text-sm font-semibold text-right">{{ $detail['value'] }}</div>
                             </div>
@@ -216,8 +206,8 @@
 
                             <!-- Actual price elements -->
                             <div class="flex items-center gap-2" id="price-content">
-                                <div class="text-[20px] text-[var(--color-main)] font-custom-bold-upper" data-old-price>{{ trim($product->a_new_price) != '' ? $product->a_new_price : $product->a_old_price }} ₾ </div>
-                                <div class="text-[14px] text-[var(--color-main)] font-custom-bold-upper line-through @if(trim($product->a_new_price) != '') opacity-100 @else opacity-0 @endif " data-new-price>{{ $product->a_old_price }} ₾ </div>
+                                <div class="text-[20px] text-[var(--color-main)] font-custom-bold-upper" data-old-price>{{ trim($product->a_new_price) != '' ? $product->a_new_price : $product->a_old_price }} ₾</div>
+                                <div class="text-[14px] text-[var(--color-main)] font-custom-bold-upper line-through @if(trim($product->a_new_price) != '') opacity-100 @else opacity-0 @endif " data-new-price>{{ $product->a_old_price }} ₾</div>
                             </div>
 
                         </div>
@@ -232,15 +222,7 @@
                                 @endif
                             </span>
 
-                            <x-button
-                                size="sm"
-                                icon="phosphor-heart"
-                                data-id="{{ $product->id ?? '' }}"
-                                data-btn-favorites
-                                class="hidden md:block not-fav relative !pr-[8px]"
-                                variant="primary"
-                                iconCustomClass=" !mr-[0]"
-                            >
+                            <x-button size="sm" icon="phosphor-heart" data-id="{{ $product->id ?? '' }}" data-btn-favorites class="hidden md:block not-fav relative !pr-[8px]" variant="primary" iconCustomClass=" !mr-[0]">
                                 <span class="btn-text"></span>
                                 <span class="spinner absolute inset-0 flex items-center justify-center hidden">
                                     <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -262,80 +244,77 @@
 
                         <div class="flex flex-col justify-between items-center gap-[7px] w-full">
                             @php
-                            $a_text = isset($product->a_text) && trim($product->a_text) !=='' ? $product->a_text : 'A)  ახალივით მდგომარეობაში 9.5/10';
-                            $b_text = isset($product->b_text) && trim($product->b_text) !=='' ? $product->b_text : 'B)  მცირედი მოხმარების კვალით 8/10';
-                            $c_text = isset($product->c_text) && trim($product->c_text) !=='' ? $product->c_text : 'C)  შესამჩნევი მოხმარების კვალი 6/10';
+                                $a_text = isset($product->a_text) && trim($product->a_text) !=='' ? $product->a_text : 'A)  ახალივით მდგომარეობაში 9.5/10';
+                                $b_text = isset($product->b_text) && trim($product->b_text) !=='' ? $product->b_text : 'B)  მცირედი მოხმარების კვალით 8/10';
+                                $c_text = isset($product->c_text) && trim($product->c_text) !=='' ? $product->c_text : 'C)  შესამჩნევი მოხმარების კვალი 6/10';
 
-                            $conditions = [
-                                1 => ['label' => $a_text, 'field' => 'a_old_price'],
-                                2 => ['label' => $b_text, 'field' => 'b_old_price'],
-                                3 => ['label' => $c_text, 'field' => 'c_old_price'],
-                            ];
+                                $conditions = [
+                                    1 => ['label' => $a_text, 'field' => 'a_old_price'],
+                                    2 => ['label' => $b_text, 'field' => 'b_old_price'],
+                                    3 => ['label' => $c_text, 'field' => 'c_old_price'],
+                                ];
 
-                            $radios = [];
-                            $firstAdded = false;
-
-
-                            foreach ($conditions as $value => $data) {
-                                if (trim($product->{$data['field']}) !== '') {
-
-                                    $item = [
-                                        'label' => $data['label'],
-                                        'icon'  => 'phosphor-radio-button',
-                                        'value' => $value
-                                    ];
+                                $radios = [];
+                                $firstAdded = false;
 
 
-                                    if (!$firstAdded) {
-                                        $item['checked'] = true;
-                                        $firstAdded = true;
+                                foreach ($conditions as $value => $data) {
+                                    if (trim($product->{$data['field']}) !== '') {
+
+                                        $item = [
+                                            'label' => $data['label'],
+                                            'icon'  => 'phosphor-radio-button',
+                                            'value' => $value
+                                        ];
+
+
+                                        if (!$firstAdded) {
+                                            $item['checked'] = true;
+                                            $firstAdded = true;
+                                        }
+
+                                        $radios[] = $item;
                                     }
-
-                                    $radios[] = $item;
                                 }
-                            }
 
                             @endphp
-                            <x-radio-card label-class="!text-[12px]" text-position="right"
-                                          iconClass="!w-[20px] !h-[20px]" name="payment_options" iconPosition="right"
-                                          :options="$radios" :ajax="true"  :ajax="true"  :dataAttributes="['data-radio-ajax' => true]"   />
+                            <x-radio-card label-class="!text-[12px]" text-position="right" iconClass="!w-[20px] !h-[20px]" name="payment_options" iconPosition="right" :options="$radios" :ajax="true" :ajax="true" :dataAttributes="['data-radio-ajax' => true]"/>
 
                         </div>
 
                     </div>
-
+                    @php
+                        $productImage = json_decode($product->images)[0] ??  '';
+                        $cardOptions = [
+                            'data-product-id' => $product->id,
+                            'data-image' => Voyager::image($productImage),
+                            'data-title' => $product->title,
+                            'data-slug' => $product->slug,
+                        ];
+                    @endphp
                     <div class="mt-[16px]">
                         <div class="flex justify-start items-center gap-2">
                             <h2 class="text-sm font-custom-bold-upper">ონლაინ განვადება</h2>
                             <span>
-                              <x-tooltip icon="phosphor-warning-circle" iconClass="!w-[19.5px] !h-[19.5px]"
-                                         text="განვადების შესავსებად აირჩიეთ სასურველი ბანკი"
-                                         labelClass="!text-slate-500 !text-[11px] !px-0"
-                                         contentClass="!bg-slate-700 !text-[11px] text-white whitespace-nowrap "/>
+                              <x-tooltip icon="phosphor-warning-circle" iconClass="!w-[19.5px] !h-[19.5px]" text="განვადების შესავსებად აირჩიეთ სასურველი ბანკი" labelClass="!text-slate-500 !text-[11px] !px-0" contentClass="!bg-slate-700 !text-[11px] text-white whitespace-nowrap "/>
                             </span>
                         </div>
                         <div class="flex flex-col justify-between items-center  space-y-2 mt-[5px]">
 
-                            <div
-                                class="border border-gray-300 shadow-md w-full rounded-[4px] flex justify-center items-center bg-white">
-                                <a href="{{ route('pages.checkout') }}">
-                                    <img src="{{ asset('assets/images/TBC.png') }}" alt=""
-                                         class="w-[135px] object-cover transition duration-500 hover:scale-105 ">
+                            <div class="border border-gray-300 shadow-md w-full rounded-[4px] flex justify-center items-center bg-white">
+                                <a href="#"  add-to-cart-and-checkout-btn data-product-id="{{ $product->id }}" data-image="{{ Voyager::image($productImage) }}" data-title="{{ $product->title }}" data-slug="{{ $product->slug }}">
+                                    <img src="{{ asset('assets/images/TBC.png') }}" alt="" class="w-[135px] object-cover transition duration-500 hover:scale-105 ">
                                 </a>
                             </div>
 
-                            <div
-                                class="border border-gray-300 shadow-md w-full rounded-[4px] flex justify-center items-center bg-white">
-                                <a href="{{ route('pages.checkout') }}">
-                                    <img src="{{ asset('assets/images/boglogo.png') }}" alt=""
-                                         class="w-[135px] object-cover transition duration-500 hover:scale-105 ">
+                            <div class="border border-gray-300 shadow-md w-full rounded-[4px] flex justify-center items-center bg-white">
+                                <a href="#" add-to-cart-and-checkout-btn data-product-id="{{ $product->id }}" data-image="{{ Voyager::image($productImage) }}" data-title="{{ $product->title }}" data-slug="{{ $product->slug }}">
+                                    <img src="{{ asset('assets/images/boglogo.png') }}" alt="" class="w-[135px] object-cover transition duration-500 hover:scale-105 ">
                                 </a>
                             </div>
-                            <div
-                                class="border border-gray-300 shadow-md w-full rounded-[4px] flex justify-center items-center bg-white">
-                                <a href="{{ route('pages.checkout') }}">
-                                    <img src="{{ asset('assets/images/credo.png') }}" alt=""
-                                         class="w-[135px] object-cover transition duration-500 hover:scale-105 ">
+                            <div class="border border-gray-300 shadow-md w-full rounded-[4px] flex justify-center items-center bg-white">
+                                <a href="#" add-to-cart-and-checkout-btn data-product-id="{{ $product->id }}" data-image="{{ Voyager::image($productImage) }}" data-title="{{ $product->title }}" data-slug="{{ $product->slug }}">
+                                    <img src="{{ asset('assets/images/credo.png') }}" alt="" class="w-[135px] object-cover transition duration-500 hover:scale-105 ">
                                 </a>
                             </div>
 
@@ -346,22 +325,11 @@
                     <x-line class="!border-t-[#dfd5d5] !my-[13px]"/>
 
                     <div class="flex flex-col justify-between items-center mt-[16px] gap-[7px]">
-                        <x-button on size="sm" icon="phosphor-shopping-cart" iconPosition="left" class="w-full"
-                                  variant="outline" href="{{ route('pages.cart') }}">კალათის ნახვა
+                        <x-button on size="sm" icon="phosphor-shopping-cart" iconPosition="left" class="w-full" variant="outline" href="{{ route('pages.cart') }}">კალათის ნახვა
                         </x-button>
 
 
-                        @php
-                            $productImage = json_decode($product->images)[0] ??  '';
-                            $cardOptions = [
-                                'data-product-id' => $product->id,
-                                'data-image' => Voyager::image($productImage),
-                                'data-title' => $product->title,
-                                'data-slug' => $product->slug,
-                            ];
-                        @endphp
-
-                        <x-button size="sm" icon="phosphor-shopping-bag" add-to-cart-and-checkout-btn  :options="$cardOptions" iconPosition="left" class="w-full" variant="primary">
+                        <x-button size="sm" icon="phosphor-shopping-bag" add-to-cart-and-checkout-btn :options="$cardOptions" iconPosition="left" class="w-full" variant="primary">
                             განვადებით ყიდვა
                         </x-button>
 
@@ -408,61 +376,61 @@
 @push('js')
 
     <script>
-        $(function (){
+        $(function () {
 
-           $(document).on('click', '[data-radio-ajax]', function (e){
+            $(document).on('click', '[data-radio-ajax]', function (e) {
 
-               let $this = $(this);
-               let $id = {{ $product->id }};
-               let $optionId = $this.val();
-               let new_price_wrp =  $("[data-new-price]");
-               let old_price_wrp =  $("[data-old-price]");
+                let $this = $(this);
+                let $id = {{ $product->id }};
+                let $optionId = $this.val();
+                let new_price_wrp = $("[data-new-price]");
+                let old_price_wrp = $("[data-old-price]");
 
-               $.ajax({
-                   url: '{{ route('ajax.call') }}',
-                   type: 'POST',
-                   data: {
-                       action: 'getPriceById',
-                       value:{id:$id,optionId:$optionId },
-                       _token: $('meta[name="csrf-token"]').attr('content')
-                   },
-                   beforeSend: function () {
-                       // Show loader, hide prices
-                       $('#price-content').addClass('opacity-0');
-                       $('#price-loader').removeClass('hidden');
-                       new_price_wrp.addClass('opacity-0');
+                $.ajax({
+                    url: '{{ route('ajax.call') }}',
+                    type: 'POST',
+                    data: {
+                        action: 'getPriceById',
+                        value: {id: $id, optionId: $optionId},
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    beforeSend: function () {
+                        // Show loader, hide prices
+                        $('#price-content').addClass('opacity-0');
+                        $('#price-loader').removeClass('hidden');
+                        new_price_wrp.addClass('opacity-0');
 
-                   },
-                   success: function (response) {
+                    },
+                    success: function (response) {
 
-                           if(response && response.success === true){
-                               old_price_wrp.text("");
-                               new_price_wrp.text("");
+                        if (response && response.success === true) {
+                            old_price_wrp.text("");
+                            new_price_wrp.text("");
 
-                               if(response.old_price && response.new_price){
-                                   old_price_wrp.text(response.new_price + ' ₾');
-                                   new_price_wrp.text(response.old_price + ' ₾');
-                                   new_price_wrp.removeClass('opacity-0');
-                               }
-                               if(response.new_price && !response.old_price){
-                                   new_price_wrp.text(response.new_price + ' ₾');
-                               }
+                            if (response.old_price && response.new_price) {
+                                old_price_wrp.text(response.new_price + ' ₾');
+                                new_price_wrp.text(response.old_price + ' ₾');
+                                new_price_wrp.removeClass('opacity-0');
+                            }
+                            if (response.new_price && !response.old_price) {
+                                new_price_wrp.text(response.new_price + ' ₾');
+                            }
 
-                               if(response.old_price &&  !response.new_price){
-                                   old_price_wrp.text(response.old_price + ' ₾');
-                               }
+                            if (response.old_price && !response.new_price) {
+                                old_price_wrp.text(response.old_price + ' ₾');
+                            }
 
-                               window.applyRadioUI($this);
-                           }
+                            window.applyRadioUI($this);
+                        }
 
-                   },
-                   complete: function () {
-                       // Hide loader, show updated prices
-                       $('#price-loader').addClass('hidden');
-                       $('#price-content').removeClass('opacity-0');
-                   }
-               });
-           });
+                    },
+                    complete: function () {
+                        // Hide loader, show updated prices
+                        $('#price-loader').addClass('hidden');
+                        $('#price-content').removeClass('opacity-0');
+                    }
+                });
+            });
 
         });
     </script>
