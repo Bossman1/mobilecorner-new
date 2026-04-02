@@ -155,8 +155,8 @@
                             <div class="flex flex-col justify-between items-center gap-[7px] w-full">
                                 @php
                                     $radios = [
-                                      ['label'=>'თბს ბანკი','image' => asset('assets/images/TBC.png'),'value' => 1],
-                                      ['label'=>'საქართცელოს ბანკი','image' => asset('assets/images/boglogo.png'),'value' => 3]
+                                      ['label'=>'თიბისი ბანკი','image' => asset('assets/images/TBC.png'),'value' => 1],
+                                      ['label'=>'საქართველოს ბანკი','image' => asset('assets/images/boglogo.png'),'value' => 3]
                                     ]
                                 @endphp
                                 <x-radio-card
