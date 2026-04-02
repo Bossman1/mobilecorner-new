@@ -156,8 +156,7 @@
                                 @php
                                     $radios = [
                                       ['label'=>'თბს ბანკი','image' => asset('assets/images/TBC.png'),'value' => 1],
-                                      ['label'=>'კრედო ბანკი','image' => asset('assets/images/credo.png'),'value' => 2],
-                                      ['label'=>'საქართცელოს ბანკი','image' => asset('assets/images/boglogo.png'),'value' => 3]
+                                      ['label'=>'კრედო ბანკი','image' => asset('assets/images/credo.png'),'value' => 2]
                                     ]
                                 @endphp
                                 <x-radio-card
