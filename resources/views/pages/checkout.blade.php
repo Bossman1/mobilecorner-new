@@ -156,6 +156,7 @@
                                 @php
                                     $radios = [
                                       ['label'=>'თიბისი ბანკი','image' => asset('assets/images/TBC.png'),'value' => 1],
+                                      ['label'=>'კრედო ბანკი','image' => asset('assets/images/credo.png'),'value' => 2],
                                       ['label'=>'საქართველოს ბანკი','image' => asset('assets/images/boglogo.png'),'value' => 3]
                                     ]
                                 @endphp

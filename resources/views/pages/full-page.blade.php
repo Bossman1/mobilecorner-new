@@ -313,6 +313,12 @@
                                 </a>
                             </div>
 
+                            <div class="border border-gray-300 shadow-md w-full rounded-[4px] flex justify-center items-center bg-white">
+                                <a href="#" add-to-cart-and-checkout-btn data-product-id="{{ $product->id }}" data-image="{{ Voyager::image($productImage) }}" data-title="{{ $product->title }}" data-slug="{{ $product->slug }}">
+                                    <img src="{{ asset('assets/images/credo.png') }}" alt="" class="w-[135px] object-cover transition duration-500 hover:scale-105 ">
+                                </a>
+                            </div>
+
                         </div>
 
                     </div>
